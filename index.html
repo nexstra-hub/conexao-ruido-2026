@@ -8,7 +8,7 @@
     .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 
     body, .wrap {
-        background: #0f0f0f;
+        background: transparent;
         color: #e0e0e0;
         font-family: system-ui, -apple-system, sans-serif;
     }
@@ -35,6 +35,233 @@
         padding:16px;
     }
 
+    .field{margin-bottom:12px}
+    .field label{
+        display:block;
+        font-size:12px;
+        color:#b0b0b0;
+        margin-bottom:4px;
+    }
+    .field select, .field input[type=number]{
+        width:100%;
+        background:#252525;
+        color:#e0e0e0;
+        border:1px solid #444;
+        border-radius:6px;
+        padding:8px 10px;
+    }
+    .field select:focus, .field input[type=number]:focus{
+        outline:none;
+        border-color:#3b82f6;
+    }
+
+    .kpi{
+        background:#252525;
+        border-radius:8px;
+        padding:12px 14px;
+        text-align:center;
+    }
+    .kv{font-size:22px;font-weight:500;margin-top:4px; color:#ffffff}
+    .kl{font-size:11px;color:#888}
+
+    .verdict{
+        border-radius:8px;
+        padding:14px 16px;
+        margin-top:12px;
+    }
+    .v-ok{background:#0a3a2a;border:.5px solid #4ade80}
+    .v-warn{background:#3f2a1a;border:.5px solid #facc15}
+    .v-crit{background:#3a1f1f;border:.5px solid #f87171}
+
+    .v-title{font-size:14px;font-weight:500;margin-bottom:4px}
+    .v-ok .v-title{color:#4ade80}
+    .v-warn .v-title{color:#facc15}
+    .v-crit .v-title{color:#f87171}
+
+    .v-body{font-size:12px;margin-bottom:8px; color:#ddd}
+    .v-ok .v-body{color:#9cf5c3}
+    .v-warn .v-body{color:#fde047}
+    .v-crit .v-body{color:#fda4a4}
+
+    .rec-row{
+        display:flex;
+        justify-content:space-between;
+        font-size:12px;
+        padding:5px 0;
+        border-bottom:.5px solid #333;
+    }
+    .rec-row:last-child{border-bottom:none}
+    .rec-key{color:#aaa}
+    .rec-val{font-weight:500;color:#ffffff}
+
+    .bar-wrap{margin-top:10px}
+    .bar-lbl{display:flex;justify-content:space-between;font-size:11px;color:#888;margin-bottom:3px}
+    .bar-bg{background:#333;border-radius:4px;height:10px}
+    .bar-fill{height:10px;border-radius:4px;transition:width .3s}
+
+    .ins{
+        border-left:3px solid #3b82f6;
+        border-radius:0 8px 8px 0;
+        background:#1f2937;
+        padding:9px 13px;
+        font-size:12px;
+        color:#ccc;
+        margin-top:12px
+    }
+    .ins b{color:#ffffff;font-weight:500}
+</style>
+</head>
+<body>
+
+<h2 class="sr-only">Ferramenta 1 — Simulador de adequação do protetor auditivo ao GHE</h2>
+<div class="wrap">
+<div class="sec">
+  <div class="sl">Ferramenta 1 — Simulador de adequação protetor × GHE</div>
+  
+  <div class="grid2">
+    <div class="card">
+      <div class="field"><label>NEN do GHE — dB(A)</label><input type="number" id="fNen" min="70" max="115" value="91" step="0.5" oninput="calc()"></div>
+      <div class="field"><label>Tipo de protetor</label>
+        <select id="fTipo" onchange="calc()">
+          <option value="plugue_conv">Plugue convencional</option>
+          <option value="plugue_sonda">Plugue com sonda</option>
+          <option value="concha">Concha</option>
+          <option value="capconcha">Concha + capacete</option>
+          <option value="dupla">Dupla proteção</option>
+        </select>
+      </div>
+      <div class="field"><label>NRRsf do protetor — dB</label><input type="number" id="fNrrsf" min="10" max="35" value="20" step="1" oninput="calc()"></div>
+      <div class="field"><label>NRRsf do segundo protetor (dupla) — dB</label><input type="number" id="fNrrsf2" min="10" max="35" value="14" step="1" oninput="calc()"></div>
+      <div class="field"><label>EPI conjugado (apenas conchas)</label>
+        <select id="fEpi" onchange="calc()">
+          <option value="nenhum">Nenhum</option>
+          <option value="oculos">Óculos de segurança</option>
+          <option value="mascara">Máscara facial</option>
+          <option value="bone">Boné</option>
+          <option value="balaclava">Balaclava</option>
+        </select>
+      </div>
+      <div class="field"><label>Jornada de trabalho</label>
+        <select id="fJornada" onchange="calc()">
+          <option value="8">8 horas (padrão)</option>
+          <option value="10">10 horas</option>
+          <option value="12">12 horas</option>
+        </select>
+      </div>
+      <div class="field"><label>Colocação pelo trabalhador</label>
+        <select id="fColoc" onchange="calc()">
+          <option value="ok">Correta (treinado)</option>
+          <option value="ruim">Inadequada (sem treinamento)</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <div class="grid3" style="margin-bottom:10px">
+        <div class="kpi"><div class="kl">NAP esperado</div><div class="kv" id="oNap">—</div></div>
+        <div class="kpi"><div class="kl">NEP resultante</div><div class="kv" id="oNep">—</div></div>
+        <div class="kpi"><div class="kl">Gap NRRsf</div><div class="kv" id="oGap">—</div></div>
+      </div>
+
+      <div class="bar-wrap">
+        <div class="bar-lbl"><span>Proteção efetiva</span><span id="oPctBar">—</span></div>
+        <div class="bar-bg"><div class="bar-fill" id="oBar" style="width:0%;background:#1D9E75"></div></div>
+      </div>
+
+      <div id="oVerdict" class="verdict v-ok" style="margin-top:10px">
+        <div class="v-title" id="oVTitle">—</div>
+        <div class="v-body" id="oVBody">—</div>
+        <div class="rec-row"><span class="rec-key">Atenuação efetiva real</span><span class="rec-val" id="oVNap">—</span></div>
+        <div class="rec-row"><span class="rec-key">NRRsf mínimo necessário</span><span class="rec-val" id="oVMin">—</span></div>
+        <div class="rec-row"><span class="rec-key">Protetor suficiente?</span><span class="rec-val" id="oVSuf">—</span></div>
+        <div class="rec-row"><span class="rec-key">Margem de segurança</span><span class="rec-val" id="oVMarg">—</span></div>
+      </div>
+
+      <div class="ins" id="oRec">Preencha os campos ao lado para calcular.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+const OFFSETS={plugue_conv:{base:-3,max:3},plugue_sonda:{base:-2.7,max:3},concha:{base:-5,max:1},capconcha:{base:-4.8,max:1.2},dupla:{base:3,max:3}};
+const EPI_PENALTY={nenhum:0,oculos:-1.2,mascara:-1.4,bone:-1.0,balaclava:-1.5};
+const JORNADA_PENALTY={8:0,10:1.5,12:3.0};
+const COLOC_PENALTY={ok:0,ruim:-10.5};
+
+function calc(){
+  const nen=parseFloat(document.getElementById('fNen').value)||91;
+  const tipo=document.getElementById('fTipo').value;
+  const nrrsf=parseFloat(document.getElementById('fNrrsf').value)||20;
+  const nrrsf2=parseFloat(document.getElementById('fNrrsf2').value)||14;
+  const epi=document.getElementById('fEpi').value;
+  const jornada=document.getElementById('fJornada').value;
+  const coloc=document.getElementById('fColoc').value;
+
+  const hasEpi=tipo==='concha'||tipo==='capconcha'||tipo==='dupla';
+  const off=OFFSETS[tipo];
+  
+  let nap;
+  if(tipo==='dupla'){
+    const maior=Math.max(nrrsf,nrrsf2);
+    nap=maior+off.base;
+  } else {
+    nap=nrrsf+off.base;
+  }
+  
+  if(hasEpi) nap+=EPI_PENALTY[epi];
+  nap+=COLOC_PENALTY[coloc];
+  
+  const jPen=JORNADA_PENALTY[jornada];
+  const nepEfetivo=nen+jPen;
+  const nep=Math.round((nepEfetivo-nap)*10)/10;
+  const nrrsf_min=Math.ceil(nen+jPen-80);
+  const gap=Math.round((nap-nrrsf)*10)/10;
+  const margem=Math.round((80-nep)*10)/10;
+  const pct=Math.min(100,Math.max(0,Math.round(nap/(nen-80)*100)));
+
+  document.getElementById('oNap').textContent=nap.toFixed(1)+' dB';
+  document.getElementById('oNep').textContent=nep.toFixed(1)+' dB(A)';
+  document.getElementById('oGap').textContent=(gap>=0?'+':'')+gap.toFixed(1)+' dB';
+  document.getElementById('oPctBar').textContent=pct+'%';
+
+  const bar=document.getElementById('oBar');
+  bar.style.width=pct+'%';
+  bar.style.background=nep<=80?'#1D9E75':nep<=85?'#EF9F27':'#E24B4A';
+
+  document.getElementById('oVNap').textContent=nap.toFixed(1)+' dB';
+  document.getElementById('oVMin').textContent=nrrsf_min+' dB';
+  document.getElementById('oVSuf').textContent=nap>=(nrrsf_min-1)?'Sim':'Não';
+  document.getElementById('oVMarg').textContent=(margem>=0?'+':'')+margem.toFixed(1)+' dB';
+
+  const verd=document.getElementById('oVerdict');
+  const vt=document.getElementById('oVTitle');
+  const vb=document.getElementById('oVBody');
+  const rec=document.getElementById('oRec');
+
+  verd.className='verdict';
+  if(nep<=80){
+    verd.classList.add('v-ok');
+    vt.textContent='Protetor adequado — trabalhador protegido';
+    vb.textContent='NEP '+nep.toFixed(1)+' dB(A) está dentro do limite. Margem de '+margem.toFixed(1)+' dB.';
+    rec.innerHTML='<b>Recomendação:</b> manter o protetor atual. Se a margem for superior a 5 dB, avaliar downgrade de NRRsf para maior conforto.';
+  } else if(nep<=85){
+    verd.classList.add('v-warn');
+    vt.textContent='Atenção — proteção limítrofe';
+    vb.textContent='NEP '+nep.toFixed(1)+' dB(A) acima do limite. Risco aumentado com qualquer variação.';
+    rec.innerHTML='<b>Recomendação:</b> aumentar NRRsf em pelo menos '+(Math.ceil(nep-80)+2)+' dB ou intensificar treinamento de colocação. Verificar se há EPI conjugado impactando.';
+  } else {
+    verd.classList.add('v-crit');
+    vt.textContent='Protetor insuficiente — exposição real';
+    vb.textContent='NEP '+nep.toFixed(1)+' dB(A) — '+(nep-80).toFixed(1)+' dB acima do limite. Ação imediata necessária.';
+    rec.innerHTML='<b>Recomendação:</b> substituir para protetor com NRRsf mínimo de '+nrrsf_min+' dB. Para NEN ≥ 100 dB(A), considerar dupla proteção.';
+  }
+}
+calc();
+</script>
+
+</body>
+</html>
     .field{margin-bottom:12px}
     .field label{
         display:block;
