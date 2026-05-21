@@ -1,1 +1,222 @@
 
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);font-size:14px;color:var(--color-text-primary)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.sec{margin-bottom:2rem}
+.sec-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.06em;text-transform:uppercase;padding-bottom:8px;border-bottom:.5px solid var(--color-border-tertiary);margin-bottom:14px}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:1.5rem}
+.kpi{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px}
+.kpi-l{font-size:11px;color:var(--color-text-secondary);margin-bottom:5px}
+.kpi-v{font-size:21px;font-weight:500}
+.kpi-s{font-size:11px;color:var(--color-text-tertiary);margin-top:3px}
+.red{color:#A32D2D}.amber{color:#854F0B}.green{color:#0F6E56}
+.card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px;margin-bottom:16px}
+.leg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;font-size:11px;color:var(--color-text-secondary)}
+.ld{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle}
+.cw{position:relative;width:100%}
+.ins{border-left:3px solid #185FA5;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;background:var(--color-background-secondary);padding:9px 13px;font-size:12px;color:var(--color-text-secondary);margin-top:10px}
+.ins b{color:var(--color-text-primary);font-weight:500}
+.frow{display:flex;gap:8px;margin-bottom:12px;align-items:center;flex-wrap:wrap}
+.frow label{font-size:12px;color:var(--color-text-secondary)}
+.frow select{font-size:12px;padding:4px 8px;border:.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary)}
+.risk-pill{display:inline-block;font-size:10px;padding:2px 8px;border-radius:var(--border-radius-md);font-weight:500}
+.rp-crit{background:#FCEBEB;color:#791F1F}
+.rp-alto{background:#FAEEDA;color:#633806}
+.rp-med{background:#FAEEDA;color:#633806}
+.rp-ok{background:#E1F5EE;color:#085041}
+.mini-bar-bg{background:var(--color-background-secondary);border-radius:3px;height:5px;margin-top:3px;width:100%}
+.mini-bar{height:5px;border-radius:3px}
+</style>
+
+<h2 class="sr-only">Dashboard — Tema 1: Risco de Exposição Ocupacional. Análise cruzada de GHEs, NEN, jornada de trabalho e adequação do protetor.</h2>
+
+<div style="padding:1rem 0">
+
+<div class="sec">
+  <div class="sec-label">Visão geral — jan 2024 a dez 2025</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-l">Total de testes</div><div class="kpi-v">26.059</div><div class="kpi-s">3.077 colaboradores</div></div>
+    <div class="kpi"><div class="kpi-l">% protegidos (NEP ≤ 80)</div><div class="kpi-v red">68,4%</div><div class="kpi-s">31,6% ainda expostos</div></div>
+    <div class="kpi"><div class="kpi-l">NEP médio geral</div><div class="kpi-v amber">75,5 dB(A)</div><div class="kpi-s">Limiar: 80 dB(A)</div></div>
+    <div class="kpi"><div class="kpi-l">GHEs em nível crítico</div><div class="kpi-v red">3 / 15</div><div class="kpi-s">≥ 100 dB(A)</div></div>
+    <div class="kpi"><div class="kpi-l">Colaboradores jornada &gt;8h</div><div class="kpi-v amber">19,8%</div><div class="kpi-s">+3 dB(A) no NEP efetivo</div></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-label">Matriz de risco — % expostos por GHE vs NEN</div>
+  <div class="card">
+    <div class="leg">
+      <span><span class="ld" style="background:#E24B4A"></span>GHE crítico ≥100 dB</span>
+      <span><span class="ld" style="background:#EF9F27"></span>GHE alto 88–99 dB</span>
+      <span><span class="ld" style="background:#1D9E75"></span>GHE controlado &lt;88 dB</span>
+      <span style="color:var(--color-text-tertiary);font-size:10px;margin-left:4px">● tamanho = nº de testes</span>
+    </div>
+    <div class="cw" style="height:300px"><canvas id="cScatter" role="img" aria-label="Dispersão: eixo X=NEN do GHE, eixo Y=percentual de colaboradores expostos. Correlação positiva clara entre NEN e exposição">GHE-B04 (102.5 dB, 85.9% expostos) e GHE-C03 (103 dB, 84.4% expostos) são os mais críticos</canvas></div>
+    <div class="ins"><b>Correlação direta:</b> cada +1 dB(A) no NEN eleva o % de expostos em ~4 pp. GHE-B04 (Empresa B, 102,5 dB) tem <b>85,9% dos colaboradores expostos</b> — o pior de toda a base.</div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-label">Tabela de risco consolidada — todos os GHEs</div>
+  <div class="card" style="padding:12px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed">
+      <thead>
+        <tr style="border-bottom:.5px solid var(--color-border-tertiary)">
+          <th style="text-align:left;padding:6px 8px;font-weight:500;color:var(--color-text-secondary);width:15%">GHE</th>
+          <th style="text-align:left;padding:6px 8px;font-weight:500;color:var(--color-text-secondary);width:14%">Empresa</th>
+          <th style="text-align:right;padding:6px 8px;font-weight:500;color:var(--color-text-secondary);width:12%">NEN dB(A)</th>
+          <th style="text-align:left;padding:6px 8px;font-weight:500;color:var(--color-text-secondary);width:18%">% expostos</th>
+          <th style="text-align:right;padding:6px 8px;font-weight:500;color:var(--color-text-secondary);width:10%">NEP médio</th>
+          <th style="text-align:left;padding:6px 8px;font-weight:500;color:var(--color-text-secondary);width:10%">Risco</th>
+          <th style="text-align:left;padding:6px 8px;font-weight:500;color:var(--color-text-secondary);width:21%">Ação prioritária</th>
+        </tr>
+      </thead>
+      <tbody id="riskTbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-label">Impacto da jornada &gt;8h — NEP em GHEs ≥ 88 dB(A)</div>
+  <div class="frow">
+    <label>GHE:</label>
+    <select id="selGhe" onchange="updateJornada()">
+      <option value="all">Todos (≥88 dB)</option>
+      <option value="GHE-C03">GHE-C03 — 103,0 dB</option>
+      <option value="GHE-B04">GHE-B04 — 102,5 dB</option>
+      <option value="GHE-A05">GHE-A05 — 101,5 dB</option>
+      <option value="GHE-B01">GHE-B01 — 93,0 dB</option>
+      <option value="GHE-C02">GHE-C02 — 90,5 dB</option>
+      <option value="GHE-A03">GHE-A03 — 91,0 dB</option>
+    </select>
+  </div>
+  <div class="card">
+    <div class="leg">
+      <span><span class="ld" style="background:#85B7EB"></span>Jornada padrão (8h)</span>
+      <span><span class="ld" style="background:#E24B4A"></span>Jornada estendida (&gt;8h)</span>
+    </div>
+    <div class="cw" style="height:220px"><canvas id="cJorn" role="img" aria-label="NEP médio e percentual de expostos comparando jornada padrão vs estendida por GHE">Jornada extendida aumenta sistematicamente o NEP e o percentual de expostos</canvas></div>
+    <div class="ins" id="jornIns"><b>Jornada &gt;8h:</b> nos GHEs críticos (≥100 dB), trabalhadores com jornada estendida atingem NEP médio de <b>88,1 dB(A)</b> vs 85,2 dB(A) para jornada padrão — <b>+2,9 dB(A)</b> que pode ser determinante para a classificação legal de risco grave.</div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const ghe = [
+  {g:"GHE-B04",e:"Empresa B",nen:102.5,pct_exp:85.9,nap:15.79,nep:87.21,n:1048},
+  {g:"GHE-C03",e:"Empresa C",nen:103.0,pct_exp:84.4,nap:17.46,nep:86.10,n:2559},
+  {g:"GHE-A05",e:"Empresa A",nen:101.5,pct_exp:72.4,nap:17.45,nep:84.59,n:2194},
+  {g:"GHE-B01",e:"Empresa B",nen:93.0, pct_exp:46.4,nap:13.98,nep:79.61,n:1014},
+  {g:"GHE-C02",e:"Empresa C",nen:90.5, pct_exp:32.6,nap:14.29,nep:76.78,n:2578},
+  {g:"GHE-A03",e:"Empresa A",nen:91.0, pct_exp:31.8,nap:14.54,nep:76.97,n:2145},
+  {g:"GHE-B06",e:"Empresa B",nen:89.0, pct_exp:24.0,nap:14.55,nep:75.18,n:1068},
+  {g:"GHE-A02",e:"Empresa A",nen:88.0, pct_exp:20.8,nap:14.35,nep:74.16,n:2156},
+  {g:"GHE-B02",e:"Empresa B",nen:87.5, pct_exp:18.3,nap:14.11,nep:73.91,n:1038},
+  {g:"GHE-C01",e:"Empresa C",nen:86.0, pct_exp:13.8,nap:14.23,nep:72.27,n:2618},
+  {g:"GHE-B03",e:"Empresa B",nen:84.0, pct_exp:6.6, nap:14.42,nep:70.07,n:1072},
+  {g:"GHE-C04",e:"Empresa C",nen:83.0, pct_exp:6.0, nap:14.09,nep:69.69,n:2590},
+  {g:"GHE-A01",e:"Empresa A",nen:82.5, pct_exp:4.6, nap:13.92,nep:69.37,n:2129},
+  {g:"GHE-A04",e:"Empresa A",nen:79.0, pct_exp:0.0, nap:16.37,nep:63.29,n:1250},
+  {g:"GHE-B05",e:"Empresa B",nen:78.5, pct_exp:0.0, nap:16.47,nep:62.65,n:600},
+];
+const col_emp={A:"#1D9E75",B:"#378ADD",C:"#EF9F27"};
+const col_nen=d=>d.nen>=100?"#E24B4A":d.nen>=88?"#EF9F27":"#1D9E75";
+
+new Chart(document.getElementById('cScatter'),{
+  type:'bubble',
+  data:{datasets:[{
+    label:'GHEs',
+    data:ghe.map(d=>({x:d.nen,y:d.pct_exp,r:Math.sqrt(d.n/18),ghe:d.g,emp:d.e,nep:d.nep})),
+    backgroundColor:ghe.map(d=>col_nen(d)+'CC'),
+    borderColor:ghe.map(d=>col_nen(d)),
+    borderWidth:1
+  }]},
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:d=>[
+      d.raw.ghe+' ('+d.raw.emp+')',
+      'NEN: '+d.raw.x+' dB(A)',
+      'Expostos: '+d.raw.y.toFixed(1)+'%',
+      'NEP médio: '+d.raw.nep.toFixed(1)+' dB(A)'
+    ]}}},
+    scales:{
+      x:{min:75,max:107,title:{display:true,text:'NEN dB(A)',font:{size:11}},grid:{color:'rgba(128,128,128,.08)'}},
+      y:{min:-5,max:100,title:{display:true,text:'% expostos',font:{size:11}},grid:{color:'rgba(128,128,128,.08)'},ticks:{callback:v=>v+'%'}}
+    },
+    layout:{padding:10}
+  }
+});
+
+const tbody=document.getElementById('riskTbody');
+const riskPill=d=>{
+  if(d.nen>=100&&d.pct_exp>70) return '<span class="risk-pill rp-crit">Crítico</span>';
+  if(d.nen>=90&&d.pct_exp>30) return '<span class="risk-pill rp-alto">Alto</span>';
+  if(d.pct_exp>10) return '<span class="risk-pill rp-med">Moderado</span>';
+  return '<span class="risk-pill rp-ok">Controlado</span>';
+};
+const acao=d=>{
+  if(d.nen>=100&&d.pct_exp>70) return 'Migrar para dupla proteção urgente';
+  if(d.nen>=100) return 'Revisar modelo + reforçar treinamento';
+  if(d.nen>=90&&d.pct_exp>30) return 'Avaliar upgrade de NRRsf';
+  if(d.pct_exp>10) return 'Monitorar — intensificar periódicos';
+  return '—';
+};
+[...ghe].sort((a,b)=>b.pct_exp-a.pct_exp).forEach(d=>{
+  const pct=d.pct_exp;
+  const bc=pct>70?"#E24B4A":pct>30?"#EF9F27":"#1D9E75";
+  tbody.innerHTML+=`<tr style="border-bottom:.5px solid var(--color-border-tertiary)">
+    <td style="padding:7px 8px;font-weight:500">${d.g}</td>
+    <td style="padding:7px 8px;color:var(--color-text-secondary)">${d.e}</td>
+    <td style="padding:7px 8px;text-align:right">${d.nen}</td>
+    <td style="padding:7px 8px"><div style="font-size:12px;font-weight:500;color:${bc}">${pct.toFixed(1)}%</div>
+      <div class="mini-bar-bg"><div class="mini-bar" style="width:${Math.min(100,pct)}%;background:${bc}"></div></div></td>
+    <td style="padding:7px 8px;text-align:right;color:var(--color-text-secondary)">${d.nep.toFixed(1)}</td>
+    <td style="padding:7px 8px">${riskPill(d)}</td>
+    <td style="padding:7px 8px;font-size:11px;color:var(--color-text-secondary)">${acao(d)}</td>
+  </tr>`;
+});
+
+const jornData = {
+  all:{labels:["GHE-C03","GHE-B04","GHE-A05","GHE-B01","GHE-C02","GHE-A03","GHE-B06","GHE-A02"],
+    pad:[85.62,86.81,84.07,78.92,76.03,76.52,74.39,73.59],
+    ext:[88.21,89.21,86.96,82.41,79.97,79.14,77.63,76.93],
+    padPct:[82.1,84.4,68.8,41.3,28.5,29.8,20.2,17.7],
+    extPct:[94.3,93.1,88.7,66.8,50.1,41.6,35.5,36.0]},
+  "GHE-C03":{labels:["NEP médio","% expostos"],pad:[85.62,82.1],ext:[88.21,94.3]},
+  "GHE-B04":{labels:["NEP médio","% expostos"],pad:[86.81,84.4],ext:[89.21,93.1]},
+  "GHE-A05":{labels:["NEP médio","% expostos"],pad:[84.07,68.8],ext:[86.96,88.7]},
+  "GHE-B01":{labels:["NEP médio","% expostos"],pad:[78.92,41.3],ext:[82.41,66.8]},
+  "GHE-C02":{labels:["NEP médio","% expostos"],pad:[76.03,28.5],ext:[79.97,50.1]},
+  "GHE-A03":{labels:["NEP médio","% expostos"],pad:[76.52,29.8],ext:[79.14,41.6]},
+};
+let jChart=null;
+function updateJornada(){
+  const sel=document.getElementById('selGhe').value;
+  if(jChart) jChart.destroy();
+  const d=jornData[sel]||jornData.all;
+  const isAll=sel==='all';
+  jChart=new Chart(document.getElementById('cJorn'),{
+    type:'bar',
+    data:{
+      labels:d.labels,
+      datasets:[
+        {label:'Jornada padrão (8h)',data:d.pad,backgroundColor:'#85B7EB',borderRadius:3},
+        {label:'Jornada >8h',data:d.ext,backgroundColor:'#E24B4A',borderRadius:3,borderDash:[]}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw.toFixed(1)+(isAll?' dB(A)':'')}}},
+      scales:{
+        y:{min:isAll?65:0,grid:{color:'rgba(128,128,128,.08)'},ticks:{callback:v=>v.toFixed(0)+(isAll?' dB':'')}},
+        x:{grid:{display:false},ticks:{font:{size:10},maxRotation:30}}
+      }
+    }
+  });
+}
+updateJornada();
+</script>
