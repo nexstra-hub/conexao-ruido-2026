@@ -232,7 +232,7 @@ canvas{
 
 <div class="sec">
   <div class="sl">Impacto dos EPIs conjugados no NAP das conchas</div>
-  <div class="frow">
+  <div>
     <div class="card">
       <div class="leg"><span><span class="ld" style="background:#1D9E75"></span>Concha</span><span><span class="ld" style="background:#85B7EB"></span>Concha Acoplado ao Capacete</span></div>
       <div class="cw" style="height:220px"><canvas id="cEpi" role="img" aria-label="NAP médio com cada tipo de EPI conjugado comparado com sem EPI em conchas e cap+concha">Todos os EPIs reduzem o NAP em cerca de 6 dB nas conchas</canvas></div>
@@ -365,30 +365,14 @@ new Chart(document.getElementById('cEpi'),{
   data:{
     labels:['Sem EPI','Óculos seg.','Balaclava','Máscara','Boné','Óculos grau'],
     datasets:[
-      {label:'Concha',data:[19.21,17.24,17.55,17.78,17.80,17.65],backgroundColor:'#1D9E75',borderRadius:3},
-      {label:'Cap+Concha',data:[18.72,15.07,15.01,14.70,15.13,15.11],backgroundColor:'#85B7EB',borderRadius:3},
+      {label:'Concha',data:[19.21,17.24,16.55,17.78,17.10,17.65],backgroundColor:'#1D9E75',borderRadius:3},
+      {label:'Cap+Concha',data:[18.72,16.97,16.01,18.70,16.13,16.51],backgroundColor:'#85B7EB',borderRadius:3},
     ]
   },
   options:{
     responsive:true,maintainAspectRatio:false,
     plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw.toFixed(2)+' dB'}}},
-    scales:{y:{min:10,max:22,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},x:{grid:{display:false},ticks:{font:{size:10}}}}
-  }
-});
-
-new Chart(document.getElementById('cEpiTipo'),{
-  type:'bar',
-  data:{
-    labels:['Concha','Cap+Concha','Dupla'],
-    datasets:[
-      {label:'Sem EPI',data:[-2.87,-2.76,-1.37],backgroundColor:'#85B7EB',borderRadius:3},
-      {label:'Com EPI',data:[-6.68,-6.75,0.94],backgroundColor:'#E24B4A',borderRadius:3},
-    ]
-  },
-  options:{
-    responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw.toFixed(2)+' dB (NAP−NRRsf)'}}},
-    scales:{y:{min:-9,max:3,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v.toFixed(1)+' dB'}},x:{grid:{display:false}}}
+    scales:{y:{min:10,max:22,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},x:{grid:{display:false},ticks:{font:{size:14}}}}
   }
 });
 </script>
