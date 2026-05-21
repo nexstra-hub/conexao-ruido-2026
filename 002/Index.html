@@ -1,1 +1,416 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
+body{
+  font-family:var(--font-sans);
+  font-size:19px;
+  color:#F5F7FA;
+  background:transparent;
+  padding:0 10px;
+}
+
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0)
+}
+
+.sec{margin-bottom:2rem}
+
+.sl{
+  font-size:16px;
+  font-weight:600;
+  color:#B8C2CC;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding-bottom:8px;
+  border-bottom:.5px solid rgba(255,255,255,.12);
+  margin-bottom:14px
+}
+
+.card{
+  background:#11161D;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:16px;
+  box-shadow:0 2px 12px rgba(0,0,0,.28)
+}
+
+.cw{
+  position:relative;
+  width:100%
+}
+
+.leg{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:10px;
+  font-size:16px;
+  color:#B8C2CC
+}
+
+.ld{
+  width:10px;
+  height:10px;
+  border-radius:2px;
+  display:inline-block;
+  margin-right:4px;
+  vertical-align:middle
+}
+
+.ins{
+  border-left:3px solid #3B82F6;
+  border-radius:0 12px 12px 0;
+  background:#18202A;
+  padding:12px 15px;
+  font-size:17px;
+  color:#C7D0DA;
+  margin-top:10px
+}
+
+.ins b{
+  color:#FFFFFF;
+  font-weight:600
+}
+
+.frow{
+  display:flex;
+  gap:8px;
+  margin-bottom:12px;
+  align-items:center;
+  flex-wrap:wrap
+}
+
+.frow label{
+  font-size:17px;
+  color:#C7D0DA
+}
+
+.frow select{
+  font-size:17px;
+  padding:6px 10px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;
+  background:#161B22;
+  color:#FFFFFF
+}
+
+.r2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px
+}
+
+.kpi-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:10px;
+  margin-bottom:1.5rem
+}
+
+.kpi{
+  background:#161B22;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  padding:16px;
+  box-shadow:0 2px 10px rgba(0,0,0,.25)
+}
+
+.kpi-l{
+  font-size:16px;
+  color:#9DA7B3;
+  margin-bottom:5px
+}
+
+.kpi-v{
+  font-size:24px;
+  font-weight:600;
+  color:#FFFFFF
+}
+
+.kpi-s{
+  font-size:16px;
+  color:#7E8A97;
+  margin-top:3px
+}
+
+.red{color:#FF6B6B}
+.amber{color:#FFBE55}
+.green{color:#39D98A}
+
+.badge{
+  display:inline-block;
+  font-size:15px;
+  padding:4px 10px;
+  border-radius:999px;
+  font-weight:600
+}
+
+.b-deg{
+  background:rgba(255,107,107,.15);
+  color:#FF8E8E
+}
+
+.b-ok{
+  background:rgba(57,217,138,.12);
+  color:#67F0A8
+}
+
+.b-n{
+  background:rgba(255,255,255,.08);
+  color:#D0D7DE
+}
+
+table{
+  color:#F5F7FA
+}
+
+th{
+  color:#AEB8C2 !important
+}
+
+td{
+  color:#E6EDF3
+}
+
+canvas{
+  background:transparent
+}
+</style>
+
+<h2 class="sr-only">Dashboard — Tema 2: Seleção e adequação de protetores auditivos. Análise de degradação, eficiência real, matching com GHE e impacto de EPIs conjugados.</h2>
+
+<div style="padding:1rem 10px">
+
+<div class="sec">
+  <div class="sl">Ranking de eficiência real — NAP médio vs NRRsf por modelo</div>
+  <div class="frow">
+    <label>Tipo:</label>
+    <select id="selTipo" onchange="updateRanking()">
+      <option value="all">Todos</option>
+      <option value="Plugue">Plugues</option>
+      <option value="Concha">Conchas</option>
+      <option value="Cap">Cap + Concha</option>
+      <option value="Dupla">Dupla proteção</option>
+    </select>
+  </div>
+  <div class="card">
+    <div class="leg">
+      <span><span class="ld" style="background:#1D9E75"></span>NAP obtido</span>
+      <span><span class="ld" style="background:#B4B2A9"></span>NRRsf (referência)</span>
+      <span><span class="ld" style="background:#E24B4A"></span>Gap negativo (NAP &lt; NRRsf−4)</span>
+    </div>
+    <div class="cw" id="rankWrap" style="height:380px">
+      <canvas id="cRank" role="img" aria-label="Gráfico de barras comparando NAP obtido e NRRsf para cada modelo de protetor">Plugue B1 tem maior gap negativo; dupla proteção supera NRRsf</canvas>
+    </div>
+    <div class="ins"><b>Insight chave:</b> nenhum modelo de concha simples entrega o NRRsf declarado em uso real — gap médio de <b>−5,1 dB</b>. Plugues com sonda (Empresa B) têm gap menor (−2,7 dB) que plugues convencionais (−3,5 dB). Dupla proteção é o único tipo que supera o NRRsf.</div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Degradação do NAP ao longo do tempo de uso — modelos com anomalia</div>
+  <div class="frow">
+    <label>Modelo:</label>
+    <select id="selMod" onchange="updateDeg()">
+      <option value="Plugue B1">Plugue B1 — degrada rápido</option>
+      <option value="Plugue C3 (Sonda)">Plugue C3 Sonda — degrada rápido</option>
+      <option value="Concha C2">Concha C2 — degrada rápido</option>
+      <option value="CapConcha E1">CapConcha E1 — degrada rápido</option>
+      <option value="Plugue A2">Plugue A2 — dura bem</option>
+      <option value="Plugue C2 (Sonda)">Plugue C2 Sonda — dura bem</option>
+      <option value="Concha D1">Concha D1 — dura bem</option>
+      <option value="CapConcha E2">CapConcha E2 — dura bem</option>
+    </select>
+  </div>
+  <div class="card">
+    <div class="cw" style="height:210px"><canvas id="cDeg" role="img" aria-label="Evolução do offset NAP menos NRRsf ao longo de faixas de tempo de uso em dias">Modelos com degradação rápida perdem mais de 2dB adicionais após 90 dias</canvas></div>
+    <div class="ins" id="degIns">Selecione o modelo para ver a curva de degradação e diagnóstico de prazo de troca.</div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Matching modelo × GHE — % protegidos em GHEs críticos (≥ 100 dB)</div>
+  <div class="card">
+    <div class="leg">
+      <span><span class="ld" style="background:#E24B4A"></span>GHE-B04 (102,5 dB)</span>
+      <span><span class="ld" style="background:#EF9F27"></span>GHE-A05 (101,5 dB)</span>
+      <span><span class="ld" style="background:#534AB7"></span>GHE-C03 (103,0 dB)</span>
+    </div>
+    <div class="cw" style="height:260px"><canvas id="cMatch" role="img" aria-label="Percentual de colaboradores protegidos por modelo em cada GHE crítico acima de 100 dB">Dupla proteção é o único tipo com taxa acima de 60% em GHEs críticos</canvas></div>
+    <div class="ins"><b>Alerta de subdimensionamento:</b> conchas com NRRsf 19–21 dB (Concha C1, CapConcha C1) têm <b>0% de adequação</b> em GHEs ≥ 100 dB. Apenas dupla proteção ultrapassa 60% de cobertura nesses ambientes.</div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Impacto dos EPIs conjugados no NAP das conchas</div>
+  <div class="r2">
+    <div class="card">
+      <div class="leg"><span><span class="ld" style="background:#85B7EB"></span>Sem EPI (referência)</span><span><span class="ld" style="background:#E24B4A"></span>Com EPI conjugado</span></div>
+      <div class="cw" style="height:220px"><canvas id="cEpi" role="img" aria-label="NAP médio com cada tipo de EPI conjugado comparado com sem EPI em conchas e cap+concha">Todos os EPIs reduzem o NAP em cerca de 6 dB nas conchas</canvas></div>
+      <div class="ins" style="font-size:11px"><b>−6 dB</b> de perda média com qualquer EPI conjugado. Balaclava e óculos são os mais impactantes em cap+concha.</div>
+    </div>
+    <div class="card">
+      <div class="leg"><span><span class="ld" style="background:#1D9E75"></span>Concha</span><span><span class="ld" style="background:#378ADD"></span>Cap+Concha</span><span><span class="ld" style="background:#7F77DD"></span>Dupla</span></div>
+      <div class="cw" style="height:220px"><canvas id="cEpiTipo" role="img" aria-label="Offset NAP menos NRRsf por tipo de protetor com e sem EPI">Dupla proteção mantém performance mesmo com EPI conjugado</canvas></div>
+      <div class="ins" style="font-size:11px"><b>Exceção da dupla proteção:</b> os EPIs conjugados não penalizam o NAP da dupla — o plugue compensa a perda da concha.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const modelos=[
+  {m:"Plugue B1",      t:"Plugue",nrrsf:14,nap:11.56,off:-2.44,tipo:"degrada_rapido"},
+  {m:"Plugue A1",      t:"Plugue",nrrsf:15,nap:13.35,off:-1.65,tipo:"normal"},
+  {m:"Concha D2",      t:"Concha",nrrsf:16,nap:11.38,off:-4.62,tipo:"degrada_rapido"},
+  {m:"Concha C2",      t:"Concha",nrrsf:17,nap:12.19,off:-4.81,tipo:"degrada_rapido"},
+  {m:"Plugue C1(Sonda)",t:"Plugue",nrrsf:14,nap:11.13,off:-2.87,tipo:"normal"},
+  {m:"CapConcha C1",   t:"Cap",   nrrsf:19,nap:13.90,off:-5.10,tipo:"normal"},
+  {m:"CapConcha E1",   t:"Cap",   nrrsf:18,nap:12.89,off:-5.11,tipo:"degrada_rapido"},
+  {m:"Concha C1",      t:"Concha",nrrsf:20,nap:14.86,off:-5.14,tipo:"normal"},
+  {m:"Plugue B2",      t:"Plugue",nrrsf:20,nap:16.32,off:-3.68,tipo:"normal"},
+  {m:"Plugue C2(Sonda)",t:"Plugue",nrrsf:18,nap:15.62,off:-2.38,tipo:"dura_bem"},
+  {m:"Concha A1",      t:"Concha",nrrsf:21,nap:15.84,off:-5.16,tipo:"normal"},
+  {m:"Plugue C3(Sonda)",t:"Plugue",nrrsf:21,nap:15.54,off:-5.46,tipo:"degrada_rapido"},
+  {m:"CapConcha D1",   t:"Cap",   nrrsf:22,nap:16.95,off:-5.05,tipo:"normal"},
+  {m:"CapConcha C2",   t:"Cap",   nrrsf:22,nap:16.38,off:-5.62,tipo:"dura_bem"},
+  {m:"Concha D1",      t:"Concha",nrrsf:23,nap:17.80,off:-5.20,tipo:"dura_bem"},
+  {m:"Plugue A2",      t:"Plugue",nrrsf:19,nap:16.70,off:-2.30,tipo:"dura_bem"},
+  {m:"CapConcha E2",   t:"Cap",   nrrsf:25,nap:19.73,off:-5.27,tipo:"dura_bem"},
+  {m:"Dupla E1",       t:"Dupla", nrrsf:24,nap:24.81,off:0.81, tipo:"normal"},
+  {m:"Dupla C1(Sonda)",t:"Dupla", nrrsf:25,nap:25.84,off:0.84, tipo:"normal"},
+];
+const tCor={Plugue:"#EF9F27",Concha:"#1D9E75",Cap:"#378ADD",Dupla:"#7F77DD"};
+let rankChart=null;
+function updateRanking(){
+  const f=document.getElementById('selTipo').value;
+  let data=f==='all'?modelos:modelos.filter(d=>d.t===f);
+  data=[...data].sort((a,b)=>a.nap-b.nap);
+  const wrap=document.getElementById('rankWrap');
+  wrap.style.height=Math.max(240,data.length*38+60)+'px';
+  if(rankChart) rankChart.destroy();
+  rankChart=new Chart(document.getElementById('cRank'),{
+    type:'bar',indexAxis:'y',
+    data:{
+      labels:data.map(d=>d.m),
+      datasets:[
+        {label:'NRRsf',data:data.map(d=>d.nrrsf),backgroundColor:'rgba(136,135,128,.25)',borderRadius:3,borderSkipped:false},
+        {label:'NAP obtido',data:data.map(d=>d.nap),backgroundColor:data.map(d=>d.off<-4?"#E24B4A":tCor[d.t]),borderRadius:3,borderSkipped:false}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>{
+        const d=data[v.dataIndex];
+        return v.datasetIndex===0?'NRRsf: '+v.raw+' dB':'NAP: '+v.raw.toFixed(2)+' dB (gap: '+d.off.toFixed(2)+' dB)';
+      }}}},
+      scales:{x:{min:0,max:30,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},y:{grid:{display:false},ticks:{font:{size:10}}}}
+    }
+  });
+}
+updateRanking();
+
+const degDB={
+  "Plugue B1":      {d:[-2.57,-2.81,-4.39,-5.46,-6.84],tipo:"degrada_rapido",note:"Perda acelerada após 60 dias — reduzir prazo de troca para 45 dias."},
+  "Plugue C3 (Sonda)":{d:[-3.57,-3.51,-5.32,-6.05,-6.89],tipo:"degrada_rapido",note:"Degradação crítica após 90 dias de uso. Prazo de 90 dias deve ser reduzido para 60 dias."},
+  "Concha C2":      {d:[-4.77,-4.43,-5.40,-4.22,-5.63],tipo:"degrada_rapido",note:"Piora progressiva — prazo de 200 dias excessivo. Reduzir para 120 dias."},
+  "CapConcha E1":   {d:[-4.88,-4.74,-4.95,-5.64,-5.96],tipo:"degrada_rapido",note:"Degradação visível após 90 dias. Avaliar redução do prazo de 200 para 150 dias."},
+  "Plugue A2":      {d:[-2.62,-1.64,-1.69,-2.54,-2.83],tipo:"dura_bem",note:"Performance estável. Prazo atual de 150 dias é conservador — pode estender para 170 dias."},
+  "Plugue C2 (Sonda)":{d:[-2.84,-1.67,-1.87,-2.25,-0.25],tipo:"dura_bem",note:"Excelente durabilidade — único modelo com melhora de desempenho ao final do ciclo."},
+  "Concha D1":      {d:[-5.45,-4.81,-4.74,-5.32,-4.93],tipo:"dura_bem",note:"Concha com melhor estabilidade. Prazo de 365 dias confirmado pelos dados."},
+  "CapConcha E2":   {d:[-5.17,-4.38,-3.95,-3.97,-5.08],tipo:"dura_bem",note:"Desempenho estável com leve melhora no meio do ciclo. Prazo de 365 dias adequado."},
+};
+const degLabels=["0–30 dias","30–60 dias","60–90 dias","90–120 dias","120+ dias"];
+let degChart=null;
+function updateDeg(){
+  const mod=document.getElementById('selMod').value;
+  const d=degDB[mod];
+  if(!d){return;}
+  document.getElementById('degIns').innerHTML='<b>'+mod+':</b> '+d.note;
+  if(degChart) degChart.destroy();
+  const c=d.tipo==="degrada_rapido"?"#E24B4A":"#1D9E75";
+  degChart=new Chart(document.getElementById('cDeg'),{
+    type:'line',
+    data:{labels:degLabels,datasets:[{
+      label:'Offset NAP−NRRsf',data:d.d,
+      borderColor:c,backgroundColor:c+'18',fill:true,tension:.35,pointRadius:5,pointBackgroundColor:c
+    }]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>'Offset: '+v.raw.toFixed(2)+' dB'}}},
+      scales:{
+        y:{min:-8,max:1,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v.toFixed(1)+' dB'},
+          plugins:{annotation:{annotations:{zero:{type:'line',yMin:0,yMax:0,borderColor:'#888',borderDash:[4,3]}}}}},
+        x:{grid:{display:false}}
+      }
+    }
+  });
+}
+updateDeg();
+
+const matchData=[
+  {m:"Concha C1",          nrrsf:20,b04:0.0, a05:null,c03:null},
+  {m:"CapConcha C1",       nrrsf:19,b04:0.0, a05:null,c03:null},
+  {m:"CapConcha C2",       nrrsf:22,b04:1.7, a05:null,c03:null},
+  {m:"Concha A1",          nrrsf:21,b04:null,a05:3.8, c03:0.4},
+  {m:"CapConcha D1",       nrrsf:22,b04:null,a05:12.5,c03:1.8},
+  {m:"Concha D1",          nrrsf:23,b04:null,a05:31.8,c03:10.7},
+  {m:"CapConcha E2",       nrrsf:25,b04:null,a05:53.5,c03:38.0},
+  {m:"Dupla C1 (Sonda)",   nrrsf:25,b04:68.2,a05:null,c03:null},
+  {m:"Dupla E1",           nrrsf:24,b04:null,a05:64.5,c03:48.5},
+];
+new Chart(document.getElementById('cMatch'),{
+  type:'bar',indexAxis:'y',
+  data:{
+    labels:matchData.map(d=>d.m+' ('+d.nrrsf+' dB)'),
+    datasets:[
+      {label:'GHE-B04 (102,5 dB)',data:matchData.map(d=>d.b04),backgroundColor:'#E24B4A',borderRadius:3},
+      {label:'GHE-A05 (101,5 dB)',data:matchData.map(d=>d.a05),backgroundColor:'#EF9F27',borderRadius:3},
+      {label:'GHE-C03 (103,0 dB)',data:matchData.map(d=>d.c03),backgroundColor:'#7F77DD',borderRadius:3},
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+(v.raw==null?'n/a':v.raw.toFixed(1)+'%')}}},
+    scales:{x:{min:0,max:80,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+'%'}},y:{grid:{display:false},ticks:{font:{size:10}}}}
+  }
+});
+
+new Chart(document.getElementById('cEpi'),{
+  type:'bar',
+  data:{
+    labels:['Sem EPI','Óculos seg.','Balaclava','Máscara','Boné','Óculos grau'],
+    datasets:[
+      {label:'Concha',data:[17.33,13.24,13.55,13.78,13.80,13.65],backgroundColor:'#1D9E75',borderRadius:3},
+      {label:'Cap+Concha',data:[19.14,15.07,15.01,14.70,15.13,15.11],backgroundColor:'#378ADD',borderRadius:3},
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw.toFixed(2)+' dB'}}},
+    scales:{y:{min:10,max:22,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},x:{grid:{display:false},ticks:{font:{size:10}}}}
+  }
+});
+
+new Chart(document.getElementById('cEpiTipo'),{
+  type:'bar',
+  data:{
+    labels:['Concha','Cap+Concha','Dupla'],
+    datasets:[
+      {label:'Sem EPI',data:[-2.87,-2.76,-1.37],backgroundColor:'#85B7EB',borderRadius:3},
+      {label:'Com EPI',data:[-6.68,-6.75,0.94],backgroundColor:'#E24B4A',borderRadius:3},
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw.toFixed(2)+' dB (NAP−NRRsf)'}}},
+    scales:{y:{min:-9,max:3,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v.toFixed(1)+' dB'}},x:{grid:{display:false}}}
+  }
+});
+</script>
