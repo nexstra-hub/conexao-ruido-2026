@@ -204,7 +204,7 @@ canvas{
       <span><span class="ld" style="background:#B4B2A9"></span>NRRsf (referência)</span>
       <span><span class="ld" style="background:#E24B4A"></span>Gap negativo (NAP &lt; NRRsf−4)</span>
     </div>
-    <div class="cw" id="rankWrap" style="height:350px">
+    <div class="cw" id="rankWrap" style="height:300px">
       <canvas id="cRank" role="img" aria-label="Gráfico de barras comparando NAP obtido e NRRsf para cada modelo de protetor">Plugue B1 tem maior gap negativo; dupla proteção supera NRRsf</canvas>
     </div>
     <div class="ins"><b>Insight chave:</b> nenhum modelo de concha simples entrega o NRRsf declarado em uso real — gap médio de <b>−5,1 dB</b>. Plugues com sonda (Empresa B) têm gap menor (−2,7 dB) que plugues convencionais (−3,5 dB). Dupla proteção é o único tipo que supera o NRRsf.</div>
@@ -293,7 +293,7 @@ function updateRanking(){
   let data=f==='all'?modelos:modelos.filter(d=>d.t===f);
   data=[...data].sort((a,b)=>a.nap-b.nap);
   const wrap=document.getElementById('rankWrap');
-  wrap.style.height='350px';
+  wrap.style.height='300px';
   if(rankChart) rankChart.destroy();
   rankChart=new Chart(document.getElementById('cRank'),{
     type:'bar',indexAxis:'y',
