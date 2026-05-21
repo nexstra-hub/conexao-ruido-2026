@@ -293,7 +293,7 @@ function updateRanking(){
   let data=f==='all'?modelos:modelos.filter(d=>d.t===f);
   data=[...data].sort((a,b)=>a.nap-b.nap);
   const wrap=document.getElementById('rankWrap');
-  wrap.style.height=Math.max(240,data.length*38+60)+'px';
+  wrap.style.height='380px';
   if(rankChart) rankChart.destroy();
   rankChart=new Chart(document.getElementById('cRank'),{
     type:'bar',indexAxis:'y',
