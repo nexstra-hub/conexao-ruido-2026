@@ -207,7 +207,7 @@ canvas{
     <div class="cw" id="rankWrap" style="height:300px">
       <canvas id="cRank" role="img" aria-label="Gráfico de barras comparando NAP obtido e NRRsf para cada modelo de protetor">Plugue B1 tem maior gap negativo; dupla proteção supera NRRsf</canvas>
     </div>
-    <div class="ins"><b>Insight chave:</b> nenhum modelo de concha simples entrega o NRRsf declarado em uso real — gap médio de <b>−5,1 dB</b>. Plugues com sonda (Empresa B) têm gap menor (−2,7 dB) que plugues convencionais (−3,5 dB). Dupla proteção é o único tipo que supera o NRRsf.</div>
+    <div class="ins"><b>Insight chave:</b> nenhum modelo entrega o NRRsf declarado em uso real — Tipo concha apresenta gap médio de <b>−5,1 dB</b>. Plugues têm gap menor (−3,5 dB).</div>
   </div>
 </div>
 
@@ -217,11 +217,9 @@ canvas{
     <label>Modelo:</label>
     <select id="selMod" onchange="updateDeg()">
       <option value="Plugue B1">Plugue B1 — degrada rápido</option>
-      <option value="Plugue C3 (Sonda)">Plugue C3 Sonda — degrada rápido</option>
       <option value="Concha C2">Concha C2 — degrada rápido</option>
       <option value="CapConcha E1">CapConcha E1 — degrada rápido</option>
       <option value="Plugue A2">Plugue A2 — dura bem</option>
-      <option value="Plugue C2 (Sonda)">Plugue C2 Sonda — dura bem</option>
       <option value="Concha D1">Concha D1 — dura bem</option>
       <option value="CapConcha E2">CapConcha E2 — dura bem</option>
     </select>
@@ -233,30 +231,12 @@ canvas{
 </div>
 
 <div class="sec">
-  <div class="sl">Matching modelo × GHE — % protegidos em GHEs críticos (≥ 100 dB)</div>
-  <div class="card">
-    <div class="leg">
-      <span><span class="ld" style="background:#E24B4A"></span>GHE-B04 (102,5 dB)</span>
-      <span><span class="ld" style="background:#EF9F27"></span>GHE-A05 (101,5 dB)</span>
-      <span><span class="ld" style="background:#534AB7"></span>GHE-C03 (103,0 dB)</span>
-    </div>
-    <div class="cw" style="height:260px"><canvas id="cMatch" role="img" aria-label="Percentual de colaboradores protegidos por modelo em cada GHE crítico acima de 100 dB">Dupla proteção é o único tipo com taxa acima de 60% em GHEs críticos</canvas></div>
-    <div class="ins"><b>Alerta de subdimensionamento:</b> conchas com NRRsf 19–21 dB (Concha C1, CapConcha C1) têm <b>0% de adequação</b> em GHEs ≥ 100 dB. Apenas dupla proteção ultrapassa 60% de cobertura nesses ambientes.</div>
-  </div>
-</div>
-
-<div class="sec">
   <div class="sl">Impacto dos EPIs conjugados no NAP das conchas</div>
   <div class="r2">
     <div class="card">
-      <div class="leg"><span><span class="ld" style="background:#85B7EB"></span>Sem EPI (referência)</span><span><span class="ld" style="background:#E24B4A"></span>Com EPI conjugado</span></div>
+      <div class="leg"><span><span class="ld" style="background:#1D9E75"></span>Concha</span><span><span class="ld" style="background:#E24B4A"></span>Concha Acoplado ao Capacete</span></div>
       <div class="cw" style="height:220px"><canvas id="cEpi" role="img" aria-label="NAP médio com cada tipo de EPI conjugado comparado com sem EPI em conchas e cap+concha">Todos os EPIs reduzem o NAP em cerca de 6 dB nas conchas</canvas></div>
       <div class="ins" style="font-size:11px"><b>−6 dB</b> de perda média com qualquer EPI conjugado. Balaclava e óculos são os mais impactantes em cap+concha.</div>
-    </div>
-    <div class="card">
-      <div class="leg"><span><span class="ld" style="background:#1D9E75"></span>Concha</span><span><span class="ld" style="background:#378ADD"></span>Cap+Concha</span><span><span class="ld" style="background:#7F77DD"></span>Dupla</span></div>
-      <div class="cw" style="height:220px"><canvas id="cEpiTipo" role="img" aria-label="Offset NAP menos NRRsf por tipo de protetor com e sem EPI">Dupla proteção mantém performance mesmo com EPI conjugado</canvas></div>
-      <div class="ins" style="font-size:11px"><b>Exceção da dupla proteção:</b> os EPIs conjugados não penalizam o NAP da dupla — o plugue compensa a perda da concha.</div>
     </div>
   </div>
 </div>
@@ -388,7 +368,7 @@ new Chart(document.getElementById('cEpi'),{
     labels:['Sem EPI','Óculos seg.','Balaclava','Máscara','Boné','Óculos grau'],
     datasets:[
       {label:'Concha',data:[17.33,13.24,13.55,13.78,13.80,13.65],backgroundColor:'#1D9E75',borderRadius:3},
-      {label:'Cap+Concha',data:[19.14,15.07,15.01,14.70,15.13,15.11],backgroundColor:'#378ADD',borderRadius:3},
+      {label:'Cap+Concha',data:[19.14,15.07,15.01,14.70,15.13,15.11],backgroundColor:'#E24B4A',borderRadius:3},
     ]
   },
   options:{
