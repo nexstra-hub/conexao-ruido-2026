@@ -288,7 +288,7 @@ function updateRanking(){
         const d=data[v.dataIndex];
         return v.datasetIndex===0?'NRRsf: '+v.raw+' dB':'NAP: '+v.raw.toFixed(2)+' dB (gap: '+d.off.toFixed(2)+' dB)';
       }}}},
-      scales:{x:{min:0,max:30,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},y:{grid:{display:false},ticks:{font:{size:14}}}}
+      scales:{x:{min:0,max:30,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},y:{grid:{display:false},ticks:{font:{size:12}}}}
     }
   });
 }
@@ -356,7 +356,7 @@ new Chart(document.getElementById('cMatch'),{
   options:{
     responsive:true,maintainAspectRatio:false,
     plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+(v.raw==null?'n/a':v.raw.toFixed(1)+'%')}}},
-    scales:{x:{min:0,max:80,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+'%'}},y:{grid:{display:false},ticks:{font:{size:14}}}}
+    scales:{x:{min:0,max:80,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+'%'}},y:{grid:{display:false},ticks:{font:{size:12}}}}
   }
 });
 
@@ -372,7 +372,7 @@ new Chart(document.getElementById('cEpi'),{
   options:{
     responsive:true,maintainAspectRatio:false,
     plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw.toFixed(2)+' dB'}}},
-    scales:{y:{min:10,max:22,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},x:{grid:{display:false},ticks:{font:{size:14}}}}
+    scales:{y:{min:10,max:22,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},x:{grid:{display:false},ticks:{font:{size:12}}}}
   }
 });
 </script>
