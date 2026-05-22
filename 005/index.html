@@ -1,0 +1,463 @@
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body,
+.wrap{
+    background:transparent;
+    color:#e0e0e0;
+    font-family:system-ui,-apple-system,sans-serif;
+    font-size:21px;
+}
+
+.sr-only{
+    position:absolute;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+}
+
+.sec{
+    margin-bottom:2rem;
+}
+
+.sl{
+    font-size:16px;
+    font-weight:500;
+    color:#a0a0a0;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding-bottom:8px;
+    border-bottom:.5px solid #333;
+    margin-bottom:14px;
+}
+
+/* =========================
+   KPI
+========================= */
+
+.krow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+    gap:10px;
+    margin-bottom:1.5rem;
+}
+
+.kpi{
+    background:#252525;
+    border:.5px solid #333;
+    border-radius:8px;
+    padding:12px 14px;
+    text-align:center;
+}
+
+.kl{
+    font-size:16px;
+    color:#888;
+    margin-bottom:5px;
+}
+
+.kv{
+    font-size:24px;
+    font-weight:500;
+    color:#ffffff;
+}
+
+.ks{
+    font-size:16px;
+    color:#888;
+    margin-top:3px;
+}
+
+.red{color:#f87171}
+.amb{color:#facc15}
+.grn{color:#4ade80}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+    background:#1a1a1a;
+    border:.5px solid #333;
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:14px;
+}
+
+/* =========================
+   CONTAINERS
+========================= */
+
+.cw{
+    position:relative;
+    width:100%;
+}
+
+.r2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+/* =========================
+   LEGENDAS
+========================= */
+
+.leg{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:10px;
+    font-size:16px;
+    color:#a0a0a0;
+}
+
+.ld{
+    width:10px;
+    height:10px;
+    border-radius:2px;
+    display:inline-block;
+    margin-right:4px;
+    vertical-align:middle;
+}
+
+/* =========================
+   INSIGHTS
+========================= */
+
+.ins{
+    border-left:3px solid #3b82f6;
+    border-radius:0 8px 8px 0;
+    background:#1f2937;
+    padding:10px 14px;
+    font-size:17px;
+    color:#d0d0d0;
+    margin-top:12px;
+    line-height:1.45;
+}
+
+.ins b{
+    color:#ffffff;
+    font-weight:500;
+}
+
+/* =========================
+   FILTROS / CONTROLES
+========================= */
+
+.frow{
+    display:flex;
+    gap:8px;
+    margin-bottom:12px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.frow label{
+    font-size:17px;
+    color:#b0b0b0;
+}
+
+select,
+input[type=range]{
+    background:#252525;
+    color:#e0e0e0;
+    border:1px solid #444;
+    font-size:17px;
+}
+
+select{
+    padding:8px 10px;
+    border-radius:6px;
+}
+
+select:focus,
+input[type=range]:focus{
+    outline:none;
+    border-color:#3b82f6;
+}
+
+/* =========================
+   SLIDERS
+========================= */
+
+.slid-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.slid-row label{
+    font-size:17px;
+    color:#b0b0b0;
+    min-width:180px;
+}
+
+.slid-row span{
+    font-size:18px;
+    font-weight:500;
+    min-width:80px;
+    color:#ffffff;
+}
+
+/* =========================
+   RISCO
+========================= */
+
+.risk-num{
+    font-size:33px;
+    font-weight:500;
+    color:#f87171;
+}
+
+.risk-lbl{
+    font-size:17px;
+    color:#888;
+    margin-top:4px;
+}
+
+/* =========================
+   ALERTAS
+========================= */
+
+.alert-box{
+    background:#3a1f1f;
+    border:.5px solid #f87171;
+    border-radius:8px;
+    padding:12px 14px;
+    margin-bottom:14px;
+}
+
+.alert-box p{
+    font-size:17px;
+    color:#fda4a4;
+    margin:0;
+    line-height:1.45;
+}
+
+.alert-box b{
+    font-weight:500;
+    color:#ffffff;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:900px){
+
+    .r2{
+        grid-template-columns:1fr;
+    }
+
+    .krow{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .slid-row{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .slid-row label{
+        min-width:auto;
+    }
+}
+
+@media(max-width:640px){
+
+    .krow{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:14px;
+    }
+
+    .kv{
+        font-size:22px;
+    }
+
+    .risk-num{
+        font-size:28px;
+    }
+}
+</style>
+
+<h2 class="sr-only">Dashboard — Tema 2 safe.EAR: risco de passivo trabalhista por PAIR. Colaboradores cronicamente expostos, estimativa financeira de ações trabalhistas e priorização por empresa e GHE.</h2>
+
+<div style="padding:1rem 0">
+
+<div class="sec">
+  <div class="sl">Colaboradores com risco elevado de passivo por PAIR</div>
+  <div class="alert-box">
+    <p><b>Argumento jurídico (kit safe.EAR):</b> uma única ação trabalhista por perda auditiva induzida por ruído pode custar entre R$ 50.000 e R$ 150.000. A empresa pode ser responsabilizada mesmo tendo fornecido o protetor auditivo, se não comprovar que ele foi eficaz individualmente.</p>
+  </div>
+  <div class="krow">
+    <div class="kpi"><div class="kl">Colaboradores em risco elevado</div><div class="kv red">745</div><div class="ks">≥50% dos testes com NEP &gt; 80 dB</div></div>
+    <div class="kpi"><div class="kl">Empresa A</div><div class="kv red">229</div><div class="ks">colaboradores em risco</div></div>
+    <div class="kpi"><div class="kl">Empresa B</div><div class="kv red">207</div><div class="ks">colaboradores em risco</div></div>
+    <div class="kpi"><div class="kl">Empresa C</div><div class="kv red">309</div><div class="ks">colaboradores em risco</div></div>
+    <div class="kpi"><div class="kl">Exposição financeira (15% de prob.)</div><div class="kv red">R$ 5,6M–16,8M</div><div class="ks">considerando R$50k–150k/ação</div></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Calculadora de risco financeiro — simule o passivo potencial</div>
+  <div class="card">
+    <div class="slid-row">
+      <label>Colaboradores expostos:</label>
+      <input type="range" min="50" max="800" value="745" step="5" id="slCol" oninput="calcRisco()">
+      <span id="outCol">745</span>
+    </div>
+    <div class="slid-row">
+      <label>Probabilidade de ação trabalhista (%):</label>
+      <input type="range" min="1" max="30" value="15" step="1" id="slProb" oninput="calcRisco()">
+      <span id="outProb">15%</span>
+    </div>
+    <div class="slid-row">
+      <label>Custo médio por ação (R$):</label>
+      <input type="range" min="50000" max="150000" value="100000" step="5000" id="slCusto" oninput="calcRisco()">
+      <span id="outCusto">R$ 100.000</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px">
+      <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:16px;text-align:center">
+        <div class="risk-lbl">Risco financeiro estimado</div>
+        <div class="risk-num" id="rTotal">R$ 11,2M</div>
+        <div class="risk-lbl" style="margin-top:4px" id="rDetalhes">745 × 15% × R$100.000</div>
+      </div>
+      <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:16px;text-align:center">
+        <div class="risk-lbl">Ações trabalhistas esperadas</div>
+        <div class="risk-num" id="rAcoes" style="font-size:28px">112</div>
+        <div class="risk-lbl" style="margin-top:4px">processos potenciais</div>
+      </div>
+    </div>
+    <div class="ins">Sem evidência objetiva (fit test), a empresa não possui argumento técnico rastreável para defesa em ação trabalhista por PAIR. <b>O safe.EAR fornece o laudo individual e rastreável</b> que pode ser a diferença entre ganhar ou perder a ação.</div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Distribuição do risco por nível de exposição (NEP médio dos colaboradores em risco)</div>
+  <div class="r2">
+    <div class="card">
+      <div class="leg">
+        <span><span class="ld" style="background:#EF9F27"></span>NEP 80–86 dB — risco alto</span>
+        <span><span class="ld" style="background:#E24B4A"></span>NEP &gt;86 dB — risco crítico</span>
+      </div>
+      <div class="cw" style="height:220px">
+        <canvas id="cFaixas" role="img" aria-label="Distribuição dos 745 colaboradores em risco por faixa de NEP médio. 181 na faixa 80-83, 262 na faixa 83-86, 214 na faixa 86-90, 88 acima de 90 dB">A maior concentração de colaboradores em risco está na faixa entre 83 e 86 dB NEP</canvas>
+      </div>
+      <div class="ins" style="font-size:15px"><b>302 colaboradores</b> com NEP médio acima de 86 dB(A) — exposição grave e sistemática que gera passivo acumulado de PAIR.</div>
+    </div>
+    <div class="card">
+      <div class="leg">
+        <span><span class="ld" style="background:#E24B4A"></span>Empresa A (229)</span>
+        <span><span class="ld" style="background:#EF9F27"></span>Empresa B (207)</span>
+        <span><span class="ld" style="background:#7F77DD"></span>Empresa C (309)</span>
+      </div>
+      <div class="cw" style="height:220px">
+        <canvas id="cEmpRisco" role="img" aria-label="Comparação entre colaboradores em risco alto por empresa versus total de colaboradores testados">Empresa C tem proporcionalmente mais colaboradores em risco em relação ao total</canvas>
+      </div>
+      <div class="ins" style="font-size:15px">Empresa C concentra <b>41,5%</b> dos casos de risco elevado, reflexo do GHE-C03 com 103,0 dB(A) e maior número de colaboradores expostos.</div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">GHEs geradores de passivo — exposição por ambiente de trabalho</div>
+  <div class="card">
+    <div class="cw" style="height:240px">
+      <canvas id="cGheRisco" role="img" aria-label="Percentual de colaboradores expostos (NEP acima de 80dB) por GHE, mostrando os três GHEs críticos acima de 100dB com taxas entre 72% e 86%">GHE-B04, GHE-C03 e GHE-A05 são os ambientes geradores de maior risco de passivo</canvas>
+    </div>
+    <div class="ins"><b>GHE-B04 (102,5 dB) e GHE-C03 (103,0 dB)</b> têm respectivamente 85,9% e 84,4% dos colaboradores expostos acima do limite. Sem o fit test, a empresa não tem como provar individualmente que cada trabalhador estava protegido — <b>todos se tornam passivo potencial</b>.</div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+function calcRisco(){
+  const col=parseInt(document.getElementById('slCol').value);
+  const prob=parseInt(document.getElementById('slProb').value)/100;
+  const custo=parseInt(document.getElementById('slCusto').value);
+  document.getElementById('outCol').textContent=col;
+  document.getElementById('outProb').textContent=(prob*100).toFixed(0)+'%';
+  document.getElementById('outCusto').textContent='R$ '+custo.toLocaleString('pt-BR');
+  const total=col*prob*custo;
+  const acoes=Math.round(col*prob);
+  document.getElementById('rTotal').textContent='R$ '+(total/1e6).toFixed(1)+'M';
+  document.getElementById('rAcoes').textContent=acoes;
+  document.getElementById('rDetalhes').textContent=col+' × '+(prob*100).toFixed(0)+'% × R$'+custo.toLocaleString('pt-BR');
+}
+
+new Chart(document.getElementById('cFaixas'),{
+  type:'bar',
+  data:{
+    labels:['80–83 dB','83–86 dB','86–90 dB','>90 dB'],
+    datasets:[{
+      label:'Colaboradores',
+      data:[181,262,214,88],
+      backgroundColor:['#EF9F27','#EF9F27','#E24B4A','#A32D2D'],
+      borderRadius:4
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.raw+' colaboradores em risco'}}},
+    scales:{y:{grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v}},x:{grid:{display:false}}}
+  }
+});
+
+new Chart(document.getElementById('cEmpRisco'),{
+  type:'bar',
+  data:{
+    labels:['Empresa A','Empresa B','Empresa C'],
+    datasets:[
+      {label:'Em risco',data:[229,207,309],backgroundColor:['#E24B4A','#EF9F27','#7F77DD'],borderRadius:3},
+      {label:'Total colaboradores',data:[1100-229,900-207,1077-309],backgroundColor:['rgba(228,75,74,.2)','rgba(239,159,39,.2)','rgba(127,119,221,.2)'],borderRadius:3}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw}}},
+    scales:{y:{stacked:true,grid:{color:'rgba(128,128,128,.07)'}},x:{stacked:true,grid:{display:false}}}
+  }
+});
+
+const gheAll=[
+  {g:"GHE-B04",pct:85.9,nen:102.5},{g:"GHE-C03",pct:84.4,nen:103.0},
+  {g:"GHE-A05",pct:72.4,nen:101.5},{g:"GHE-B01",pct:46.4,nen:93.0},
+  {g:"GHE-C02",pct:32.6,nen:90.5},{g:"GHE-A03",pct:31.8,nen:91.0},
+  {g:"GHE-B06",pct:24.0,nen:89.0},{g:"GHE-A02",pct:20.8,nen:88.0},
+  {g:"GHE-B02",pct:18.3,nen:87.5},{g:"GHE-C01",pct:13.8,nen:86.0},
+  {g:"GHE-B03",pct:6.6,nen:84.0},{g:"GHE-C04",pct:6.0,nen:83.0},
+  {g:"GHE-A01",pct:4.6,nen:82.5},{g:"GHE-A04",pct:0,nen:79.0},{g:"GHE-B05",pct:0,nen:78.5},
+];
+new Chart(document.getElementById('cGheRisco'),{
+  type:'bar',indexAxis:'y',
+  data:{
+    labels:gheAll.map(d=>d.g+' ('+d.nen+' dB)'),
+    datasets:[{
+      label:'% colaboradores expostos',
+      data:gheAll.map(d=>d.pct),
+      backgroundColor:gheAll.map(d=>d.nen>=100?'#A32D2D':d.nen>=90?'#E24B4A':d.pct>10?'#EF9F27':'#1D9E75'),
+      borderRadius:3
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>gheAll[v.dataIndex].pct.toFixed(1)+'% expostos — NEN: '+gheAll[v.dataIndex].nen+' dB(A)'}}},
+    scales:{
+      x:{min:0,max:100,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+'%'}},
+      y:{grid:{display:false},ticks:{font:{size:10}}}
+    }
+  }
+});
+</script>
