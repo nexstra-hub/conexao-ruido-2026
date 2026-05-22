@@ -261,7 +261,6 @@ const modelos=[
   {m:"Concha D1",      t:"Concha",nrrsf:23,nap:17.80,off:-5.20,tipo:"dura_bem"},
   {m:"Plugue A2",      t:"Plugue",nrrsf:19,nap:16.70,off:-2.30,tipo:"dura_bem"},
   {m:"CapConcha E2",   t:"Cap",   nrrsf:25,nap:19.73,off:-5.27,tipo:"dura_bem"},
-  {m:"Dupla E1",       t:"Dupla", nrrsf:24,nap:24.81,off:0.81, tipo:"normal"},
   {m:"Dupla C1(Sonda)",t:"Dupla", nrrsf:25,nap:25.84,off:0.84, tipo:"normal"},
 ];
 const tCor={Plugue:"#EF9F27",Concha:"#1D9E75",Cap:"#378ADD",Dupla:"#7F77DD"};
@@ -288,7 +287,7 @@ function updateRanking(){
         const d=data[v.dataIndex];
         return v.datasetIndex===0?'NRRsf: '+v.raw+' dB':'NAP: '+v.raw.toFixed(2)+' dB (gap: '+d.off.toFixed(2)+' dB)';
       }}}},
-      scales:{x:{min:0,max:30,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},y:{grid:{display:false},ticks:{font:{size:12}}}}
+      scales:{x:{min:0,max:30,grid:{color:'rgba(128,128,128,.07)'}},y:{grid:{display:false},ticks:{font:{size:12}}}}
     }
   });
 }
