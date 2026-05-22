@@ -1,0 +1,433 @@
+
+<style>
+
+*{box-sizing:border-box;margin:0;padding:5}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+body, .wrap {
+    background: transparent;
+    color: #e0e0e0;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.sl{
+    font-size:21px;
+    font-weight:500;
+    color:#a0a0a0;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding-bottom:6px;
+    border-bottom:.5px solid #333;
+    margin-bottom:14px;
+    margin-top:1.5rem
+}
+
+.krow{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:10px;margin-bottom:1.5rem}
+
+.kpi,.roi-box,.meth-card{
+    background:#252525;
+    border-radius:8px;
+    padding:14px;
+    text-align:center;
+}
+
+.kl,.ks,.roi-l,.meth-key,.leg{
+    font-size:21px;
+    color:#e0e0e0;
+}
+
+.kv,.roi-v{
+    font-size:30px;
+    font-weight:500;
+}
+
+.ks,.roi-l{margin-top:3px}
+
+.r{color:#f38601}
+.a{color:#854F0B}
+.g{color:#32ba28}
+.b{color:#00b5f6}
+
+.card{
+    background:#1a1a1a;
+    border:.5px solid #333;
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:14px
+}
+
+.cw{position:relative;width:100%}
+
+.leg{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:10px
+}
+
+.ld{
+    width:10px;
+    height:10px;
+    border-radius:2px;
+    display:inline-block;
+    margin-right:4px;
+    vertical-align:middle
+}
+
+.ins{
+    border-left:3px solid #3b82f6;
+    border-radius:0 8px 8px 0;
+    background:#1f2937;
+    padding:12px 14px;
+    font-size:22px;
+    color:#ccc;
+    margin-top:12px
+}
+
+.ins b{
+    color:#ffffff;
+    font-weight:500
+}
+
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+.slid-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:12px
+}
+
+.slid-row label{
+    font-size:22px;
+    color:#b0b0b0;
+    min-width:175px
+}
+
+.slid-row span{
+    font-size:23px;
+    font-weight:500;
+    min-width:80px
+}
+
+.roi-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:10px;
+    margin-top:12px
+}
+
+.meth-compare{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:14px
+}
+
+.meth-title{
+    font-size:22px;
+    font-weight:500;
+    margin-bottom:8px;
+}
+
+.meth-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:22px;
+    margin-bottom:6px
+}
+
+.meth-val{
+    font-weight:500
+}
+
+canvas{
+    background:#1a1a1a;
+    border-radius:10px;
+}
+
+</style>
+
+<h2 class="sr-only">Dashboard para consultorias prestadoras de serviço de fit test: produtividade operacional por método, calculadora de capacidade diária, modelagem de receita recorrente e posicionamento por tipo de cliente.</h2>
+
+<div style="padding:1rem 0">
+
+<div class="sl">Produtividade operacional — diferença entre métodos</div>
+
+<div class="meth-compare">
+  <div class="meth-card">
+    <div class="meth-title" style="color:#00b5f6">Método objetivo (MIRE)</div>
+    <div class="meth-row"><span class="meth-key">Duração média</span><span class="meth-val">54 segundos</span></div>
+    <div class="meth-row"><span class="meth-key">Capacidade/hora</span><span class="meth-val g">~52 testes</span></div>
+    <div class="meth-row"><span class="meth-key">Capacidade/dia (8h)</span><span class="meth-val g">~417 testes</span></div>
+    <div class="meth-row"><span class="meth-key">Protetores elegíveis</span><span class="meth-val">Concha, Cap+Concha, Plugue c/ sonda, Dupla</span></div>
+  </div>
+  <div class="meth-card">
+    <div class="meth-title" style="color:#f38601">Método subjetivo (REAT)</div>
+    <div class="meth-row"><span class="meth-key">Duração média</span><span class="meth-val">19,1 minutos</span></div>
+    <div class="meth-row"><span class="meth-key">Capacidade/hora</span><span class="meth-val r">~3 testes</span></div>
+    <div class="meth-row"><span class="meth-key">Capacidade/dia (8h)</span><span class="meth-val r">~24 testes</span></div>
+    <div class="meth-row"><span class="meth-key">Protetores elegíveis</span><span class="meth-val">Plugue convencional (s/ sonda)</span></div>
+  </div>
+</div>
+
+<div class="sl">Calculadora de capacidade e receita — planejamento operacional</div>
+<div class="card">
+  <div class="slid-row">
+    <label>Colaboradores no cliente:</label>
+    <input type="range" min="50" max="2000" value="500" step="50" id="sN" oninput="calcCap()">
+    <span id="oN">500</span>
+  </div>
+  <div class="slid-row">
+    <label>% de plugues convencionais (subj.):</label>
+    <input type="range" min="0" max="80" value="30" step="5" id="sPct" oninput="calcCap()">
+    <span id="oPct">30%</span>
+  </div>
+  <div class="slid-row">
+    <label>Preço por teste (R$):</label>
+    <input type="range" min="80" max="200" value="120" step="10" id="sPr" oninput="calcCap()">
+    <span id="oPr">R$ 120</span>
+  </div>
+  <div class="roi-grid">
+    <div class="roi-box"><div class="roi-l">Dias necessários</div><div class="roi-v b" id="cDias">3</div><div class="roi-l">para testar todos</div></div>
+    <div class="roi-box"><div class="roi-l">Receita total</div><div class="roi-v g" id="cReceita">R$ 60k</div></div>
+    <div class="roi-box"><div class="roi-l">Receita/dia</div><div class="roi-v g" id="cDia">R$ 20k</div></div>
+  </div>
+  <div class="cw" style="height:200px;margin-top:14px">
+    <canvas id="cCap" role="img" aria-label="Projeção de dias necessários e receita por diferentes tamanhos de cliente, mostrando como a proporção de plugues convencionais impacta o tempo total de aplicação">A presença de plugues convencionais aumenta significativamente o número de dias necessários para completar o projeto</canvas>
+  </div>
+  <div class="ins" id="capIns">Com 500 colaboradores e 30% de plugues convencionais, são necessários aproximadamente 3 dias de trabalho para completar todos os testes.</div>
+</div>
+
+<div class="sl">Modelagem de contrato recorrente — receita anual projetada</div>
+<div class="card">
+  <div class="slid-row">
+    <label>Clientes ativos em carteira:</label>
+    <input type="range" min="1" max="20" value="3" step="1" id="sClientes" oninput="calcRec()">
+    <span id="oClientes">5</span>
+  </div>
+  <div class="slid-row">
+    <label>Média de colaboradores/cliente:</label>
+    <input type="range" min="50" max="1000" value="200" step="25" id="sCols" oninput="calcRec()">
+    <span id="oCols">200</span>
+  </div>
+  <div class="slid-row">
+    <label>Periodicidade (meses):</label>
+    <input type="range" min="4" max="12" value="6" step="1" id="sPer" oninput="calcRec()">
+    <span id="oPer">6 meses</span>
+  </div>
+  <div class="slid-row">
+    <label>Preço por teste (R$):</label>
+    <input type="range" min="80" max="200" value="100" step="10" id="sPr2" oninput="calcRec()">
+    <span id="oPr2">R$ 120</span>
+  </div>
+  <div class="roi-grid">
+    <div class="roi-box"><div class="roi-l">Testes/ano</div><div class="roi-v b" id="rTestes">4.000</div></div>
+    <div class="roi-box"><div class="roi-l">Receita anual</div><div class="roi-v g" id="rAnual">R$ 480k</div></div>
+    <div class="roi-box"><div class="roi-l">Payback equipamento</div><div class="roi-v" id="rPayback" style="color:#00b5f6">1,9 meses</div><div class="roi-l">(ref. R$60k equip.)</div></div>
+  </div>
+  <div class="cw" style="height:190px;margin-top:14px">
+    <canvas id="cRec" role="img" aria-label="Receita recorrente acumulada ao longo de 24 meses com linha de payback do equipamento. A curva de receita cruza o custo do equipamento muito antes do primeiro mês.">Receita acumulada ao longo de 24 meses mostrando o ponto de payback do equipamento no início da série.</canvas>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+function calcCap() {
+  const n = parseInt(document.getElementById('sN').value) || 0;
+  const pct = parseInt(document.getElementById('sPct').value) / 100 || 0;
+  const pr = parseInt(document.getElementById('sPr').value) || 0;
+
+  // Saídas básicas
+  document.getElementById('oN').textContent = n;
+  document.getElementById('oPct').textContent = (pct * 100).toFixed(0) + '%';
+  document.getElementById('oPr').textContent = 'R$ ' + pr;
+
+  // Cálculos
+  const nSub = Math.round(n * pct);
+  const nObj = n - nSub;
+
+  const diasObj = nObj / 417;
+  const diasSub = nSub / 24;
+  const diasTotal = (diasObj + diasSub) > 0 ? Math.ceil(diasObj + diasSub) : 0;
+
+  const receita = n * pr;
+
+  // Saídas
+  document.getElementById('cDias').textContent = diasTotal;
+  document.getElementById('cReceita').textContent = 'R$ ' + (receita / 1000).toFixed(0) + 'k';
+  
+  // Receita por dia (corrigido)
+  const receitaDiaria = diasTotal > 0 ? Math.round(receita / diasTotal / 1000) : 0;
+  document.getElementById('cDia').textContent = 'R$ ' + receitaDiaria + 'k';
+
+  // Texto explicativo
+  document.getElementById('capIns').innerHTML = 
+    `Com <b>${n}</b> colaboradores e <b>${(pct*100).toFixed(0)}%</b> de plugues convencionais 
+    (<b>${nSub} subjetivo + ${nObj} objetivo</b>), são necessários <b>${diasTotal} dias</b> de aplicação para completar todos os testes.`;
+
+  // Destruir gráfico anterior
+  if (capChart) capChart.destroy();
+
+  // Gráfico
+  const tamanhos = [100, 200, 300, 500, 750, 1000, 1500, 2000];
+  
+  const diasArr = tamanhos.map(t => {
+    const ns = Math.round(t * pct);
+    const no = t - ns;
+    return Math.ceil(no / 417 + ns / 24);
+  });
+
+  const recArr = tamanhos.map(t => t * pr / 1000);
+
+  capChart = new Chart(document.getElementById('cCap'), {
+    type: 'bar',
+    data: {
+      labels: tamanhos.map(t => t + ' col.'),
+      datasets: [
+        { 
+          label: 'Dias (eixo esq)', 
+          data: diasArr, 
+          backgroundColor: '#85B7EB', 
+          borderRadius: 3, 
+          yAxisID: 'y' 
+        },
+        { 
+          label: 'Receita R$k (eixo dir)', 
+          data: recArr, 
+          backgroundColor: '#1D9E75', 
+          borderRadius: 3, 
+          yAxisID: 'y2', 
+          type: 'line', 
+          tension: 0.4, 
+          pointRadius: 4 
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: v => v.datasetIndex === 0 ? v.raw + ' dias' : 'R$ ' + v.raw.toFixed(0) + 'k receita'
+          }
+        }
+      },
+      scales: {
+        y: {
+          grid: { color: 'rgba(128,128,128,.07)' },
+          ticks: { callback: v => v + ' d' },
+          title: { display: true, text: 'dias', font: { size: 16 } }
+        },
+        y2: {
+          position: 'right',
+          grid: { display: false },
+          ticks: { callback: v => 'R$' + v + 'k' },
+          title: { display: true, text: 'receita', font: { size: 16 } }
+        },
+        x: {
+          grid: { display: false },
+          ticks: { font: { size: 16 } }
+        }
+      }
+    }
+  });
+}
+
+let capChart = null;
+
+// Executa ao carregar
+calcCap();
+
+let recChart=null;
+function calcRec(){
+  const cli=parseInt(document.getElementById('sClientes').value);
+  const cols=parseInt(document.getElementById('sCols').value);
+  const per=parseInt(document.getElementById('sPer').value);
+  const pr=parseInt(document.getElementById('sPr2').value);
+
+  document.getElementById('oClientes').textContent=cli;
+  document.getElementById('oCols').textContent=cols;
+  document.getElementById('oPer').textContent=per+' meses';
+  document.getElementById('oPr2').textContent='R$ '+pr;
+
+  const testesAno=cli*cols*(12/per);
+  const recAno=testesAno*pr;
+  const payback=60000/recAno*12;
+
+  document.getElementById('rTestes').textContent=testesAno.toLocaleString('pt-BR');
+  document.getElementById('rAnual').textContent='R$ '+(recAno/1000).toFixed(0)+'k';
+  document.getElementById('rPayback').textContent=payback.toFixed(1)+' meses';
+
+  const meses=Array.from({length:25},(_,i)=>i);
+
+  // Receita entra integralmente no início de cada ciclo
+  const receitaCiclo = cli * cols * pr;
+
+  const acum = meses.map(m => {
+    const ciclosRecebidos = Math.floor(m / per) + 1;
+    return ciclosRecebidos * receitaCiclo;
+  });
+
+  if(recChart) recChart.destroy();
+
+  recChart=new Chart(document.getElementById('cRec'),{
+    type:'line',
+    data:{
+      labels:meses.map(m=>m+'m'),
+      datasets:[
+        {
+          label:'Receita acumulada',
+          data:acum,
+          borderColor:'#1D9E75',
+          backgroundColor:'rgba(29,158,117,.08)',
+          fill:true,
+          tension:.3,
+          pointRadius:0
+        },
+        {
+          label:'Custo equipamento',
+          data:meses.map(()=>60000),
+          borderColor:'#E24B4A',
+          borderDash:[4,3],
+          pointRadius:0,
+          fill:false
+        }
+      ]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          callbacks:{
+            label:v=>v.dataset.label+': R$'+Math.round(v.raw).toLocaleString('pt-BR')
+          }
+        }
+      },
+      scales:{
+        y:{
+          grid:{color:'rgba(128,128,128,.07)'},
+          ticks:{
+            callback:v=>'R$'+(v/1000).toFixed(0)+'k'
+          }
+        },
+        x:{
+          grid:{display:false},
+          ticks:{
+            font:{size:16},
+            maxTicksLimit:13
+          }
+        }
+      }
+    }
+  });
+}
+
+calcRec();
+</script>
