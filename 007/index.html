@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard — Tema 4 safe.EAR: PCA e ROI</title>
+<style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+    body, .wrap {
+        background: transparent;
+        color: #e0e0e0;
+        font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .sec{margin-bottom:2rem}
+    .sl{
+        font-size:16px;        /* 11 + 5 */
+        font-weight:500;
+        color:#a0a0a0;
+        letter-spacing:.06em;
+        text-transform:uppercase;
+        padding-bottom:8px;
+        border-bottom:.5px solid #333;
+        margin-bottom:14px
+    }
+
+    .krow{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.5rem}
+    .kpi{
+        background:#252525;
+        border:.5px solid #333;
+        border-radius:12px;
+        padding:12px 14px;
+    }
+    .kl{font-size:16px; color:#888;margin-bottom:5px}     /* 11 + 5 */
+    .kv{font-size:24px;font-weight:500;color:#ffffff}     /* 19 + 5 */
+    .ks{font-size:16px;color:#666;margin-top:3px}         /* 11 + 5 */
+
+    .card{
+        background:#1a1a1a;
+        border:.5px solid #333;
+        border-radius:12px;
+        padding:16px;
+        margin-bottom:14px;
+    }
+
+    .cw{position:relative;width:100%}
+    .leg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;font-size:16px;color:#a0a0a0} /* 11 + 5 */
+    .ld{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle}
+
+    .ins{
+        border-left:3px solid #3b82f6;
+        border-radius:0 8px 8px 0;
+        background:#1f2937;
+        padding:9px 13px;
+        font-size:17px;        /* 12 + 5 */
+        color:#ccc;
+        margin-top:10px
+    }
+    .ins b{color:#ffffff;font-weight:500}
+
+    .frow{display:flex;gap:8px;margin-bottom:12px;align-items:center;flex-wrap:wrap}
+    .frow label{font-size:17px;color:#b0b0b0}              /* 12 + 5 */
+
+    select, input[type=range]{
+        background:#252525;
+        color:#e0e0e0;
+        border:1px solid #444;
+        border-radius:6px;
+        padding:6px 10px;
+        font-size:16px;
+    }
+
+    .slid-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .slid-row label{font-size:17px;color:#b0b0b0;min-width:190px}  /* 12 + 5 */
+    .slid-row span{font-size:18px;font-weight:500;min-width:90px;color:#e0e0e0} /* 13 + 5 */
+
+    .roi-box{
+        background:#252525;
+        border:.5px solid #333;
+        border-radius:12px;
+        padding:14px;
+        text-align:center;
+    }
+    .roi-v{font-size:31px;font-weight:500;color:#4ade80}   /* 26 + 5 */
+    .roi-l{font-size:16px;color:#888;margin-top:3px}       /* 11 + 5 */
+
+    .roi-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px}
+
+    .ind-table{
+        width:100%;
+        border-collapse:collapse;
+        font-size:17px;        /* 12 + 5 */
+    }
+    .ind-table th{
+        text-align:left;
+        font-weight:500;
+        font-size:16px;        /* 11 + 5 */
+        color:#a0a0a0;
+        padding:8px 10px;
+        border-bottom:.5px solid #333;
+    }
+    .ind-table td{
+        padding:9px 10px;
+        border-bottom:.5px solid #333;
+        color:#e0e0e0;
+    }
+
+    .red{color:#f87171}
+    .amb{color:#fbbf24}
+    .grn{color:#4ade80}
+    .bl{color:#60a5fa}
+</style>
+</head>
+<body>
+
+<div style="padding:1rem 10px" class="wrap">
+
+<div class="sec">
+  <div class="sl">Indicadores objetivos do PCA — o que o fit test entrega para o gestor</div>
+  <div class="krow">
+    <div class="kpi"><div class="kl">% colaboradores protegidos (geral)</div><div class="kv amb">68,4%</div><div class="ks">sem fit test, esse dado não existe</div></div>
+    <div class="kpi"><div class="kl">NAP médio real (colocação correta)</div><div class="kv">16,64 dB</div><div class="ks">vs NRRsf médio de 20,1 dB</div></div>
+    <div class="kpi"><div class="kl">Melhora de 2024 → 2025</div><div class="kv grn">+0,7 dB NAP</div><div class="ks">evidência de eficácia do PCA</div></div>
+    <div class="kpi"><div class="kl">Taxa de colocação inadequada</div><div class="kv red">19,4%</div><div class="ks">só identificável pelo fit test</div></div>
+    <div class="kpi"><div class="kl">Sessões de treinamento documentadas</div><div class="kv bl">5.056</div><div class="ks">rastreabilidade NR-01</div></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Evolução trimestral da proteção — indicador central do PCA</div>
+  <div class="card">
+    <div class="frow">
+      <label>Empresa:</label>
+      <select id="selEmpPCA" onchange="updatePCA()">
+        <option value="all">Todas (comparativo)</option>
+        <option value="A">Empresa A</option>
+        <option value="B">Empresa B</option>
+        <option value="C">Empresa C</option>
+      </select>
+      <label style="margin-left:8px">Métrica:</label>
+      <select id="selMetrica" onchange="updatePCA()">
+        <option value="pct">% protegidos</option>
+        <option value="nap">NAP médio (dB)</option>
+      </select>
+    </div>
+    <div class="leg">
+      <span><span class="ld" style="background:#1D9E75"></span>Empresa A</span>
+      <span><span class="ld" style="background:#378ADD"></span>Empresa B</span>
+      <span><span class="ld" style="background:#EF9F27"></span>Empresa C</span>
+    </div>
+    <div class="cw" style="height:250px">
+      <canvas id="cPCA" role="img" aria-label="Evolução trimestral do percentual de colaboradores protegidos"></canvas>
+    </div>
+    <div class="ins"><b>Indicador objetivo e rastreável para o PCA:</b> a evolução trimestral demonstra que o programa de fit test gera melhora mensurável ao longo do tempo — exatamente o tipo de evidência exigido pela NR-01 e pelo Guia do PCA da FUNDACENTRO.</div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Painel de indicadores objetivos — o que o relatório safe.EAR entrega</div>
+  <div class="card" style="padding:12px">
+    <table class="ind-table">
+      <thead><tr>
+        <th style="width:22%">Indicador do PCA</th>
+        <th style="width:13%">Empresa A</th>
+        <th style="width:13%">Empresa B</th>
+        <th style="width:13%">Empresa C</th>
+        <th style="width:15%">Referência</th>
+        <th style="width:24%">Ação recomendada</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td>% protegidos (NEP ≤ 80 dB)</td>
+          <td><span style="color:#BA7517;font-weight:500">82,9%</span></td>
+          <td><span style="color:#BA7517;font-weight:500">80,6%</span></td>
+          <td><span style="color:#f87171;font-weight:500">75,5%</span></td>
+          <td style="color:#888">Meta: ≥ 90%</td>
+          <td style="font-size:16px;color:#aaa">Revisar modelos nos GHEs críticos</td>
+        </tr>
+        <tr>
+          <td>NAP médio real</td>
+          <td>16,5 dB</td>
+          <td>16,1 dB</td>
+          <td>16,8 dB</td>
+          <td style="color:#888">NRRsf médio: ~20 dB</td>
+          <td style="font-size:16px;color:#aaa">Gap de 3–5 dB a investigar</td>
+        </tr>
+        <tr>
+          <td>Taxa colocação inadequada</td>
+          <td><span style="color:#f87171;font-weight:500">19,2%</span></td>
+          <td><span style="color:#f87171;font-weight:500">19,5%</span></td>
+          <td><span style="color:#f87171;font-weight:500">19,3%</span></td>
+          <td style="color:#888">Meta: &lt; 5%</td>
+          <td style="font-size:16px;color:#aaa">Intensificar treinamento — NR-01</td>
+        </tr>
+        <tr>
+          <td>Sessões treinamento registradas</td>
+          <td>1.812</td>
+          <td>1.120</td>
+          <td>2.124</td>
+          <td style="color:#888">Rastreabilidade NR-01</td>
+          <td style="font-size:16px;color:#aaa">Relatório individual gerado ✓</td>
+        </tr>
+        <tr>
+          <td>Modelos subdimensionados nos GHEs</td>
+          <td><span style="color:#BA7517;font-weight:500">1 GHE</span></td>
+          <td><span style="color:#f87171;font-weight:500">2 GHEs</span></td>
+          <td><span style="color:#f87171;font-weight:500">1 GHE</span></td>
+          <td style="color:#888">Meta: 0 GHEs</td>
+          <td style="font-size:16px;color:#aaa">Trocar para dupla proteção — NR-06</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">ROI para o prestador de serviço — calculadora de receita</div>
+  <div class="card">
+    <div class="slid-row">
+      <label>Colaboradores/mês:</label>
+      <input type="range" min="20" max="500" value="100" step="10" id="slNCol" oninput="calcROI()">
+      <span id="outNCol">100</span>
+    </div>
+    <div class="slid-row">
+      <label>Preço por teste (R$):</label>
+      <input type="range" min="80" max="200" value="100" step="10" id="slPreco" oninput="calcROI()">
+      <span id="outPreco">R$ 100</span>
+    </div>
+    <div class="slid-row">
+      <label>Periodicidade (meses entre testes):</label>
+      <input type="range" min="4" max="12" value="6" step="1" id="slPer" oninput="calcROI()">
+      <span id="outPer">6 meses</span>
+    </div>
+    <div class="roi-grid">
+      <div class="roi-box"><div class="roi-l">Receita por ciclo</div><div class="roi-v" id="roiCiclo">R$ 10.000</div></div>
+      <div class="roi-box"><div class="roi-l">Receita anual</div><div class="roi-v" id="roiAnual">R$ 20.000</div></div>
+      <div class="roi-box"><div class="roi-l">Payback estimado</div><div class="roi-v" id="roiPayback">&lt; 6 meses</div><div class="roi-l" style="margin-top:2px;font-size:15px">equipamento ~R$60k (referência)</div></div>
+    </div>
+    <div class="cw" style="height:250px;margin-top:14px">
+      <canvas id="cROI" role="img" aria-label="Projeção de receita acumulada"></canvas>
+    </div>
+    <div class="ins">Com 3.077 colaboradores na base simulada e periodicidade média de 5 meses, o volume potencial de testes é de <b>26.059 em 2 anos</b>. A receita total estimada entre R$ 80–200/teste representa <b>R$ 2,1M a R$ 5,2M</b> para o prestador de serviço.</div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const pcaData={
+  pct:{ A:[84.1,81.1,82.0,81.4,84.7,84.4,82.0,83.0], B:[78.0,81.4,74.8,83.3,79.2,83.7,80.1,82.0], C:[75.8,74.5,73.7,74.0,76.1,75.7,77.9,78.8] },
+  nap:{ A:[16.50,16.06,16.09,16.47,16.93,16.99,16.86,17.06], B:[15.51,16.84,15.34,16.41,16.02,17.16,16.27,17.32], C:[16.26,16.24,16.67,16.34,16.86,17.32,17.38,16.92] }
+};
+const trim8=['Q1\'24','Q2\'24','Q3\'24','Q4\'24','Q1\'25','Q2\'25','Q3\'25','Q4\'25'];
+let pcaChart=null;
+
+function updatePCA(){
+  const emp=document.getElementById('selEmpPCA').value;
+  const met=document.getElementById('selMetrica').value;
+  const yLabel=met==='pct'?'% protegidos':'NAP médio (dB)';
+  const yMin=met==='pct'?70:14;
+  const yMax=met==='pct'?92:19;
+  const cb=met==='pct'?v=>v.toFixed(1)+'%':v=>v.toFixed(2)+' dB';
+  if(pcaChart) pcaChart.destroy();
+  let datasets;
+  const cols={A:'#1D9E75',B:'#378ADD',C:'#EF9F27'};
+  const dashes={A:[],B:[4,3],C:[2,2]};
+  if(emp==='all'){
+    datasets=['A','B','C'].map(k=>({
+      label:'Empresa '+k,data:pcaData[met][k],
+      borderColor:cols[k],backgroundColor:cols[k]+'12',fill:true,tension:.4,pointRadius:4,borderDash:dashes[k]
+    }));
+  } else {
+    datasets=[{label:'Empresa '+emp,data:pcaData[met][emp],borderColor:cols[emp],backgroundColor:cols[emp]+'12',fill:true,tension:.4,pointRadius:5}];
+  }
+  pcaChart=new Chart(document.getElementById('cPCA'),{
+    type:'line',
+    data:{labels:trim8,datasets},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+cb(v.raw)}}},
+      scales:{y:{min:yMin,max:yMax,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:cb}},x:{grid:{display:false}}}
+    }
+  });
+}
+updatePCA();
+
+let roiChart=null;
+function calcROI(){
+  const nc=parseInt(document.getElementById('slNCol').value);
+  const pr=parseInt(document.getElementById('slPreco').value);
+  const per=parseInt(document.getElementById('slPer').value);
+  document.getElementById('outNCol').textContent=nc;
+  document.getElementById('outPreco').textContent='R$ '+pr;
+  document.getElementById('outPer').textContent=per+' meses';
+  const ciclo=nc*pr;
+  const anual=ciclo*(12/per);
+  document.getElementById('roiCiclo').textContent='R$ '+ciclo.toLocaleString('pt-BR');
+  document.getElementById('roiAnual').textContent='R$ '+Math.round(anual).toLocaleString('pt-BR');
+  const payback_meses=Math.ceil(60000/ciclo);
+  document.getElementById('roiPayback').textContent=payback_meses<=6?'< 6 meses':payback_meses+' meses';
+  const meses=Array.from({length:25},(_,i)=>i);
+  const acum=[];let s=0;
+  for(let i=0;i<25;i++){s+=ciclo*(i>0?1:0);acum.push(s);}
+  if(roiChart) roiChart.destroy();
+  roiChart=new Chart(document.getElementById('cROI'),{
+    type:'line',
+    data:{labels:meses.map(m=>m+'m'),datasets:[
+      {label:'Receita acumulada',data:acum,borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,.08)',fill:true,tension:.3,pointRadius:0},
+      {label:'Custo equipamento',data:meses.map(()=>60000),borderColor:'#E24B4A',borderDash:[4,3],pointRadius:0,fill:false}
+    ]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>'R$ '+Math.round(v.raw).toLocaleString('pt-BR')}}},
+      scales:{
+        y:{grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>'R$ '+(v/1000).toFixed(0)+'k'}},
+        x:{grid:{display:false},ticks:{font:{size:13},maxTicksLimit:13}}
+      }
+    }
+  });
+}
+calcROI();
+</script>
+</body>
+</html>
