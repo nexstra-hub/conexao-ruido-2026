@@ -1,0 +1,466 @@
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body,
+.wrap{
+    background:transparent;
+    color:#e0e0e0;
+    font-family:system-ui,-apple-system,sans-serif;
+    font-size:21px; /* +5px base */
+}
+
+.sr-only{
+    position:absolute;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+}
+
+.sec{
+    margin-bottom:1.5rem;
+}
+
+.sl{
+    font-size:16px;
+    font-weight:500;
+    color:#e0e0e0;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding-bottom:6px;
+    border-bottom:.5px solid #333;
+    margin-bottom:12px;
+}
+
+/* =========================
+   KPI
+========================= */
+
+.krow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+    gap:10px;
+    margin-bottom:1.5rem;
+}
+
+.kpi{
+    background:#252525;
+    border-radius:8px;
+    padding:12px 14px;
+    text-align:center;
+    border:.5px solid #333;
+}
+
+.kl{
+    font-size:16px;
+    color:#888;
+    margin-bottom:4px;
+}
+
+.kv{
+    font-size:27px;
+    font-weight:500;
+    color:#ffffff;
+}
+
+.ks{
+    font-size:16px;
+    color:#888;
+    margin-top:4px;
+}
+
+.red{color:#f87171}
+.amb{color:#facc15}
+.grn{color:#4ade80}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+    background:#1a1a1a;
+    border:.5px solid #333;
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:14px;
+}
+
+/* =========================
+   FILTROS
+========================= */
+
+.frow{
+    display:flex;
+    gap:8px;
+    margin-bottom:12px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.frow label{
+    font-size:17px;
+    color:#b0b0b0;
+}
+
+select{
+    background:#252525;
+    color:#e0e0e0;
+    border:1px solid #444;
+    border-radius:6px;
+    padding:8px 10px;
+    font-size:17px;
+}
+
+select:focus{
+    outline:none;
+    border-color:#3b82f6;
+}
+
+/* =========================
+   LEGENDAS
+========================= */
+
+.leg{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:12px;
+    font-size:16px;
+    color:#a0a0a0;
+}
+
+.ld{
+    width:10px;
+    height:10px;
+    border-radius:2px;
+    display:inline-block;
+    margin-right:4px;
+    vertical-align:middle;
+}
+
+/* =========================
+   CONTAINERS
+========================= */
+
+.cw{
+    position:relative;
+    width:100%;
+}
+
+.r2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+/* =========================
+   FLOW / PROCESSO
+========================= */
+
+.flow{
+    display:grid;
+    grid-template-columns:1fr 36px 1fr 36px 1fr;
+    align-items:center;
+    margin:16px 0;
+}
+
+.fbox{
+    background:#252525;
+    border:.5px solid #333;
+    border-radius:8px;
+    padding:14px;
+    text-align:center;
+}
+
+.fnum{
+    font-size:27px;
+    font-weight:500;
+    color:#ffffff;
+}
+
+.flbl{
+    font-size:15px;
+    color:#888;
+    margin-top:4px;
+}
+
+.farr{
+    text-align:center;
+    font-size:23px;
+    color:#666;
+}
+
+/* =========================
+   BADGES
+========================= */
+
+.gbadge{
+    display:inline-block;
+    font-size:16px;
+    font-weight:500;
+    padding:2px 8px;
+    border-radius:6px;
+    background:#0a3a2a;
+    color:#4ade80;
+    margin-top:6px;
+    border:.5px solid #4ade80;
+}
+
+.rbadge{
+    display:inline-block;
+    font-size:16px;
+    font-weight:500;
+    padding:2px 8px;
+    border-radius:6px;
+    background:#3a1f1f;
+    color:#f87171;
+    margin-top:6px;
+    border:.5px solid #f87171;
+}
+
+/* =========================
+   INSIGHTS / CALLOUTS
+========================= */
+
+.ins{
+    border-left:3px solid #3b82f6;
+    border-radius:0 8px 8px 0;
+    background:#1f2937;
+    padding:10px 14px;
+    font-size:17px;
+    color:#d0d0d0;
+    margin-top:12px;
+    line-height:1.45;
+}
+
+.ins b{
+    color:#ffffff;
+    font-weight:500;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:900px){
+
+    .r2{
+        grid-template-columns:1fr;
+    }
+
+    .flow{
+        grid-template-columns:1fr;
+        gap:10px;
+    }
+
+    .farr{
+        transform:rotate(90deg);
+    }
+
+    .krow{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:640px){
+
+    .krow{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:14px;
+    }
+
+    .kv{
+        font-size:25px;
+    }
+
+    .fnum{
+        font-size:25px;
+    }
+}
+</style>
+
+<h2 class="sr-only">Dashboard — Tema 1 safe.EAR: o CA não garante proteção real. Gap entre NRRsf certificado e NAP obtido, e impacto da colocação incorreta do protetor.</h2>
+
+<div style="padding:1rem 10px">
+
+<div class="sec">
+  <div class="sl">O CA certifica o produto — não a proteção individual do trabalhador</div>
+  <div class="krow">
+    <div class="kpi"><div class="kl">Gap médio NRRsf → NAP (conchas)</div><div class="kv red">−5,1 dB</div><div class="ks">25% da atenuação perdida</div></div>
+    <div class="kpi"><div class="kl">Gap médio NRRsf → NAP (plugues)</div><div class="kv amb">−3,0 dB</div><div class="ks">17% da atenuação perdida</div></div>
+    <div class="kpi"><div class="kl">Dupla proteção vs NRRsf</div><div class="kv grn">+1,0 dB</div><div class="ks">único tipo que supera o CA</div></div>
+    <div class="kpi"><div class="kl">Pior modelo (Concha C2)</div><div class="kv red">−5,5 dB</div><div class="ks">32,6% do NRRsf perdido</div></div>
+    <div class="kpi"><div class="kl">Melhor plugue convencional</div><div class="kv grn">−2,3 dB</div><div class="ks">Plugue A2 — apenas 12,2% de gap</div></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Proteção real obtida vs NRRsf certificado — todos os modelos</div>
+  <div class="card">
+    <div class="frow">
+      <label>Filtrar por tipo:</label>
+      <select id="selTipo" onchange="updateGap()">
+        <option value="all">Todos</option>
+        <option value="Plugue">Plugues</option>
+        <option value="Concha">Conchas</option>
+        <option value="Cap">Cap + Concha</option>
+        <option value="Dupla">Dupla proteção</option>
+      </select>
+    </div>
+    <div class="leg">
+      <span><span class="ld" style="background:#B4B2A9"></span>NRRsf (certificado — CA)</span>
+      <span><span class="ld" style="background:#1D9E75"></span>NAP real obtido</span>
+      <span><span class="ld" style="background:#E24B4A"></span>Gap crítico (&gt;30% perdido)</span>
+    </div>
+    <div class="cw" id="gapWrap" style="height:460px">
+      <canvas id="cGap" role="img" aria-label="Comparação entre NRRsf certificado e NAP real obtido para cada modelo de protetor. Todos os modelos exceto dupla proteção entregam menos do que o certificado.">Todos os modelos de concha perdem entre 20% e 34% da atenuação certificada. Plugues perdem entre 12% e 30%.</canvas>
+    </div>
+    <div class="ins"><b>O CA do protetor não comprova proteção individual:</b> mesmo com certificado válido, conchas entregam em média apenas <b>75–80% do NRRsf</b> no uso real. Apenas a dupla proteção supera o NRRsf certificado (+1 dB em média).</div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Colocação incorreta — o maior fator de perda de atenuação</div>
+  <div class="card">
+    <div class="flow">
+      <div class="fbox">
+        <div class="fnum red">11,2 dB</div>
+        <div class="flbl">NAP com colocação incorreta</div>
+        <div class="rbadge">−10,8 dB vs NRRsf</div>
+      </div>
+      <div class="farr">→</div>
+      <div class="fbox">
+        <div class="fnum" style="color:#185FA5">18,4 dB</div>
+        <div class="flbl">NAP com experimentador</div>
+        <div class="gbadge">+7,2 dB recuperado</div>
+      </div>
+      <div class="farr">→</div>
+      <div class="fbox">
+        <div class="fnum" style="color:#0F6E56">17,0 dB</div>
+        <div class="flbl">Recolocação pelo usuário</div>
+        <div class="gbadge">+5,8 dB após treinamento</div>
+      </div>
+    </div>
+  </div>
+  <div class="r2">
+    <div class="card">
+      <div class="cw" style="height:220px">
+        <canvas id="cColocacao" role="img" aria-label="Comparação de NAP médio entre colocação incorreta (6.2 dB), pelo experimentador (18.4 dB) e recolocação pelo usuário (17.0 dB) por empresa">Ganho médio de 10.9 dB após sessão de treinamento em todas as empresas</canvas>
+      </div>
+      <div class="ins" style="font-size:15px"><b>5.056 sessões</b> de treinamento registradas. Em média, <b>19,4%</b> das tentativas iniciais resultaram em colocação inadequada — com NAP apenas 66% do que seria atingível.</div>
+    </div>
+    <div class="card">
+      <div class="cw" style="height:220px">
+        <canvas id="cGapColocacao" role="img" aria-label="Distribuição do NAP em três situações: colocação incorreta concentrada abaixo de 10dB, pelo experimentador em torno de 18-20dB, recolocação usuário em torno de 15-19dB">A colocação incorreta reduz o NAP para menos de 10 dB em 96% dos casos</canvas>
+      </div>
+      <div class="ins" style="font-size:15px">Após recolocação orientada, o usuário recupera <b>82,8% do NRRsf</b> — demonstrando que o treinamento tem impacto mensurável e rastreável com o safe.EAR.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const modelos=[
+  {m:"Concha C2",    t:"Concha",nrrsf:17,nap:11.46,off:-5.54,gap_pct:32.6},
+  {m:"CapConcha E1", t:"Cap",   nrrsf:18,nap:12.48,off:-5.52,gap_pct:30.7},
+  {m:"CapConcha C2", t:"Cap",   nrrsf:22,nap:16.52,off:-5.48,gap_pct:24.9},
+  {m:"Concha D2",    t:"Concha",nrrsf:16,nap:10.54,off:-5.46,gap_pct:34.1},
+  {m:"Concha C1",    t:"Concha",nrrsf:20,nap:14.78,off:-5.22,gap_pct:26.1},
+  {m:"CapConcha C1", t:"Cap",   nrrsf:19,nap:13.79,off:-5.21,gap_pct:27.4},
+  {m:"CapConcha D1", t:"Cap",   nrrsf:22,nap:16.94,off:-5.06,gap_pct:23.0},
+  {m:"Concha A1",    t:"Concha",nrrsf:21,nap:16.00,off:-5.00,gap_pct:23.8},
+  {m:"Concha D1",    t:"Concha",nrrsf:23,nap:18.03,off:-4.97,gap_pct:21.6},
+  {m:"CapConcha E2", t:"Cap",   nrrsf:25,nap:20.22,off:-4.78,gap_pct:19.1},
+  {m:"Plugue C3(Sonda)",t:"Plugue",nrrsf:21,nap:16.74,off:-4.26,gap_pct:20.3},
+  {m:"Plugue B1",    t:"Plugue",nrrsf:14,nap:9.85, off:-4.15,gap_pct:29.6},
+  {m:"Plugue B2",    t:"Plugue",nrrsf:20,nap:16.59,off:-3.41,gap_pct:17.0},
+  {m:"Plugue A1",    t:"Plugue",nrrsf:15,nap:11.96,off:-3.04,gap_pct:20.3},
+  {m:"Plugue C1(Sonda)",t:"Plugue",nrrsf:14,nap:11.02,off:-2.98,gap_pct:21.3},
+  {m:"Plugue C2(Sonda)",t:"Plugue",nrrsf:18,nap:15.68,off:-2.32,gap_pct:12.9},
+  {m:"Plugue A2",    t:"Plugue",nrrsf:19,nap:16.69,off:-2.31,gap_pct:12.2},
+  {m:"Dupla C1(Sonda)",t:"Dupla",nrrsf:25,nap:26.07,off:1.07,gap_pct:-4.3},
+];
+const tColors={Plugue:"#EF9F27",Concha:"#1D9E75",Cap:"#378ADD",Dupla:"#7F77DD"};
+let gapChart=null;
+
+function updateGap(){
+  const f=document.getElementById('selTipo').value;
+  const data=f==='all'?modelos:modelos.filter(d=>{
+    if(f==="Plugue") return d.t==="Plugue";
+    if(f==="Concha") return d.t==="Concha";
+    if(f==="Cap")    return d.t==="Cap";
+    if(f==="Dupla")  return d.t==="Dupla";
+    return true;
+  });
+  const h=Math.max(260,data.length*4+6);
+  document.getElementById('gapWrap').style.height=h+'px';
+  if(gapChart) gapChart.destroy();
+  gapChart=new Chart(document.getElementById('cGap'),{
+    type:'bar', indexAxis:'y',
+    data:{
+      labels:data.map(d=>d.m),
+      datasets:[
+        {label:'NRRsf (CA)',data:data.map(d=>d.nrrsf),backgroundColor:'rgba(136,135,128,.22)',borderRadius:3,order:2},
+        {label:'NAP real',data:data.map(d=>d.nap),backgroundColor:data.map(d=>d.gap_pct>28?'#E24B4A':tColors[d.t]),borderRadius:3,order:1}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{
+        label:v=>{const d=data[v.dataIndex];
+          return v.datasetIndex===0?'NRRsf (CA): '+v.raw+' dB':'NAP real: '+v.raw.toFixed(2)+' dB | gap: '+d.off.toFixed(2)+' dB ('+d.gap_pct+'% perdido)';
+        }
+      }}},
+      scales:{
+        x:{min:0,max:30,grid:{color:'rgba(128,128,128,.07)'}},
+        y:{grid:{display:false},ticks:{font:{size:10}}}
+      }
+    }
+  });
+}
+updateGap();
+
+new Chart(document.getElementById('cColocacao'),{
+  type:'bar',
+  data:{
+    labels:['Empresa A','Empresa B','Empresa C'],
+    datasets:[
+      {label:'Colocação incorreta',data:[12.37,12.03,12.10],backgroundColor:'#F09595',borderRadius:3},
+      {label:'Pelo experimentador',data:[18.69,18.10,18.51],backgroundColor:'#85B7EB',borderRadius:3,borderDash:[4,3]},
+      {label:'Recolocação usuário',data:[17.23,16.67,17.07],backgroundColor:'#1D9E75',borderRadius:3}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw.toFixed(2)+' dB NAP'}}},
+    scales:{y:{min:0,max:22,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},x:{grid:{display:false}}}
+  }
+});
+
+new Chart(document.getElementById('cGapColocacao'),{
+  type:'bar',
+  data:{
+    labels:['Incorreta','Experimentador','Recolocação','Colocação ok'],
+    datasets:[{
+      label:'NAP médio (dB)',
+      data:[6.18,18.43,17.05,16.64],
+      backgroundColor:['#E24B4A','#185FA5','#EF9F27','#1D9E75'],
+      borderRadius:4
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.raw.toFixed(2)+' dB NAP médio'}}},
+    scales:{y:{min:0,max:22,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},x:{grid:{display:false}}}
+  }
+});
+</script>
