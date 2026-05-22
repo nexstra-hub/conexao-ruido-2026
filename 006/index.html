@@ -1,1 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard — Tema 3 safe.EAR: Seleção Adequada de Protetor (NR-06)</title>
+<style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 
+    body, .wrap {
+        background: transparent;
+        color: #e0e0e0;
+        font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .sec{margin-bottom:2rem}
+    .sl{
+        font-size:16px;        /* +5 */
+        font-weight:500;
+        color:#a0a0a0;
+        letter-spacing:.06em;
+        text-transform:uppercase;
+        padding-bottom:8px;
+        border-bottom:.5px solid #333;
+        margin-bottom:16px
+    }
+
+    .krow{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:1.5rem}
+    .kpi{
+        background:#252525;
+        border:.5px solid #333;
+        border-radius:12px;
+        padding:16px 18px;
+    }
+    .kl{font-size:16px; color:#888;margin-bottom:6px}     /* +5 */
+    .kv{font-size:26px; font-weight:500; color:#ffffff}   /* +5 */
+    .ks{font-size:16px; color:#777;margin-top:6px}        /* +5 */
+
+    .card{
+        background:#1a1a1a;
+        border:.5px solid #333;
+        border-radius:12px;
+        padding:20px;
+        margin-bottom:18px;
+    }
+
+    .cw{position:relative;width:100%}
+    .leg{
+        display:flex;
+        flex-wrap:wrap;
+        gap:12px;
+        margin-bottom:14px;
+        font-size:17px;        /* +5 */
+        color:#aaa
+    }
+    .ld{width:14px;height:14px;border-radius:3px;display:inline-block;margin-right:6px;vertical-align:middle}
+
+    .ins{
+        border-left:3px solid #3b82f6;
+        border-radius:0 8px 8px 0;
+        background:#1f2937;
+        padding:14px 18px;
+        font-size:18px;        /* +5 */
+        color:#ccc;
+        margin-top:14px;
+        line-height:1.45;
+    }
+    .ins b{color:#ffffff;font-weight:500}
+
+    .frow{display:flex;gap:10px;margin-bottom:14px;align-items:center;flex-wrap:wrap}
+    .frow label{font-size:17px;color:#b0b0b0}             /* +5 */
+
+    select{
+        background:#252525;
+        color:#e0e0e0;
+        border:1px solid #444;
+        border-radius:6px;
+        padding:8px 12px;
+        font-size:18px;        /* +5 */
+    }
+
+    .badge{
+        display:inline-block;
+        font-size:15px;        /* +5 */
+        padding:3px 9px;
+        border-radius:6px;
+        font-weight:500;
+    }
+    .b-sub{background:#3a1f1f;color:#f87171}
+    .b-ok{background:#0a3a2a;color:#4ade80}
+    .b-warn{background:#3f2a1a;color:#facc15}
+
+    .rec-grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+        gap:14px;
+        margin-top:14px;
+    }
+    .rec-card{
+        background:#252525;
+        border:.5px solid #333;
+        border-radius:12px;
+        padding:18px;
+    }
+    .rec-ghe{font-size:18px; font-weight:500; margin-bottom:8px}   /* +5 */
+    .rec-detail{font-size:17px; color:#aaa; line-height:1.45}      /* +5 */
+    .rec-acao{
+        font-size:17px;        /* +5 */
+        margin-top:12px;
+        padding:8px 12px;
+        border-radius:6px;
+        background:#3a1f1f;
+        color:#f87171;
+        display:inline-block;
+    }
+
+    .red{color:#f87171}
+    .amb{color:#fbbf24}
+    .grn{color:#4ade80}
+</style>
+</head>
+<body>
+
+<h2 class="sr-only">Dashboard — Tema 3 safe.EAR: seleção adequada de protetor por GHE (NR-06). Identificação de subdimensionamentos, mismatch modelo-GHE e análise de desgaste real para revisão de prazos de troca.</h2>
+
+<div style="padding:1rem 10px">
+
+<div class="sec">
+  <div class="sl">Seleção de protetor (NR-06) — o fit test identifica subdimensionamentos invisíveis</div>
+  <div class="krow">
+    <div class="kpi"><div class="kl">GHEs críticos</div><div class="kv red">3 / 15</div><div class="ks">NRRsf insuficiente para o NEN</div></div>
+    <div class="kpi"><div class="kl">GHE-B04: modelos com 0% de cobertura</div><div class="kv red">4 modelos</div><div class="ks">CapConcha C1, C2, Concha C1 e A1</div></div>
+    <div class="kpi"><div class="kl">Dupla proteção — opção eficaz em GHEs ≥100 dB</div><div class="kv grn">&gt;65% cobertura</div><div class="ks">demais tipos abaixo de 54%</div></div>
+    <div class="kpi"><div class="kl">Modelos que degradam antes do prazo</div><div class="kv amb">5 modelos</div><div class="ks">Plugue B1, C3, Concha C2, D2, CapE1</div></div>
+    <div class="kpi"><div class="kl">Modelos que superam o prazo definido</div><div class="kv grn">5 modelos</div><div class="ks">Plugue A2, C2, Concha D1, CapC2, E2</div></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Adequação do protetor por GHE crítico (≥ 100 dB) — % colaboradores protegidos</div>
+  <div class="card">
+    <div class="leg">
+      <span><span class="ld" style="background:#E24B4A"></span>GHE-B04 (102,5 dB)</span>
+      <span><span class="ld" style="background:#7F77DD"></span>GHE-C03 (103,0 dB)</span>
+      <span><span class="ld" style="background:#EF9F27"></span>GHE-A05 (101,5 dB)</span>
+    </div>
+    <div class="cw" style="height:340px">
+      <canvas id="cMatch" role="img" aria-label="Percentual de colaboradores protegidos por modelo de protetor nos três GHEs críticos acima de 100dB. Apenas dupla proteção ultrapassa 65% de cobertura.">Concha C1 e CapConcha C1 têm 0% de cobertura nos GHEs críticos. Dupla proteção lidera com 65-68%.</canvas>
+    </div>
+    <div class="ins"><b>Recomendação NR-06 gerada pelo fit test:</b> em GHEs com NEN ≥ 100 dB(A), apenas modelos de dupla proteção alcançam taxa de cobertura aceitável. O fit test fornece a evidência técnica individual para embasar a troca obrigatória de modelo.</div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Desgaste real por tempo de uso — revisão dos prazos de troca</div>
+  <div class="frow">
+    <label>Modelo:</label>
+    <select id="selDeg" onchange="updateDeg()">
+      <optgroup label="Degrada antes do prazo — reduzir troca">
+        <option value="Plugue B1">Plugue B1 (NRRsf 14 dB)</option>
+        <option value="Plugue C3(Sonda)">Plugue C3 Sonda (NRRsf 21 dB)</option>
+        <option value="Concha C2">Concha C2 (NRRsf 17 dB)</option>
+        <option value="CapConcha E1">CapConcha E1 (NRRsf 18 dB)</option>
+        <option value="Concha D2">Concha D2 (NRRsf 16 dB)</option>
+      </optgroup>
+      <optgroup label="Dura além do prazo — pode estender troca">
+        <option value="Plugue A2">Plugue A2 (NRRsf 19 dB)</option>
+        <option value="Plugue C2(Sonda)">Plugue C2 Sonda (NRRsf 18 dB)</option>
+        <option value="Concha D1">Concha D1 (NRRsf 23 dB)</option>
+        <option value="CapConcha E2">CapConcha E2 (NRRsf 25 dB)</option>
+      </optgroup>
+    </select>
+  </div>
+  <div class="card">
+    <div class="cw" style="height:210px">
+      <canvas id="cDeg" role="img" aria-label="Curva de degradação do offset NAP menos NRRsf ao longo do tempo de uso. Modelos que degradam rapidamente mostram queda acentuada após 60 dias.">A degradação varia significativamente entre modelos. Plugue B1 perde 4 dB adicionais ao final do ciclo.</canvas>
+    </div>
+    <div class="ins" id="degIns" style="font-size:12px">Selecione um modelo acima para ver a curva de desgaste e a recomendação de ajuste de prazo de troca.</div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Recomendações de ação — o que o fit test revelou sobre cada GHE crítico</div>
+  <div class="rec-grid">
+    <div class="rec-card">
+      <div class="rec-ghe">GHE-B04 — 102,5 dB(A) <span class="badge b-sub">Crítico</span></div>
+      <div class="rec-detail">85,9% dos colaboradores expostos<br>Única empresa com apenas 1 fabricante (Marca 03)</div>
+      <div class="rec-acao">Migrar para Dupla C1 Sonda (68,2% cobertura)</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-ghe">GHE-C03 — 103,0 dB(A) <span class="badge b-sub">Crítico</span></div>
+      <div class="rec-detail">84,4% dos colaboradores expostos<br>Melhor modelo atual: Dupla E1 (48,5%)</div>
+      <div class="rec-acao">Dupla E1 insuficiente — revisar seleção de protetor</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-ghe">GHE-A05 — 101,5 dB(A) <span class="badge b-warn">Alto</span></div>
+      <div class="rec-detail">72,4% dos colaboradores expostos<br>Dupla E1 atinge 64,5% de cobertura</div>
+      <div class="rec-acao">Priorizar Dupla E1 + intensificar treinamento</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-ghe">GHE-B01 — 93,0 dB(A) <span class="badge b-warn">Alto</span></div>
+      <div class="rec-detail">46,4% expostos — NRRsf mínimo necessário: 13 dB<br>Protetor atual: Marca 03 (vários modelos)</div>
+      <div class="rec-acao">Revisão de modelo + ajuste de treinamento</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const matchData=[
+  {m:"Concha C1 (20 dB)",     b04:0.0,  c03:null, a05:null},
+  {m:"CapConcha C1 (19 dB)",  b04:0.0,  c03:null, a05:null},
+  {m:"CapConcha C2 (22 dB)",  b04:1.7,  c03:null, a05:null},
+  {m:"CapConcha C2 (22 dB)*", b04:null, c03:1.8,  a05:null},
+  {m:"Concha A1 (21 dB)",     b04:null, c03:0.4,  a05:3.8},
+  {m:"CapConcha D1 (22 dB)",  b04:null, c03:1.8,  a05:12.5},
+  {m:"Concha D1 (23 dB)",     b04:null, c03:10.7, a05:31.8},
+  {m:"CapConcha E2 (25 dB)",  b04:null, c03:38.0, a05:53.5},
+  {m:"Dupla C1 (25 dB)",b04:68.2, c03:null, a05:null},
+  {m:"Dupla E1 (24 dB)",      b04:null, c03:48.5, a05:64.5},
+];
+new Chart(document.getElementById('cMatch'),{
+  type:'bar',indexAxis:'y',
+  data:{
+    labels:matchData.map(d=>d.m),
+    datasets:[
+      {label:'GHE-B04 (102,5 dB)',data:matchData.map(d=>d.b04),backgroundColor:'#E24B4A',borderRadius:3},
+      {label:'GHE-C03 (103,0 dB)',data:matchData.map(d=>d.c03),backgroundColor:'#7F77DD',borderRadius:3},
+      {label:'GHE-A05 (101,5 dB)',data:matchData.map(d=>d.a05),backgroundColor:'#EF9F27',borderRadius:3},
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+(v.raw==null?'n/a':v.raw.toFixed(1)+'% protegidos')}}},
+    scales:{
+      x:{min:0,max:80,grid:{color:'rgba(128,128,128,.07)'}},
+      y:{grid:{display:false},ticks:{font:{size:10}}}
+    }
+  }
+});
+
+const degDB={
+  "Plugue B1":      {d:[-2.57,-2.81,-4.39,-5.46,-6.84],c:'#E24B4A',note:'Perda de −4,3 dB ao final do ciclo vs início. Prazo de 90 dias deve ser reduzido para 45–60 dias.'},
+  "Plugue C3(Sonda)":{d:[-3.57,-3.51,-5.32,-6.05,-6.89],c:'#E24B4A',note:'Degradação crítica após 90 dias. Reduzir prazo de 90 para 60 dias para manter proteção adequada.'},
+  "Concha C2":      {d:[-4.77,-4.43,-5.40,-4.22,-5.63],c:'#E24B4A',note:'Piora progressiva confirmada. Prazo de 200 dias excessivo — revisar para 120 dias.'},
+  "CapConcha E1":   {d:[-4.88,-4.74,-4.95,-5.64,-5.96],c:'#E24B4A',note:'Queda de −1,1 dB no ciclo. Prazo de 200 dias deve ser reduzido para 150 dias.'},
+  "Concha D2":      {d:[-5.27,-3.98,-5.48,-5.06,-5.58],c:'#E24B4A',note:'Variabilidade alta e queda final. Prazo de 180 dias deve ser revisado para 130 dias.'},
+  "Plugue A2":      {d:[-2.62,-1.64,-1.69,-2.54,-2.83],c:'#1D9E75',note:'Performance estável — apenas −0,2 dB de variação no ciclo. Prazo de 150 dias pode estender para 170 dias.'},
+  "Plugue C2(Sonda)":{d:[-2.84,-1.67,-1.87,-2.25,-0.25],c:'#1D9E75',note:'Melhora ao longo do ciclo (+2,6 dB). Prazo de 160 dias é conservador — pode estender com segurança.'},
+  "Concha D1":      {d:[-5.45,-4.81,-4.74,-5.32,-4.93],c:'#1D9E75',note:'Melhor estabilidade entre as conchas. Variação de apenas +0,5 dB no ciclo. Prazo de 365 dias confirmado.'},
+  "CapConcha E2":   {d:[-5.17,-4.38,-3.95,-3.97,-5.08],c:'#1D9E75',note:'Desempenho estável com leve melhora no meio do ciclo. Prazo de 365 dias adequado.'},
+};
+const degLabels=["0–30 dias","30–60 dias","60–90 dias","90–120 dias","120+ dias"];
+let degChart=null;
+function updateDeg(){
+  const mod=document.getElementById('selDeg').value;
+  const d=degDB[mod];
+  if(!d) return;
+  document.getElementById('degIns').innerHTML='<b>'+mod+':</b> '+d.note;
+  if(degChart) degChart.destroy();
+  degChart=new Chart(document.getElementById('cDeg'),{
+    type:'line',
+    data:{labels:degLabels,datasets:[{
+      label:'Offset NAP−NRRsf',data:d.d,
+      borderColor:d.c,backgroundColor:d.c+'18',fill:true,tension:.35,
+      pointRadius:5,pointBackgroundColor:d.c
+    }]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.raw.toFixed(2)+' dB (NAP−NRRsf)'}}},
+      scales:{
+        y:{min:-8,max:1,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v.toFixed(1)+' dB'}},
+        x:{grid:{display:false},ticks:{font:{size:10}}}
+      }
+    }
+  });
+}
+updateDeg();
+</script>
