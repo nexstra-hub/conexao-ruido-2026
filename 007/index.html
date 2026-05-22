@@ -17,7 +17,7 @@
     .sl{
         font-size:16px;        /* 11 + 5 */
         font-weight:500;
-        color:#a0a0a0;
+        color:#e0e0e0;
         letter-spacing:.06em;
         text-transform:uppercase;
         padding-bottom:8px;
@@ -32,9 +32,9 @@
         border-radius:12px;
         padding:12px 14px;
     }
-    .kl{font-size:16px; color:#b0b0b0;margin-bottom:5px}     /* 11 + 5 */
+    .kl{font-size:16px; color:#e0e0e0;margin-bottom:5px}     /* 11 + 5 */
     .kv{font-size:24px;font-weight:500;color:#ffffff}     /* 19 + 5 */
-    .ks{font-size:16px;color:#666;margin-top:3px}         /* 11 + 5 */
+    .ks{font-size:16px;color:#e0e0e0;margin-top:3px}         /* 11 + 5 */
 
     .card{
         background:#1a1a1a;
@@ -45,7 +45,7 @@
     }
 
     .cw{position:relative;width:100%}
-    .leg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;font-size:16px;color:#a0a0a0} /* 11 + 5 */
+    .leg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;font-size:16px;color:#e0e0e0} /* 11 + 5 */
     .ld{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle}
 
     .ins{
@@ -83,7 +83,7 @@
         text-align:center;
     }
     .roi-v{font-size:31px;font-weight:500;color:#4ade80}   /* 26 + 5 */
-    .roi-l{font-size:16px;color:#b0b0b0;margin-top:3px}       /* 11 + 5 */
+    .roi-l{font-size:16px;color:#e0e0e0;margin-top:3px}       /* 11 + 5 */
 
     .roi-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px}
 
@@ -96,7 +96,7 @@
         text-align:left;
         font-weight:500;
         font-size:16px;        /* 11 + 5 */
-        color:#a0a0a0;
+        color:#e0e0e0;
         padding:8px 10px;
         border-bottom:.5px solid #333;
     }
@@ -174,40 +174,40 @@
           <td><span style="color:#BA7517;font-weight:500">82,9%</span></td>
           <td><span style="color:#BA7517;font-weight:500">80,6%</span></td>
           <td><span style="color:#f87171;font-weight:500">75,5%</span></td>
-          <td style="color:#b0b0b0">Meta: ≥ 90%</td>
-          <td style="font-size:16px;color:#aaa">Revisar modelos nos GHEs críticos</td>
+          <td style="color:#4ade80">Meta: ≥ 90%</td>
+          <td style="font-size:16px;color:#f87171">Revisar modelos nos GHEs críticos</td>
         </tr>
         <tr>
           <td>NAP médio real</td>
           <td>16,5 dB</td>
           <td>16,1 dB</td>
           <td>16,8 dB</td>
-          <td style="color:#b0b0b0">NRRsf médio: ~20 dB</td>
-          <td style="font-size:16px;color:#aaa">Gap de 3–5 dB a investigar</td>
+          <td style="color:#4ade80">NRRsf médio: ~20 dB</td>
+          <td style="font-size:16px;color:#f87171">Gap de 3–5 dB a investigar</td>
         </tr>
         <tr>
           <td>Taxa colocação inadequada</td>
           <td><span style="color:#f87171;font-weight:500">19,2%</span></td>
           <td><span style="color:#f87171;font-weight:500">19,5%</span></td>
           <td><span style="color:#f87171;font-weight:500">19,3%</span></td>
-          <td style="color:#b0b0b0">Meta: &lt; 5%</td>
-          <td style="font-size:16px;color:#aaa">Intensificar treinamento — NR-01</td>
+          <td style="color:#4ade80">Meta: &lt; 5%</td>
+          <td style="font-size:16px;color:#f87171">Intensificar treinamento — NR-01</td>
         </tr>
         <tr>
           <td>Sessões treinamento registradas</td>
           <td>1.812</td>
           <td>1.120</td>
           <td>2.124</td>
-          <td style="color:#b0b0b0">Rastreabilidade NR-01</td>
-          <td style="font-size:16px;color:#aaa">Relatório individual gerado ✓</td>
+          <td style="color:#4ade80">Rastreabilidade NR-01</td>
+          <td style="font-size:16px;color:#4ade80">Relatório individual gerado ✓</td>
         </tr>
         <tr>
           <td>Modelos subdimensionados nos GHEs</td>
           <td><span style="color:#BA7517;font-weight:500">1 GHE</span></td>
           <td><span style="color:#f87171;font-weight:500">2 GHEs</span></td>
           <td><span style="color:#f87171;font-weight:500">1 GHE</span></td>
-          <td style="color:#b0b0b0">Meta: 0 GHEs</td>
-          <td style="font-size:16px;color:#aaa">Trocar para dupla proteção — NR-06</td>
+          <td style="color:#4ade80">Meta: 0 GHEs</td>
+          <td style="font-size:16px;color:#f87171">Avaliar troca de protetores — NR-06</td>
         </tr>
       </tbody>
     </table>
@@ -219,7 +219,7 @@
   <div class="card">
     <div class="slid-row">
       <label>Colaboradores/mês:</label>
-      <input type="range" min="20" max="500" value="100" step="10" id="slNCol" oninput="calcROI()">
+      <input type="range" min="20" max="1000" value="300" step="10" id="slNCol" oninput="calcROI()">
       <span id="outNCol">100</span>
     </div>
     <div class="slid-row">
@@ -229,7 +229,7 @@
     </div>
     <div class="slid-row">
       <label>Periodicidade (meses entre testes):</label>
-      <input type="range" min="4" max="12" value="6" step="1" id="slPer" oninput="calcROI()">
+      <input type="range" min="1" max="12" value="6" step="1" id="slPer" oninput="calcROI()">
       <span id="outPer">6 meses</span>
     </div>
     <div class="roi-grid">
@@ -298,11 +298,22 @@ function calcROI(){
   const anual=ciclo*(12/per);
   document.getElementById('roiCiclo').textContent='R$ '+ciclo.toLocaleString('pt-BR');
   document.getElementById('roiAnual').textContent='R$ '+Math.round(anual).toLocaleString('pt-BR');
-  const payback_meses=Math.ceil(60000/ciclo);
+  
+  // Payback ajustado (primeiro ciclo no mês 0)
+  const ciclos_necessarios = Math.ceil(60000 / ciclo);
+  const payback_meses = (ciclos_necessarios - 1) * per;
+  
   document.getElementById('roiPayback').textContent=payback_meses<=6?'< 6 meses':payback_meses+' meses';
+  
   const meses=Array.from({length:25},(_,i)=>i);
   const acum=[];let s=0;
-  for(let i=0;i<25;i++){s+=ciclo*(i>0?1:0);acum.push(s);}
+  
+  // Receita entra no INÍCIO do ciclo
+  for(let i=0;i<25;i++){
+    if(i % per === 0) s += ciclo;
+    acum.push(s);
+  }
+  
   if(roiChart) roiChart.destroy();
   roiChart=new Chart(document.getElementById('cROI'),{
     type:'line',
