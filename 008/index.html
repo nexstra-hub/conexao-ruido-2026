@@ -95,19 +95,28 @@ body, .wrap {
     display:flex;
     align-items:center;
     gap:12px;
-    margin-bottom:12px
+    margin-bottom:2px
 }
 
 .slid-row label{
     font-size:22px;
     color:#b0b0b0;
-    min-width:175px
+    min-width:175px;
+    flex-shrink: 0;
+}
+
+.slid-row input[type="range"] {
+    flex: 1;
+    min-width: 0;
+    cursor: pointer
 }
 
 .slid-row span{
     font-size:23px;
     font-weight:500;
-    min-width:80px
+    min-width:80px;
+    text-align: right;
+    flex-shrink: 0;
 }
 
 .roi-grid{
@@ -152,54 +161,7 @@ canvas{
 
 <div style="padding:1rem 0">
 
-<div class="sl">Produtividade operacional — diferença entre métodos</div>
-
-<div class="meth-compare">
-  <div class="meth-card">
-    <div class="meth-title" style="color:#00b5f6">Método objetivo (MIRE)</div>
-    <div class="meth-row"><span class="meth-key">Duração média</span><span class="meth-val">54 segundos</span></div>
-    <div class="meth-row"><span class="meth-key">Capacidade/hora</span><span class="meth-val g">~52 testes</span></div>
-    <div class="meth-row"><span class="meth-key">Capacidade/dia (8h)</span><span class="meth-val g">~417 testes</span></div>
-    <div class="meth-row"><span class="meth-key">Protetores elegíveis</span><span class="meth-val">Concha, Cap+Concha, Plugue c/ sonda, Dupla</span></div>
-  </div>
-  <div class="meth-card">
-    <div class="meth-title" style="color:#f38601">Método subjetivo (REAT)</div>
-    <div class="meth-row"><span class="meth-key">Duração média</span><span class="meth-val">19,1 minutos</span></div>
-    <div class="meth-row"><span class="meth-key">Capacidade/hora</span><span class="meth-val r">~3 testes</span></div>
-    <div class="meth-row"><span class="meth-key">Capacidade/dia (8h)</span><span class="meth-val r">~24 testes</span></div>
-    <div class="meth-row"><span class="meth-key">Protetores elegíveis</span><span class="meth-val">Plugue convencional (s/ sonda)</span></div>
-  </div>
-</div>
-
-<div class="sl">Calculadora de capacidade e receita — planejamento operacional</div>
-<div class="card">
-  <div class="slid-row">
-    <label>Colaboradores no cliente:</label>
-    <input type="range" min="50" max="2000" value="500" step="50" id="sN" oninput="calcCap()">
-    <span id="oN">500</span>
-  </div>
-  <div class="slid-row">
-    <label>% de plugues convencionais (subj.):</label>
-    <input type="range" min="0" max="80" value="30" step="5" id="sPct" oninput="calcCap()">
-    <span id="oPct">30%</span>
-  </div>
-  <div class="slid-row">
-    <label>Preço por teste (R$):</label>
-    <input type="range" min="80" max="200" value="120" step="10" id="sPr" oninput="calcCap()">
-    <span id="oPr">R$ 120</span>
-  </div>
-  <div class="roi-grid">
-    <div class="roi-box"><div class="roi-l">Dias necessários</div><div class="roi-v b" id="cDias">3</div><div class="roi-l">para testar todos</div></div>
-    <div class="roi-box"><div class="roi-l">Receita total</div><div class="roi-v g" id="cReceita">R$ 60k</div></div>
-    <div class="roi-box"><div class="roi-l">Receita/dia</div><div class="roi-v g" id="cDia">R$ 20k</div></div>
-  </div>
-  <div class="cw" style="height:200px;margin-top:14px">
-    <canvas id="cCap" role="img" aria-label="Projeção de dias necessários e receita por diferentes tamanhos de cliente, mostrando como a proporção de plugues convencionais impacta o tempo total de aplicação">A presença de plugues convencionais aumenta significativamente o número de dias necessários para completar o projeto</canvas>
-  </div>
-  <div class="ins" id="capIns">Com 500 colaboradores e 30% de plugues convencionais, são necessários aproximadamente 3 dias de trabalho para completar todos os testes.</div>
-</div>
-
-<div class="sl">Modelagem de contrato recorrente — receita anual projetada</div>
+<div class="sl">Planejamento de Receita — Modelagem de contrato</div>
 <div class="card">
   <div class="slid-row">
     <label>Clientes ativos em carteira:</label>
@@ -222,13 +184,57 @@ canvas{
     <span id="oPr2">R$ 120</span>
   </div>
   <div class="roi-grid">
-    <div class="roi-box"><div class="roi-l">Testes/ano</div><div class="roi-v b" id="rTestes">4.000</div></div>
-    <div class="roi-box"><div class="roi-l">Receita anual</div><div class="roi-v g" id="rAnual">R$ 480k</div></div>
-    <div class="roi-box"><div class="roi-l">Payback equipamento</div><div class="roi-v" id="rPayback" style="color:#00b5f6">1,9 meses</div><div class="roi-l">(ref. R$60k equip.)</div></div>
+    <div class="roi-box"><div class="roi-l">Testes/Ano</div><div class="roi-v b" id="rTestes">4.000</div></div>
+    <div class="roi-box"><div class="roi-l">Receita Anual</div><div class="roi-v g" id="rAnual">R$ 480k</div></div>
+    <div class="roi-box"><div class="roi-l">Payback Equipamento</div><div class="roi-v" id="rPayback" style="color:#00b5f6">1,9 meses</div><div class="roi-l">(ref. R$60k equip.)</div></div>
   </div>
   <div class="cw" style="height:190px;margin-top:14px">
     <canvas id="cRec" role="img" aria-label="Receita recorrente acumulada ao longo de 24 meses com linha de payback do equipamento. A curva de receita cruza o custo do equipamento muito antes do primeiro mês.">Receita acumulada ao longo de 24 meses mostrando o ponto de payback do equipamento no início da série.</canvas>
   </div>
+</div>
+
+<div class="sl">Produtividade operacional — Diferença entre métodos</div>
+<div class="meth-compare">
+  <div class="meth-card">
+    <div class="meth-title" style="color:#00b5f6">Método Objetivo (MIRE)</div>
+    <div class="meth-row"><span class="meth-key">Duração prevista</span><span class="meth-val">~7 minutos</span></div>
+    <div class="meth-row"><span class="meth-key">Capacidade/hora</span><span class="meth-val g">~9 testes</span></div>
+    <div class="meth-row"><span class="meth-key">Capacidade/dia (8h)</span><span class="meth-val g">~68 testes</span></div>
+  </div>
+  <div class="meth-card">
+    <div class="meth-title" style="color:#f38601">Método Subjetivo (REAT)</div>
+    <div class="meth-row"><span class="meth-key">Duração média</span><span class="meth-val">27 minutos</span></div>
+    <div class="meth-row"><span class="meth-key">Capacidade/hora</span><span class="meth-val r">~2 testes</span></div>
+    <div class="meth-row"><span class="meth-key">Capacidade/dia (8h)</span><span class="meth-val r">~16 testes</span></div>
+  </div>
+</div>
+
+<div class="sl">Planejamento operacional — Calculadora de capacidade e receita</div>
+<div class="card">
+  <div class="slid-row">
+    <label>Colaboradores no cliente:</label>
+    <input type="range" min="50" max="2000" value="600" step="50" id="sN" oninput="calcCap()">
+    <span id="oN">500</span>
+  </div>
+  <div class="slid-row">
+    <label>% de plugues convencionais (subj.):</label>
+    <input type="range" min="0" max="80" value="30" step="5" id="sPct" oninput="calcCap()">
+    <span id="oPct">30%</span>
+  </div>
+  <div class="slid-row">
+    <label>Preço por teste (R$):</label>
+    <input type="range" min="80" max="200" value="100" step="10" id="sPr" oninput="calcCap()">
+    <span id="oPr">R$ 120</span>
+  </div>
+  <div class="roi-grid">
+    <div class="roi-box"><div class="roi-l">Dias Necessários</div><div class="roi-v b" id="cDias">3</div></div>
+    <div class="roi-box"><div class="roi-l">Receita Total</div><div class="roi-v g" id="cReceita">R$ 60k</div></div>
+    <div class="roi-box"><div class="roi-l">Receita/Dia</div><div class="roi-v g" id="cDia">R$ 20k</div></div>
+  </div>
+  <div class="cw" style="height:200px;margin-top:14px">
+    <canvas id="cCap" role="img" aria-label="Projeção de dias necessários e receita por diferentes tamanhos de cliente, mostrando como a proporção de plugues convencionais impacta o tempo total de aplicação">A presença de plugues convencionais aumenta significativamente o número de dias necessários para completar o projeto</canvas>
+  </div>
+  <div class="ins" id="capIns">Com 500 colaboradores e 30% de plugues convencionais, são necessários aproximadamente 3 dias de trabalho para completar todos os testes.</div>
 </div>
 
 </div>
@@ -249,8 +255,8 @@ function calcCap() {
   const nSub = Math.round(n * pct);
   const nObj = n - nSub;
 
-  const diasObj = nObj / 417;
-  const diasSub = nSub / 24;
+  const diasObj = nObj / 68;
+  const diasSub = nSub / 16;
   const diasTotal = (diasObj + diasSub) > 0 ? Math.ceil(diasObj + diasSub) : 0;
 
   const receita = n * pr;
