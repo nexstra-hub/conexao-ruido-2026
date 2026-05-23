@@ -1,0 +1,413 @@
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body,
+.wrap{
+    background:transparent;
+    color:#e0e0e0;
+    font-family:system-ui,-apple-system,sans-serif;
+    font-size:21px;
+}
+
+.sr-only{
+    position:absolute;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+}
+
+.sec{
+    margin-bottom:2rem;
+}
+
+.sl{
+    font-size:16px;
+    font-weight:500;
+    color:#a0a0a0;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding-bottom:8px;
+    margin-bottom:14px;
+    margin-top:1.5rem;
+}
+
+/* =========================
+   KPI
+========================= */
+
+.grid3{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+    gap:10px;
+    margin-bottom:1.5rem;
+}
+
+.kpi{
+    background:#252525;
+    border:.5px solid #333;
+    border-radius:8px;
+    padding:12px 14px;
+    text-align:center;
+}
+
+.kl{
+    font-size:16px;
+    color:#e0e0e0;
+    margin-top:5px;
+}
+
+.kv{
+    font-size:24px;
+    font-weight:500;
+    color:#ffffff;
+}
+
+.r{color:#f87171}
+.a{color:#facc15}
+.g{color:#4ade80}
+.b{color:#60a5fa}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+    background:#1a1a1a;
+    border:.5px solid #333;
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:14px;
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.frow{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.frow label{
+    font-size:17px;
+    color:#b0b0b0;
+    min-width:195px;
+    flex-shrink:0;
+}
+
+.frow input,
+.frow select{
+    flex:1;
+    background:#252525;
+    color:#e0e0e0;
+    border:1px solid #444;
+    padding:8px 12px;
+    border-radius:6px;
+    font-size:17px;
+}
+
+.frow input:focus,
+.frow select:focus{
+    outline:none;
+    border-color:#3b82f6;
+}
+
+/* =========================
+   PROPOSAL BOX
+========================= */
+
+.prop-box{
+    background:#252525;
+    border:.5px solid #333;
+    border-radius:8px;
+    padding:16px;
+    font-size:17px;
+}
+
+.prop-row{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    border-bottom:.5px solid #333;
+}
+
+.prop-row:last-child{
+    border-bottom:none;
+    font-weight:500;
+    padding-top:8px;
+}
+
+.prop-key{
+    color:#a0a0a0;
+}
+
+/* =========================
+   TABS
+========================= */
+
+.tab-btns{
+    display:flex;
+    gap:8px;
+    margin-bottom:14px;
+    flex-wrap:wrap;
+}
+
+.tab-btns button{
+    background:#252525;
+    color:#e0e0e0;
+    border:1px solid #444;
+    padding:10px 16px;
+    border-radius:8px;
+    font-size:17px;
+    cursor:pointer;
+}
+
+.tab-btns button.active{
+    background:#3b82f6;
+    color:#ffffff;
+    border-color:#3b82f6;
+}
+
+/* =========================
+   INSIGHTS
+========================= */
+
+.ins{
+    border-left:3px solid #3b82f6;
+    border-radius:0 8px 8px 0;
+    background:#1f2937;
+    padding:12px 16px;
+    font-size:17px;
+    color:#d0d0d0;
+    margin-top:12px;
+    line-height:1.45;
+}
+
+.ins b{
+    color:#ffffff;
+    font-weight:500;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+/* =========================
+   CHART CONTAINER
+========================= */
+
+.chart-container{
+    background:#1a1a1a;
+    border:.5px solid #333;
+    border-radius:12px;
+    padding:16px;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:900px){
+    .grid2{
+        grid-template-columns:1fr;
+    }
+    .grid3{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:640px){
+    .grid3{
+        grid-template-columns:1fr;
+    }
+    .kpi .kv{
+        font-size:22px;
+    }
+    .frow label{
+        min-width:auto;
+    }
+}
+</style>
+
+<h2 class="sr-only">Ferramenta 6: simulador de proposta comercial e ROI para prestadores de serviço de fit test. Calcula receita por ciclo, anual e em 24 meses, payback do equipamento, margem estimada e compara cenários de precificação.</h2>
+
+<div class="wrap" style="padding:1rem 10px">
+
+<div class="sec">
+  <div class="sl">Dados do cliente e contrato</div>
+  <div class="card">
+    <div class="grid2">
+      <div>
+        <div class="frow"><label>Nome do cliente</label><input type="text" id="pCliente" value="Empresa Industrial S.A." placeholder="razão social"></div>
+        <div class="frow"><label>Total de colaboradores</label><input type="number" id="pCols" value="500" min="10" max="5000" step="10" oninput="calcProp()"></div>
+        <div class="frow"><label>% com plugue convencional (subjetivo)</label><input type="number" id="pPctSub" value="25" min="0" max="100" step="5" oninput="calcProp()"></div>
+        <div class="frow"><label>Periodicidade entre ciclos (meses)</label><input type="number" id="pPer" value="6" min="4" max="12" step="1" oninput="calcProp()"></div>
+        <div class="frow"><label>Duração do contrato (meses)</label><input type="number" id="pDur" value="24" min="6" max="60" step="6" oninput="calcProp()"></div>
+      </div>
+      <div>
+        <div class="frow"><label>Preço — método objetivo (R$/teste)</label><input type="number" id="pPrecoObj" value="120" min="50" max="300" step="10" oninput="calcProp()"></div>
+        <div class="frow"><label>Preço — método subjetivo (R$/teste)</label><input type="number" id="pPrecoSub" value="180" min="80" max="400" step="10" oninput="calcProp()"></div>
+        <div class="frow"><label>Custo operacional por dia (R$)</label><input type="number" id="pCustoOp" value="800" min="200" max="5000" step="100" oninput="calcProp()"></div>
+        <div class="frow"><label>Custo do equipamento (R$)</label><input type="number" id="pEquip" value="60000" min="10000" max="300000" step="5000" oninput="calcProp()"></div>
+        <div class="frow"><label>Outros custos fixos mensais (R$)</label><input type="number" id="pFixo" value="1500" min="0" max="10000" step="500" oninput="calcProp()"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Resumo da proposta</div>
+  <div class="grid3" style="margin-bottom:14px">
+    <div class="kpi"><div class="kv b" id="rCiclo">—</div><div class="kl">receita por ciclo</div></div>
+    <div class="kpi"><div class="kv g" id="rAnual">—</div><div class="kl">receita anual estimada</div></div>
+    <div class="kpi"><div class="kv g" id="rContrato">—</div><div class="kl">receita total do contrato</div></div>
+    <div class="kpi"><div class="kv" id="rDias">—</div><div class="kl">dias de campo por ciclo</div></div>
+    <div class="kpi"><div class="kv g" id="rMargem">—</div><div class="kl">margem bruta estimada</div></div>
+    <div class="kpi"><div class="kv b" id="rPayback">—</div><div class="kl">payback do equipamento</div></div>
+  </div>
+
+  <div class="card">
+    <div class="prop-box" id="propBox"></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Projeção de receita × custo acumulado</div>
+  <div class="tab-btns">
+    <button class="active" id="btnRec" onclick="switchTab('rec')">Receita vs custo</button>
+    <button id="btnMarg" onclick="switchTab('marg')">Margem por ciclo</button>
+    <button id="btnCen" onclick="switchTab('cen')">Cenários de preço</button>
+  </div>
+  <div class="chart-container">
+    <div style="position:relative;width:100%;height:280px">
+      <canvas id="cProp" role="img" aria-label="Projeção financeira ao longo do contrato mostrando receita acumulada, custo acumulado e ponto de payback do equipamento.">Projeção de receita e custo ao longo da duração do contrato.</canvas>
+    </div>
+  </div>
+  <div class="ins" id="propIns" style="margin-top:12px"></div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+let pChart=null;
+let currentTab='rec';
+
+function fmt(n){return'R$ '+Math.round(n).toLocaleString('pt-BR')}
+function fmtk(n){return'R$ '+(n/1000).toFixed(0)+'k'}
+
+function calcProp(){
+  const cols=parseInt(document.getElementById('pCols').value)||500;
+  const pctSub=parseInt(document.getElementById('pPctSub').value)/100||0.25;
+  const per=parseInt(document.getElementById('pPer').value)||6;
+  const dur=parseInt(document.getElementById('pDur').value)||24;
+  const prObj=parseInt(document.getElementById('pPrecoObj').value)||120;
+  const prSub=parseInt(document.getElementById('pPrecoSub').value)||180;
+  const custoOp=parseInt(document.getElementById('pCustoOp').value)||800;
+  const equip=parseInt(document.getElementById('pEquip').value)||60000;
+  const fixo=parseInt(document.getElementById('pFixo').value)||1500;
+
+  const nSub=Math.round(cols*pctSub);
+  const nObj=cols-nSub;
+  const recCiclo=nObj*prObj+nSub*prSub;
+  const ciclos=dur/per;
+  const recContrato=recCiclo*ciclos;
+  const recAnual=recCiclo*(12/per);
+
+  const diasObj=Math.ceil(nObj/417);
+  const diasSub=Math.ceil(nSub/24);
+  const diasCiclo=diasObj+diasSub;
+  const custoCiclo=diasCiclo*custoOp;
+  const custoAnual=custoCiclo*(12/per)+fixo*12;
+  const margemCiclo=(recCiclo-custoCiclo)/recCiclo*100;
+  const paybackMeses=equip/(recCiclo-custoCiclo)/per*per;
+
+  document.getElementById('rCiclo').textContent=fmtk(recCiclo);
+  document.getElementById('rAnual').textContent=fmtk(recAnual);
+  document.getElementById('rContrato').textContent=fmtk(recContrato);
+  document.getElementById('rDias').textContent=diasCiclo+' dias';
+  document.getElementById('rMargem').textContent=margemCiclo.toFixed(1)+'%';
+  document.getElementById('rMargem').className='kv '+(margemCiclo>40?'g':margemCiclo>20?'a':'r');
+  document.getElementById('rPayback').textContent=paybackMeses<1?'< 1 mês':paybackMeses.toFixed(1)+' meses';
+
+  const cliente=document.getElementById('pCliente').value||'Cliente';
+  document.getElementById('propBox').innerHTML=`
+    <div style="font-size:17px;font-weight:500;margin-bottom:12px;color:#e0e0e0">${cliente} — proposta de serviço recorrente</div>
+    <div class="prop-row"><span class="prop-key">Colaboradores elegíveis</span><span>${cols.toLocaleString('pt-BR')} (${nObj} objetivo + ${nSub} subjetivo)</span></div>
+    <div class="prop-row"><span class="prop-key">Ciclos no período</span><span>${ciclos.toFixed(0)} ciclos (a cada ${per} meses)</span></div>
+    <div class="prop-row"><span class="prop-key">Testes totais no contrato</span><span>${(cols*ciclos).toLocaleString('pt-BR')} testes</span></div>
+    <div class="prop-row"><span class="prop-key">Dias de campo por ciclo</span><span>${diasCiclo} dias (${diasObj}d obj. + ${diasSub}d subj.)</span></div>
+    <div class="prop-row"><span class="prop-key">Custo operacional estimado/ciclo</span><span>${fmt(custoCiclo)}</span></div>
+    <div class="prop-row"><span class="prop-key">Margem bruta por ciclo</span><span style="color:${margemCiclo>40?'#4ade80':margemCiclo>20?'#facc15':'#f87171'}">${margemCiclo.toFixed(1)}%</span></div>
+    <div class="prop-row"><span class="prop-key">Receita total do contrato (${dur} meses)</span><span style="color:#60a5fa;font-size:18px">${fmt(recContrato)}</span></div>
+  `;
+
+  window._prop={cols,pctSub,per,dur,prObj,prSub,custoOp,equip,fixo,recCiclo,custoCiclo,ciclos,recContrato,paybackMeses,margemCiclo,recAnual};
+  drawTab(currentTab);
+}
+
+function switchTab(tab){
+  currentTab=tab;
+  document.getElementById('btnRec').className=tab==='rec'?'active':'';
+  document.getElementById('btnMarg').className=tab==='marg'?'active':'';
+  document.getElementById('btnCen').className=tab==='cen'?'active':'';
+  drawTab(tab);
+}
+
+function drawTab(tab){
+  const p=window._prop;
+  if(!p) return;
+  if(pChart) pChart.destroy();
+  const meses=Array.from({length:p.dur+1},(_,i)=>i);
+
+  if(tab==='rec'){
+    const rec=meses.map(m=>Math.round(m*(p.recCiclo/p.per)));
+    const custo=meses.map(m=>Math.round(p.equip+m*p.custoOp*(12/p.per)/12+m*p.fixo));
+    pChart=new Chart(document.getElementById('cProp'),{type:'line',
+      data:{labels:meses.map(m=>m+'m'),datasets:[
+        {label:'Receita acumulada',data:rec,borderColor:'#4ade80',backgroundColor:'rgba(74,222,128,.08)',fill:true,tension:.3,pointRadius:0},
+        {label:'Custo acumulado',data:custo,borderColor:'#f87171',borderDash:[4,3],pointRadius:0,fill:false}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+fmt(v.raw)}}},
+        scales:{y:{grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>fmtk(v)}},x:{grid:{display:false},ticks:{font:{size:10},maxTicksLimit:13}}}}
+    });
+    document.getElementById('propIns').innerHTML=`Payback do equipamento em <b>${p.paybackMeses<1?'menos de 1 mês':p.paybackMeses.toFixed(1)+' meses'}</b>. Receita total projetada: <b>${fmt(p.recContrato)}</b> em ${p.dur} meses.`;
+  } else if(tab==='marg'){
+    const ciclosArr=Array.from({length:Math.round(p.ciclos)+1},(_,i)=>i);
+    const marg=ciclosArr.map(c=>Math.round((p.recCiclo-p.custoCiclo)*c-p.equip));
+    pChart=new Chart(document.getElementById('cProp'),{type:'bar',
+      data:{labels:ciclosArr.map(c=>c===0?'Início':'Ciclo '+c),datasets:[{label:'Lucro líquido acumulado',data:marg,backgroundColor:marg.map(v=>v>=0?'#4ade80':'#f87171'),borderRadius:3}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>fmt(v.raw)}}},
+        scales:{y:{grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>fmtk(v)}},x:{grid:{display:false},ticks:{font:{size:10}}}}}
+    });
+    document.getElementById('propIns').innerHTML=`Margem bruta por ciclo de <b>${p.margemCiclo.toFixed(1)}%</b>. O contrato começa a dar lucro líquido a partir do <b>ciclo ${Math.ceil(p.equip/(p.recCiclo-p.custoCiclo))}</b>.`;
+  } else {
+    const precos=[80,100,120,150,180,200];
+    const recs=precos.map(pr=>Math.round(pr*p.cols*(12/p.per)));
+    const margens=precos.map(pr=>{const recC=pr*p.cols;const m=(recC-p.custoCiclo)/recC*100;return parseFloat(m.toFixed(1));});
+    pChart=new Chart(document.getElementById('cProp'),{type:'bar',
+      data:{labels:precos.map(pr=>'R$'+pr+'/teste'),datasets:[
+        {label:'Receita anual',data:recs,backgroundColor:'#60a5fa',borderRadius:3,yAxisID:'y'},
+        {label:'Margem %',data:margens,backgroundColor:'#4ade80',borderRadius:3,type:'line',yAxisID:'y2',tension:.3,pointRadius:4}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.datasetIndex===0?'Rec. anual: '+fmtk(v.raw):'Margem: '+v.raw+'%'}}},
+        scales:{y:{grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>fmtk(v)}},y2:{position:'right',grid:{display:false},ticks:{callback:v=>v+'%'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}
+    });
+    document.getElementById('propIns').innerHTML=`Comparação de cenários de precificação. O preço atual selecionado (R$${p.prObj}/teste objetivo) gera margem de <b>${p.margemCiclo.toFixed(1)}%</b>.`;
+  }
+}
+calcProp();
+</script>
