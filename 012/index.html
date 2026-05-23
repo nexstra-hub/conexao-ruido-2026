@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferramenta 7 - Planejador de Campanha</title>
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body,
+.wrap{
+    background:transparent;
+    color:#e0e0e0;
+    font-family:system-ui,-apple-system,sans-serif;
+    font-size:21px;
+    line-height:1.4;
+}
+
+.sr-only{
+    position:absolute;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+}
+
+.sec{
+    margin-bottom:2rem;
+}
+
+.sl{
+    font-size:16px;
+    font-weight:500;
+    color:#a0a0a0;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding-bottom:4px;
+    margin-bottom:1px;
+    margin-top:1.5rem;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 1200px) {
+    body { font-size: 19px; }
+}
+
+@media (max-width: 900px) {
+    body { font-size: 17px; }
+    .sl { font-size: 15px; }
+    .card { padding: 14px; }
+    .kv { font-size: 22px; }
+}
+
+@media (max-width: 640px) {
+    body { font-size: 16px; }
+    .sl { font-size: 14px; }
+    .card { padding: 12px; }
+    .frow { 
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: 6px; 
+    }
+    .frow label { 
+        min-width: auto; 
+        font-size: 15px; 
+    }
+    .grid3 { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .gantt th, .gantt td { font-size: 13px; padding: 6px 6px; }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 15px; }
+    .grid3 { grid-template-columns: 1fr; }
+    .kv { font-size: 20px; }
+}
+
+/* =========================
+   KPI
+========================= */
+
+.grid3{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+    gap:10px;
+    margin-bottom:1.5rem;
+}
+
+.kpi{
+    background:#252525;
+    border:.5px solid #333;
+    border-radius:8px;
+    padding:12px 14px;
+    text-align:center;
+}
+
+.kl{
+    font-size:16px;
+    color:#e0e0e0;
+    margin-top:5px;
+}
+
+.kv{
+    font-size:24px;
+    font-weight:500;
+    color:#ffffff;
+}
+
+.r{color:#f87171}
+.a{color:#facc15}
+.g{color:#4ade80}
+.b{color:#60a5fa}
+
+/* =========================
+   CARDS e FORM
+========================= */
+
+.card{
+    background:#1a1a1a;
+    border:.5px solid #333;
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:14px;
+}
+
+.frow{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.frow label{
+    font-size:17px;
+    color:#b0b0b0;
+    min-width:200px;
+    flex-shrink:0;
+}
+
+.frow input,
+.frow select,
+.frow button{
+    flex:1;
+    background:#252525;
+    color:#e0e0e0;
+    border:1px solid #444;
+    padding:8px 12px;
+    border-radius:6px;
+    font-size:17px;
+}
+
+.frow input:focus,
+.frow select:focus{
+    outline:none;
+    border-color:#3b82f6;
+}
+
+/* =========================
+   GANTT TABLE
+========================= */
+
+.gantt-wrap{
+    overflow-x:auto;
+    margin-top:8px;
+    border-radius:8px;
+    background:#1a1a1a;
+    padding:4px;
+}
+
+.gantt{
+    width:100%;
+    border-collapse:collapse;
+    font-size:15px;
+    color:#e0e0e0;
+}
+
+.gantt th{
+    text-align:left;
+    font-weight:500;
+    color:#a0a0a0;
+    padding:10px 8px;
+    border-bottom:1px solid #333;
+    white-space:nowrap;
+    background:#252525;
+}
+
+.gantt td{
+    padding:10px 8px;
+    border-bottom:1px solid #333;
+    vertical-align:middle;
+}
+
+.gbar-wrap{
+    height:18px;
+    border-radius:4px;
+    background:#333;
+    position:relative;
+    min-width:160px;
+}
+
+.gbar{
+    height:18px;
+    border-radius:4px;
+    position:absolute;
+    top:0;
+}
+
+/* =========================
+   INSIGHTS E ALERTAS
+========================= */
+
+.ins{
+    border-left:3px solid #3b82f6;
+    border-radius:0 8px 8px 0;
+    background:#1f2937;
+    padding:12px 16px;
+    font-size:17px;
+    color:#d0d0d0;
+    margin-top:12px;
+    line-height:1.45;
+}
+
+.alert{
+    background:#3a1f1f;
+    border:.5px solid #f87171;
+    border-radius:8px;
+    padding:12px 16px;
+    color:#fda4a4;
+    margin-top:10px;
+}
+
+.alert b{
+    color:#ffffff;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+</style>
+</head>
+<body>
+
+<h2 class="sr-only">Ferramenta 7: planejador operacional de campanha de fit test. Calcula dias necessários por GHE, cronograma de campo por turno, alertas de gargalo operacional e necessidade de técnicos por volume.</h2>
+
+<div class="wrap" style="padding:1rem 10px">
+
+<div class="sec">
+  <div class="sl">Configuração da campanha</div>
+  <div class="card">
+    <div class="grid2">
+      <div>
+        <div class="frow"><label>Data de início da campanha</label><input type="date" id="cData" value="2025-03-10" oninput="calcCamp()"></div>
+        <div class="frow"><label>Horas disponíveis por dia</label><input type="number" id="cHoras" value="8" min="4" max="12" step="0.5" oninput="calcCamp()"></div>
+        <div class="frow"><label>Número de técnicos em campo</label><input type="number" id="cTecnicos" value="1" min="1" max="5" step="1" oninput="calcCamp()"></div>
+        <div class="frow"><label>% esperada de trios de treinamento</label><input type="number" id="cTrio" value="20" min="0" max="60" step="5" oninput="calcCamp()"></div>
+        <div class="frow"><label>Buffer logístico por dia (%)</label><input type="number" id="cBuffer" value="15" min="0" max="40" step="5" oninput="calcCamp()"></div>
+      </div>
+      <div>
+        <div style="font-size:17px;font-weight:500;color:#e0e0e0;margin-bottom:12px">GHEs da campanha</div>
+        <div id="gheRows"></div>
+        <button onclick="addGhe()" style="margin-top:8px;padding:10px 16px;background:#252525;border:1px solid #444;color:#e0e0e0;border-radius:8px;cursor:pointer">+ Adicionar GHE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Capacidade e resumo</div>
+  <div class="grid3" style="margin-bottom:14px">
+    <div class="kpi"><div class="kv b" id="rTotCol">—</div><div class="kl">total de colaboradores</div></div>
+    <div class="kpi"><div class="kv" id="rCapDia">—</div><div class="kl">capacidade efetiva/dia</div></div>
+    <div class="kpi"><div class="kv" id="rDiasTot">—</div><div class="kl">dias necessários totais</div></div>
+    <div class="kpi"><div class="kv" id="rFim">—</div><div class="kl">previsão de conclusão</div></div>
+    <div class="kpi"><div class="kv" id="rTestesTot">—</div><div class="kl">testes totais (c/ trios)</div></div>
+    <div class="kpi"><div class="kv g" id="rEfic">—</div><div class="kl">ocupação estimada</div></div>
+  </div>
+  <div id="alertBox"></div>
+</div>
+
+<div class="sec">
+  <div class="sl">Cronograma por GHE — distribuição de campo</div>
+  <div class="card">
+    <div class="gantt-wrap">
+      <table class="gantt">
+        <thead><tr>
+          <th style="width:140px">GHE</th>
+          <th style="width:70px">Colabs.</th>
+          <th style="width:90px">Tipo</th>
+          <th style="width:60px">Dias</th>
+          <th>Alocação</th>
+          <th style="width:110px">Período</th>
+        </tr></thead>
+        <tbody id="ganttBody"></tbody>
+      </table>
+    </div>
+    <div class="ins" id="campIns" style="margin-top:12px"></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Distribuição de tempo por método</div>
+  <div class="card">
+    <div style="position:relative;width:100%;height:260px">
+      <canvas id="cCamp" role="img" aria-label="Gráfico de barras mostrando tempo alocado por GHE dividido entre método objetivo e subjetivo, com trios de treinamento destacados.">Tempo de campo distribuído por GHE, método e trios de treinamento.</canvas>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+let gheCount=0, campChart=null;
+
+function addGhe(nome='',cols=100,pctSub=20){
+  const id='g'+gheCount++;
+  const div=document.createElement('div');
+  div.id=id;
+  div.style.cssText='display:grid;grid-template-columns:1fr 70px 70px 32px;gap:8px;align-items:center;margin-bottom:8px';
+  div.innerHTML=`
+    <input type="text" value="${nome||'GHE-'+(gheCount)}" oninput="calcCamp()">
+    <input type="number" value="${cols}" min="5" max="2000" step="5" placeholder="n° col." oninput="calcCamp()">
+    <input type="number" value="${pctSub}" min="0" max="100" step="5" placeholder="% subj." oninput="calcCamp()">
+    <button onclick="document.getElementById('${id}').remove();calcCamp()" style="padding:6px;background:#252525;border:1px solid #444;color:#f87171;border-radius:6px;cursor:pointer">×</button>
+  `;
+  document.getElementById('gheRows').appendChild(div);
+  calcCamp();
+}
+
+addGhe('GHE-A01',220,0);
+addGhe('GHE-A02',180,30);
+addGhe('GHE-A03',140,45);
+addGhe('GHE-B04',90,0);
+
+function addWorkdays(startDate,days){
+  let d=new Date(startDate);let added=0;
+  while(added<days){d.setDate(d.getDate()+1);if(d.getDay()!==0&&d.getDay()!==6)added++;}
+  return d;
+}
+
+function calcCamp(){
+  // ... (o script original permanece inalterado)
+  const horas=parseFloat(document.getElementById('cHoras').value)||8;
+  const tecn=parseInt(document.getElementById('cTecnicos').value)||1;
+  const pTrio=parseInt(document.getElementById('cTrio').value)/100||0.2;
+  const buf=1+(parseInt(document.getElementById('cBuffer').value)||15)/100;
+  const dataStr=document.getElementById('cData').value;
+  const dataInicio=dataStr?new Date(dataStr):new Date();
+
+  const rows=[...document.getElementById('gheRows').children];
+  const ghes=rows.map(r=>{
+    const ins=r.querySelectorAll('input');
+    return{nome:ins[0].value,cols:parseInt(ins[1].value)||0,pctSub:parseInt(ins[2].value)/100||0};
+  }).filter(g=>g.cols>0);
+
+  if(!ghes.length) return;
+
+  const capObjH=3600/57;
+  const capSubH=3600/1140;
+  const capObjDia=Math.floor(capObjH*horas*tecn);
+  const capSubDia=Math.floor(capSubH*horas*tecn);
+
+  let totalCol=0,totalTestes=0,totalDias=0;
+  const gGantt=[];
+  let curDate=new Date(dataInicio);
+
+  ghes.forEach(g=>{
+    const nObj=Math.round(g.cols*(1-g.pctSub));
+    const nSub=Math.round(g.cols*g.pctSub);
+    const nTrio=Math.round(g.cols*pTrio);
+    const testesExtra=nTrio*2;
+    const diasObj=nObj>0?Math.ceil(nObj/capObjDia*buf):0;
+    const diasSub=nSub>0?Math.ceil(nSub/capSubDia*buf):0;
+    const diasExtra=Math.ceil(nTrio*3/capObjDia*buf);
+    const diasTotal=Math.max(1,diasObj+diasSub+diasExtra);
+    const fimDate=addWorkdays(curDate,diasTotal);
+    const testesFim=g.cols+testesExtra;
+    gGantt.push({...g,nObj,nSub,nTrio,diasObj,diasSub,diasExtra,diasTotal,inicio:new Date(curDate),fim:fimDate,testes:testesFim});
+    totalCol+=g.cols;totalTestes+=testesFim;totalDias+=diasTotal;
+    curDate=new Date(fimDate);
+  });
+
+  const fmtDate=d=>d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});
+  const capEfetivaDia=Math.floor(capObjDia*(1-pTrio)+capSubDia*0.1);
+  const ocup=Math.min(100,Math.round(totalTestes/(totalDias*(capObjDia*tecn))*100));
+
+  document.getElementById('rTotCol').textContent=totalCol.toLocaleString('pt-BR');
+  document.getElementById('rCapDia').textContent=capEfetivaDia;
+  document.getElementById('rDiasTot').textContent=totalDias;
+  document.getElementById('rDiasTot').className='kv '+(totalDias<=5?'g':totalDias<=10?'a':'r');
+  document.getElementById('rFim').textContent=fmtDate(curDate);
+  document.getElementById('rTestesTot').textContent=totalTestes.toLocaleString('pt-BR');
+  document.getElementById('rEfic').textContent=ocup+'%';
+
+  const alertBox=document.getElementById('alertBox');
+  alertBox.innerHTML='';
+  if(totalDias>15) alertBox.innerHTML=`<div class="alert"><b>Atenção:</b> campanha com ${totalDias} dias de campo. Considere aumentar o número de técnicos ou dividir em sub-campanhas por GHE.</div>`;
+  if(ghes.some(g=>g.pctSub>50)) alertBox.innerHTML+=`<div class="alert" style="margin-top:8px"><b>Gargalo subjetivo:</b> GHE(s) com mais de 50% de plugues convencionais — o método subjetivo é o limitante principal da capacidade. Avalie substituição por plugues com sonda.</div>`;
+
+  const ganttBody=document.getElementById('ganttBody');
+  ganttBody.innerHTML='';
+  const totalRange=(curDate-dataInicio)||1;
+  gGantt.forEach((g,i)=>{
+    const off=Math.round((g.inicio-dataInicio)/totalRange*100);
+    const wid=Math.round((g.fim-g.inicio)/totalRange*100);
+    const barColor=i%2===0?'#60a5fa':'#3b82f6';
+    ganttBody.innerHTML+=`<tr>
+      <td style="font-weight:500">${g.nome}</td>
+      <td>${g.cols}</td>
+      <td><span style="background:#1e40af;color:white;padding:2px 6px;border-radius:4px;font-size:13px">obj</span> <span style="background:#b45309;color:white;padding:2px 6px;border-radius:4px;font-size:13px">subj</span></td>
+      <td>${g.diasTotal}</td>
+      <td><div class="gbar-wrap"><div class="gbar" style="left:${off}%;width:${Math.max(3,wid)}%;background:${barColor}"></div></div></td>
+      <td style="font-size:15px;color:#a0a0a0">${fmtDate(g.inicio)} → ${fmtDate(g.fim)}</td>
+    </tr>`;
+  });
+
+  document.getElementById('campIns').innerHTML=`Campanha de <b>${totalDias} dias úteis</b> com ${tecn} técnico${tecn>1?'s':''} — ${totalTestes.toLocaleString('pt-BR')} testes totais incluindo ${gGantt.reduce((s,g)=>s+g.nTrio,0)} trios de treinamento esperados.`;
+
+  if(campChart) campChart.destroy();
+  campChart=new Chart(document.getElementById('cCamp'),{
+    type:'bar',
+    data:{labels:gGantt.map(g=>g.nome),datasets:[
+      {label:'Obj. (h)',data:gGantt.map(g=>parseFloat((g.nObj/capObjH).toFixed(1))),backgroundColor:'#60a5fa',borderRadius:3,stack:'s'},
+      {label:'Subj. (h)',data:gGantt.map(g=>parseFloat((g.nSub/capSubH).toFixed(1))),backgroundColor:'#facc15',borderRadius:0,stack:'s'},
+      {label:'Trios (h)',data:gGantt.map(g=>parseFloat((g.nTrio*3/capObjH).toFixed(1))),backgroundColor:'#f87171',borderRadius:0,stack:'s'}
+    ]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label.split('(')[0]+': '+v.raw.toFixed(1)+'h'}}},
+      scales:{y:{stacked:true,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+'h'}},x:{stacked:true,grid:{display:false},ticks:{font:{size:11}}}}
+    }
+  });
+}
+</script>
+</body>
+</html>
