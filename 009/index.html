@@ -1,0 +1,430 @@
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body,
+.wrap{
+    background:transparent;
+    color:#e0e0e0;
+    font-family:system-ui,-apple-system,sans-serif;
+    font-size:21px;
+}
+
+.sr-only{
+    position:absolute;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+}
+
+.sec{
+    margin-bottom:2rem;
+}
+
+.sl{
+    font-size:16px;
+    font-weight:500;
+    color:#a0a0a0;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding-bottom:8px;
+    border-bottom:.5px solid #333;
+    margin-bottom:14px;
+    margin-top:1.5rem;
+}
+
+/* =========================
+   KPI
+========================= */
+
+.krow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+    gap:10px;
+    margin-bottom:1.5rem;
+}
+
+.kpi{
+    background:#252525;
+    border:.5px solid #333;
+    border-radius:8px;
+    padding:12px 14px;
+    text-align:center;
+}
+
+.kl{
+    font-size:16px;
+    color:#e0e0e0;
+    margin-bottom:5px;
+}
+
+.kv{
+    font-size:24px;
+    font-weight:500;
+    color:#ffffff;
+}
+
+.ks{
+    font-size:16px;
+    color:#e0e0e0;
+    margin-top:3px;
+}
+
+.r{color:#f87171}
+.a{color:#facc15}
+.g{color:#4ade80}
+.b{color:#60a5fa}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+    background:#1a1a1a;
+    border:.5px solid #333;
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:14px;
+}
+
+/* =========================
+   CONTAINERS
+========================= */
+
+.cw{
+    position:relative;
+    width:100%;
+}
+
+.r2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+/* =========================
+   LEGENDAS
+========================= */
+
+.leg{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:10px;
+    font-size:16px;
+    color:#a0a0a0;
+}
+
+.ld{
+    width:10px;
+    height:10px;
+    border-radius:2px;
+    display:inline-block;
+    margin-right:4px;
+    vertical-align:middle;
+}
+
+/* =========================
+   INSIGHTS
+========================= */
+
+.ins{
+    border-left:3px solid #3b82f6;
+    border-radius:0 8px 8px 0;
+    background:#1f2937;
+    padding:10px 14px;
+    font-size:17px;
+    color:#d0d0d0;
+    margin-top:12px;
+    line-height:1.45;
+}
+
+.ins b{
+    color:#ffffff;
+    font-weight:500;
+}
+
+/* =========================
+   ALERTAS
+========================= */
+
+.alert{
+    background:#3a1f1f;
+    border:.5px solid #f87171;
+    border-radius:8px;
+    padding:12px 14px;
+    margin-bottom:14px;
+}
+
+.alert p{
+    font-size:17px;
+    color:#fda4a4;
+    margin:0;
+    line-height:1.45;
+}
+
+.alert b{
+    font-weight:500;
+    color:#ffffff;
+}
+
+/* =========================
+   SLIDERS
+========================= */
+
+.slid-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.slid-row label{
+    font-size:17px;
+    color:#b0b0b0;
+    min-width:180px;
+    flex-shrink: 0;
+}
+
+.slid-row input[type="range"] {
+    flex: 1;
+    min-width: 0;
+    cursor: pointer;
+}
+
+.slid-row span{
+    font-size:18px;
+    font-weight:500;
+    min-width:80px;
+    color:#ffffff;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+/* =========================
+   RISK / BIG NUMBERS
+========================= */
+
+.big-num{
+    font-size:33px;
+    font-weight:500;
+    color:#f87171;
+}
+
+.big-lbl{
+    font-size:17px;
+    color:#e0e0e0;
+    margin-top:4px;
+}
+
+.risk-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:10px;
+    margin-top:10px;
+}
+
+.risk-box{
+    background:#252525;
+    border:.5px solid #333;
+    border-radius:8px;
+    padding:16px;
+    text-align:center;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:900px){
+    .r2{
+        grid-template-columns:1fr;
+    }
+    .krow{
+        grid-template-columns:1fr 1fr;
+    }
+    .slid-row{
+        flex-direction:row;
+        width: 900px;
+        align-items:flex-start;
+    }
+    .slid-row label{
+        min-width:auto;
+    }
+}
+
+@media(max-width:640px){
+    .krow{
+        grid-template-columns:1fr;
+    }
+    .card{
+        padding:14px;
+    }
+    .kv{
+        font-size:22px;
+    }
+    .big-num{
+        font-size:28px;
+    }
+}
+</style>
+
+<h2 class="sr-only">Dashboard jurídico para indústrias: classificação de risco legal por nível de exposição protegida, colaboradores sem nenhum teste adequado, meses de exposição não comprovada e simulador de passivo por PAIR.</h2>
+
+<div style="padding:1rem 10px">
+
+<div class="alert">
+    <p><b>Princípio jurídico central:</b> a empresa pode ser responsabilizada por PAIR mesmo tendo fornecido EPI certificado, se não comprovar que ele funcionou individualmente para cada trabalhador. Sem o laudo do fit test, não há evidência técnica de proteção efetiva.</p>
+</div>
+
+<div class="sl">Classificação jurídica de risco — por faixa de NEP médio do colaborador</div>
+<div class="krow">
+  <div class="kpi"><div class="kl">Risco baixo (NEP &lt;75 dB)</div><div class="kv g">1.754</div><div class="ks">colaboradores — risco residual baixo</div></div>
+  <div class="kpi"><div class="kl">Risco moderado (75–80 dB)</div><div class="kv a">594</div><div class="ks">zona limítrofe — monitorar</div></div>
+  <div class="kpi"><div class="kl">Risco alto (80–85 dB)</div><div class="kv r">447</div><div class="ks">acima do limite — passivo potencial</div></div>
+  <div class="kpi"><div class="kl">Risco crítico (85–90 dB)</div><div class="kv r">226</div><div class="ks">exposição grave — ação imediata</div></div>
+  <div class="kpi"><div class="kl">Risco grave (&gt;90 dB)</div><div class="kv r" style="font-size:22px">61</div><div class="ks">61 colaboradores — passivo certo</div></div>
+</div>
+
+<div class="card">
+  <div class="leg">
+    <span><span class="ld" style="background:#1D9E75"></span>Baixo (&lt;75 dB)</span>
+    <span><span class="ld" style="background:#EF9F27"></span>Moderado (75–80)</span>
+    <span><span class="ld" style="background:#E24B4A"></span>Alto (80–85)</span>
+    <span><span class="ld" style="background:#A32D2D"></span>Crítico/Grave (&gt;85)</span>
+  </div>
+  <div class="cw" style="height:200px">
+    <canvas id="cRL" role="img" aria-label="Distribuição dos 3077 colaboradores por faixa de risco jurídico em cada empresa. Empresa B tem maior proporção de risco crítico e grave.">Empresa B tem maior proporção relativa de colaboradores em risco crítico e grave, reflexo dos GHEs com NEN acima de 100 dB.</canvas>
+  </div>
+  <div class="ins"><b>Empresa B</b> tem a maior proporção relativa de colaboradores em risco crítico/grave (11,4% vs 5,5% na A e 11,4% na C), apesar de ter menos colaboradores totais — reflexo do GHE-B04 com 102,5 dB(A).</div>
+</div>
+
+<div class="sl">Colaboradores sem nenhum teste adequado — máximo risco jurídico</div>
+<div class="r2">
+  <div class="card">
+    <div style="text-align:center;padding:8px 0">
+      <div class="big-num">472</div>
+      <div class="big-lbl">colaboradores com 0% de testes dentro do limite (NEP ≤ 80 dB)</div>
+      <div style="margin-top:12px;font-size:17px;color:#e0e0e0">Empresa A: <b style="color:#f87171">138</b> &nbsp;|&nbsp; Empresa B: <b style="color:#f87171">153</b> &nbsp;|&nbsp; Empresa C: <b style="color:#f87171">181</b></div>
+    </div>
+    <div class="ins">Esses 472 colaboradores nunca apresentaram NEP adequado em nenhum dos seus testes — para eles, <b>não existe evidência de proteção efetiva em nenhum momento</b> do período analisado.</div>
+  </div>
+  <div class="card">
+    <div class="cw" style="height:170px">
+      <canvas id="cSempre" role="img" aria-label="NEP médio dos colaboradores sempre expostos por GHE, variando de 80.9 a 88.3 dB. GHE-B04 tem o pior resultado com 88.3 dB.">GHE-B04 tem o pior NEP médio entre colaboradores sempre expostos, com 88.3 dB de média.</canvas>
+    </div>
+    <div class="ins">NEP médio desse grupo: <b>83,6 dB(A)</b>. GHE-B04 chega a <b>88,3 dB(A)</b> de média — 8,3 dB acima do limite legal.</div>
+  </div>
+</div>
+
+<div class="sl">Meses estimados de exposição sem proteção comprovada por trabalhador</div>
+<div class="card">
+  <div class="risk-grid">
+    <div class="risk-box">
+      <div class="big-lbl">Empresa A</div>
+      <div class="big-num" style="font-size:28px">2,8 meses</div>
+      <div class="big-lbl" style="margin-top:3px">média por colaborador</div>
+    </div>
+    <div class="risk-box">
+      <div class="big-lbl">Empresa B</div>
+      <div class="big-num" style="font-size:28px">3,4 meses</div>
+      <div class="big-lbl" style="margin-top:3px">média por colaborador</div>
+    </div>
+    <div class="risk-box">
+      <div class="big-lbl">Empresa C</div>
+      <div class="big-num" style="font-size:28px">3,7 meses</div>
+      <div class="big-lbl" style="margin-top:3px">média por colaborador</div>
+    </div>
+  </div>
+  <div class="ins"><b>Cada mês sem proteção comprovada é potencial evidência de negligência.</b> Sem o laudo do fit test, o período inteiro entre testes fica descoberto juridicamente — mesmo que a empresa tenha fornecido o EPI e o trabalhador o utilize.</div>
+</div>
+
+<div class="sl">Simulador de passivo — calcule o risco financeiro da sua empresa</div>
+<div class="card">
+  <div class="slid-row">
+    <label>Colaboradores em risco alto/crítico/grave:</label>
+    <input type="range" min="10" max="745" value="287" step="5" id="sCol" oninput="calcP()">
+    <span id="oCol">287</span>
+  </div>
+  <div class="slid-row">
+    <label>Prob. de ação trabalhista por colaborador (%):</label>
+    <input type="range" min="1" max="25" value="12" step="1" id="sProb" oninput="calcP()">
+    <span id="oProb">12%</span>
+  </div>
+  <div class="slid-row">
+    <label>Custo médio estimado por ação (R$ mil):</label>
+    <input type="range" min="50" max="300" value="100" step="10" id="sCusto" oninput="calcP()">
+    <span id="oCusto">R$ 100k</span>
+  </div>
+  <div class="risk-grid" style="margin-top:10px">
+    <div class="risk-box"><div class="big-lbl">Ações esperadas</div><div class="big-num" id="pAcoes">34</div></div>
+    <div class="risk-box"><div class="big-lbl">Passivo estimado</div><div class="big-num" id="pTotal" style="font-size:28px">R$ 3,4M</div></div>
+    <div class="risk-box"><div class="big-lbl">Custo de fit test equivalente</div><div class="big-num" id="pFit" style="font-size:28px;color:#4ade80">R$ 29k</div><div class="big-lbl" style="margin-top:2px;font-size:16px">@ R$100/teste × 287 col.</div></div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+new Chart(document.getElementById('cRL'),{
+  type:'bar',
+  data:{
+    labels:['Empresa A','Empresa B','Empresa C'],
+    datasets:[
+      {label:'Baixo',data:[675,500,579],backgroundColor:'#1D9E75',borderRadius:2,stack:'s'},
+      {label:'Moderado',data:[194,186,214],backgroundColor:'#EF9F27',borderRadius:0,stack:'s'},
+      {label:'Alto',data:[161,119,167],backgroundColor:'#E24B4A',borderRadius:0,stack:'s'},
+      {label:'Crítico/Grave',data:[61+9,74+29,100+23],backgroundColor:'#A32D2D',borderRadius:2,stack:'s'}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw+' colaboradores'}}},
+    scales:{
+      y:{stacked:true,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v}},
+      x:{stacked:true,grid:{display:false}}
+    }
+  }
+});
+
+new Chart(document.getElementById('cSempre'),{
+  type:'bar',indexAxis:'y',
+  data:{
+    labels:['GHE-B04','GHE-C03','GHE-A05','GHE-B01','GHE-B06','GHE-C02','GHE-A03','GHE-A02','GHE-B02'],
+    datasets:[{
+      label:'NEP médio (sempre expostos)',
+      data:[88.3,86.9,85.7,83.5,82.1,82.6,82.8,81.6,80.9],
+      backgroundColor:['#A32D2D','#A32D2D','#E24B4A','#EF9F27','#EF9F27','#EF9F27','#EF9F27','#EF9F27','#EF9F27'],
+      borderRadius:3
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.raw.toFixed(1)+' dB(A) NEP médio'}}},
+    scales:{
+      x:{min:78,max:91,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},
+      y:{grid:{display:false},ticks:{font:{size:10}}}
+    }
+  }
+});
+
+function calcP(){
+  const col=parseInt(document.getElementById('sCol').value);
+  const prob=parseInt(document.getElementById('sProb').value)/100;
+  const custo=parseInt(document.getElementById('sCusto').value)*1000;
+  document.getElementById('oCol').textContent=col;
+  document.getElementById('oProb').textContent=(prob*100).toFixed(0)+'%';
+  document.getElementById('oCusto').textContent='R$ '+(custo/1000).toFixed(0)+'k';
+  const acoes=Math.round(col*prob);
+  const total=acoes*custo;
+  const fit=col*100;
+  document.getElementById('pAcoes').textContent=acoes;
+  document.getElementById('pTotal').textContent='R$ '+(total/1e6).toFixed(1)+'M';
+  document.getElementById('pFit').textContent='R$ '+(fit/1000).toFixed(0)+'k';
+}
+</script>
