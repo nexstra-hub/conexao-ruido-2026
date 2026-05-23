@@ -1,0 +1,392 @@
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body,
+.wrap{
+    background:transparent;
+    color:#e0e0e0;
+    font-family:system-ui,-apple-system,sans-serif;
+    font-size:21px;
+}
+
+.sr-only{
+    position:absolute;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+}
+
+.sec{
+    margin-bottom:2rem;
+}
+
+.sl{
+    font-size:16px;
+    font-weight:500;
+    color:#a0a0a0;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding-bottom:8px;
+    border-bottom:.5px solid #333;
+    margin-bottom:14px;
+    margin-top:1.5rem;
+}
+
+/* =========================
+   KPI
+========================= */
+
+.krow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+    gap:10px;
+    margin-bottom:1.5rem;
+}
+
+.kpi{
+    background:#252525;
+    border:.5px solid #333;
+    border-radius:8px;
+    padding:12px 14px;
+    text-align:center;
+}
+
+.kl{
+    font-size:16px;
+    color:#e0e0e0;
+    margin-bottom:5px;
+}
+
+.kv{
+    font-size:24px;
+    font-weight:500;
+    color:#ffffff;
+}
+
+.ks{
+    font-size:16px;
+    color:#e0e0e0;
+    margin-top:3px;
+}
+
+.r{color:#f87171}
+.a{color:#facc15}
+.g{color:#4ade80}
+.b{color:#60a5fa}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+    background:#1a1a1a;
+    border:.5px solid #333;
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:14px;
+}
+
+/* =========================
+   CONTAINERS
+========================= */
+
+.cw{
+    position:relative;
+    width:100%;
+}
+
+.r2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+/* =========================
+   LEGENDAS
+========================= */
+
+.leg{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:10px;
+    font-size:16px;
+    color:#a0a0a0;
+}
+
+.ld{
+    width:10px;
+    height:10px;
+    border-radius:2px;
+    display:inline-block;
+    margin-right:4px;
+    vertical-align:middle;
+}
+
+/* =========================
+   INSIGHTS
+========================= */
+
+.ins{
+    border-left:3px solid #3b82f6;
+    border-radius:0 8px 8px 0;
+    background:#1f2937;
+    padding:10px 14px;
+    font-size:17px;
+    color:#d0d0d0;
+    margin-top:12px;
+    line-height:1.45;
+}
+
+.ins b{
+    color:#ffffff;
+    font-weight:500;
+}
+
+/* =========================
+   PROGRESS BARS & SCORES
+========================= */
+
+.prog-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:12px;
+}
+
+.prog-lbl{
+    font-size:17px;
+    color:#b0b0b0;
+    width:190px;
+    flex-shrink:0;
+}
+
+.prog-bar-bg{
+    flex:1;
+    height:10px;
+    background:#333;
+    border-radius:6px;
+    overflow:hidden;
+}
+
+.prog-bar{
+    height:10px;
+    border-radius:6px;
+}
+
+.prog-val{
+    font-size:18px;
+    font-weight:500;
+    min-width:60px;
+    text-align:right;
+    flex-shrink:0;
+}
+
+.score-box{
+    background:#252525;
+    border:.5px solid #333;
+    border-radius:8px;
+    padding:14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.score-ghe{
+    font-size:17px;
+    font-weight:500;
+    color:#e0e0e0;
+}
+
+.score-detail{
+    font-size:16px;
+    color:#a0a0a0;
+    margin-top:4px;
+}
+
+.score-val{
+    font-size:22px;
+    font-weight:500;
+    text-align:right;
+    flex-shrink:0;
+    width:70px;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:900px){
+    .r2{
+        grid-template-columns:1fr;
+    }
+    .krow{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:640px){
+    .krow{
+        grid-template-columns:1fr;
+    }
+    .card{
+        padding:14px;
+    }
+    .kv{
+        font-size:22px;
+    }
+}
+</style>
+
+<h2 class="sr-only">Dashboard SST e NR-01: proficiência de colocação por GHE, recorrência de treinamentos, rastreabilidade documental e painel de conformidade com normas regulamentadoras.</h2>
+
+<div style="padding:1rem 10px">
+
+<div class="sl">Indicadores de conformidade SST — NR-01, NR-06 e Guia PCA</div>
+<div class="krow">
+  <div class="kpi"><div class="kl">Treinamentos documentados (NR-01)</div><div class="kv b">5.056</div><div class="ks">sessões com laudo rastreável</div></div>
+  <div class="kpi"><div class="kl">Colaboradores com ≥2 treinamentos</div><div class="kv a">1.534</div><div class="ks">necessidade de reforço identificada</div></div>
+  <div class="kpi"><div class="kl">Colaboradores com ≥3 treinamentos</div><div class="kv r">742</div><div class="ks">colocação cronicamente inadequada</div></div>
+  <div class="kpi"><div class="kl">Taxa geral de colocação inadequada</div><div class="kv r">19,4%</div><div class="ks">alvo: &lt; 5% após treinamento</div></div>
+  <div class="kpi"><div class="kl">Ganho médio pós-treinamento</div><div class="kv g">+10,9 dB</div><div class="ks">evidência de eficácia NR-01</div></div>
+</div>
+
+<div class="sl">Proficiência de colocação por GHE — score e taxa de inadequação</div>
+<div class="card">
+  <div class="leg">
+    <span><span class="ld" style="background:#1D9E75"></span>Score alto (≥82%)</span>
+    <span><span class="ld" style="background:#EF9F27"></span>Score médio (79–82%)</span>
+    <span><span class="ld" style="background:#E24B4A"></span>Score baixo (&lt;79%)</span>
+    <span style="color:#a0a0a0;font-size:15px">NEN &lt;80 dB: treinamento não obrigatório</span>
+  </div>
+  <div class="cw" style="height:360px">
+    <canvas id="cProf" role="img" aria-label="Score de proficiência de colocação de protetor auditivo por GHE, variando de 78% a 85%. GHEs críticos como A05 e C03 têm os maiores scores por usarem protetores de maior NRRsf.">GHEs com NEN acima de 100 dB têm scores de proficiência mais altos porque usam protetores de maior NRRsf, que facilitam atingir bons resultados mesmo com colocação imperfeita.</canvas>
+  </div>
+  <div class="ins"><b>Paradoxo da proficiência:</b> GHE-A05 e GHE-C03 (os mais críticos) têm os maiores scores — pois usam dupla proteção e modelos de maior NRRsf, que são mais tolerantes a imperfeições de colocação. Os GHEs moderados (82–91 dB) exibem os piores scores relativos.</div>
+</div>
+
+<div class="sl">Recorrência de treinamentos — evidência de NR-01 e rastreabilidade</div>
+<div class="r2">
+  <div class="card">
+    <div style="margin-bottom:12px">
+      <div class="prog-row">
+        <div class="prog-lbl">1 sessão de treinamento</div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:32%;background:#4ade80"></div></div>
+        <div class="prog-val" style="color:#4ade80">815</div>
+      </div>
+      <div class="prog-row">
+        <div class="prog-lbl">2 ou mais sessões</div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:60%;background:#facc15"></div></div>
+        <div class="prog-val" style="color:#facc15">1.534</div>
+      </div>
+      <div class="prog-row">
+        <div class="prog-lbl">3 ou mais sessões</div>
+        <div class="prog-bar-bg"><div class="prog-bar" style="width:29%;background:#f87171"></div></div>
+        <div class="prog-val" style="color:#f87171">742</div>
+      </div>
+    </div>
+    <div class="ins">Colaboradores com 3+ treinamentos precisam de avaliação individual — pode indicar incompatibilidade de protetor ou limitação anatômica, não falta de esforço.</div>
+  </div>
+  <div class="card">
+    <div class="cw" style="height:190px">
+      <canvas id="cGanhoSessao" role="img" aria-label="Ganho médio em dB da recolocação pelo usuário por número de sessão de treinamento, do primeiro ao oitavo teste. O ganho se mantém estável em torno de 10.8 dB independente do número de sessões.">O ganho médio por sessão permanece estável em torno de 10.8 dB independentemente do número de treinamentos anteriores.</canvas>
+    </div>
+    <div class="ins">O ganho do treinamento se mantém <b>estável (~10,8 dB)</b> ao longo das sessões o colaborador — o treinamento tem eficácia consistente, mas a colocação inadequada persiste para alguns perfis.</div>
+  </div>
+</div>
+
+<div class="sl">Conformidade normativa — checklist por empresa</div>
+<div class="card">
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+    <div>
+      <div style="font-size:17px;font-weight:500;margin-bottom:12px;color:#e0e0e0">Empresa A</div>
+      <div class="score-box"><div><div class="score-ghe">NR-01 — Treinamento</div><div class="score-detail">1.812 sessões documentadas</div></div><div class="score-val g">OK</div></div>
+      <div class="score-box"><div><div class="score-ghe">NR-06 — Seleção EPI</div><div class="score-detail">GHE-A05 com modelo subdimensionado</div></div><div class="score-val r">Alerta</div></div>
+      <div class="score-box"><div><div class="score-ghe">Guia PCA — Eficácia</div><div class="score-detail">82,9% protegidos (meta ≥90%)</div></div><div class="score-val a">Parcial</div></div>
+      <div class="score-box"><div><div class="score-ghe">NR-01 — Periodicidade</div><div class="score-detail">Periódico 4/4 meses</div></div><div class="score-val g">OK</div></div>
+    </div>
+    <div>
+      <div style="font-size:17px;font-weight:500;margin-bottom:12px;color:#e0e0e0">Empresa B</div>
+      <div class="score-box"><div><div class="score-ghe">NR-01 — Treinamento</div><div class="score-detail">1.120 sessões documentadas</div></div><div class="score-val g">OK</div></div>
+      <div class="score-box"><div><div class="score-ghe">NR-06 — Seleção EPI</div><div class="score-detail">GHE-B04 e B01 subdimensionados</div></div><div class="score-val r">Crítico</div></div>
+      <div class="score-box"><div><div class="score-ghe">Guia PCA — Eficácia</div><div class="score-detail">80,6% protegidos (meta ≥90%)</div></div><div class="score-val r">Alerta</div></div>
+      <div class="score-box"><div><div class="score-ghe">NR-01 — Periodicidade</div><div class="score-detail">Periódico 6/6 meses</div></div><div class="score-val g">OK</div></div>
+    </div>
+    <div>
+      <div style="font-size:17px;font-weight:500;margin-bottom:12px;color:#e0e0e0">Empresa C</div>
+      <div class="score-box"><div><div class="score-ghe">NR-01 — Treinamento</div><div class="score-detail">2.124 sessões documentadas</div></div><div class="score-val g">OK</div></div>
+      <div class="score-box"><div><div class="score-ghe">NR-06 — Seleção EPI</div><div class="score-detail">GHE-C03 com modelos insuficientes</div></div><div class="score-val r">Alerta</div></div>
+      <div class="score-box"><div><div class="score-ghe">Guia PCA — Eficácia</div><div class="score-detail">75,5% protegidos (meta ≥90%)</div></div><div class="score-val r">Alerta</div></div>
+      <div class="score-box"><div><div class="score-ghe">NR-01 — Periodicidade</div><div class="score-detail">Periódico 4/4 meses</div></div><div class="score-val g">OK</div></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const profData=[
+  {g:"GHE-C04",nen:83.0,prof:78.1,tx:20.5},
+  {g:"GHE-A01",nen:82.5,prof:78.5,tx:20.6},
+  {g:"GHE-A03",nen:91.0,prof:79.0,tx:20.9},
+  {g:"GHE-C01",nen:86.0,prof:79.4,tx:20.9},
+  {g:"GHE-A02",nen:88.0,prof:79.5,tx:21.2},
+  {g:"GHE-B02",nen:87.5,prof:79.9,tx:21.1},
+  {g:"GHE-B01",nen:93.0,prof:80.2,tx:20.4},
+  {g:"GHE-C02",nen:90.5,prof:80.5,tx:20.6},
+  {g:"GHE-B06",nen:89.0,prof:80.5,tx:21.9},
+  {g:"GHE-B04",nen:102.5,prof:80.7,tx:21.4},
+  {g:"GHE-A04",nen:79.0,prof:80.8,tx:20.0},
+  {g:"GHE-B05",nen:78.5,prof:81.1,tx:20.0},
+  {g:"GHE-B03",nen:84.0,prof:82.7,tx:22.0},
+  {g:"GHE-A05",nen:101.5,prof:84.0,tx:21.3},
+  {g:"GHE-C03",nen:103.0,prof:84.8,tx:20.2},
+];
+const profColor=d=>d.prof>=82?'#1D9E75':d.prof>=79?'#EF9F27':'#E24B4A';
+new Chart(document.getElementById('cProf'),{
+  type:'bar',indexAxis:'y',
+  data:{
+    labels:profData.map(d=>d.g+' ('+d.nen+' dB)'),
+    datasets:[
+      {label:'Score de proficiência',data:profData.map(d=>d.prof),backgroundColor:profData.map(profColor),borderRadius:3},
+      {label:'% colocação inadequada',data:profData.map(d=>d.tx),backgroundColor:'rgba(136,135,128,.2)',borderRadius:3,borderDash:[3,2]}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.datasetIndex===0?'Score: '+v.raw.toFixed(1)+'%':'Taxa inadequada: '+v.raw.toFixed(1)+'%'}}},
+    scales:{
+      x:{min:0,max:105,grid:{color:'rgba(128,128,128,.07)'}},
+      y:{grid:{display:false},ticks:{font:{size:10}}}
+    }
+  }
+});
+
+new Chart(document.getElementById('cGanhoSessao'),{
+  type:'line',
+  data:{
+    labels:['1ª','2ª','3ª','4ª','5ª','6ª','7ª','8ª'],
+    datasets:[{
+      label:'Ganho médio (dB)',
+      data:[10.97,10.68,10.65,10.93,10.78,10.47,11.16,10.80],
+      borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.08)',fill:true,
+      tension:.4,pointRadius:5,borderDash:[]
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>'+'+v.raw.toFixed(2)+' dB ganho médio'}}},
+    scales:{
+      y:{min:9.5,max:12,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>'+'+v.toFixed(1)+' dB'}},
+      x:{grid:{display:false},title:{display:true,text:'número da sessão de treinamento',font:{size:10}}}
+    }
+  }
+});
+</script>
