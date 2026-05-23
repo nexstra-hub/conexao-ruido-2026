@@ -72,8 +72,9 @@
     }
 
     .slid-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-    .slid-row label{font-size:17px;color:#b0b0b0;min-width:190px}  /* 12 + 5 */
-    .slid-row span{font-size:18px;font-weight:500;min-width:90px;color:#e0e0e0} /* 13 + 5 */
+    .slid-row label{font-size:17px;color:#b0b0b0;min-width:175px;flex-shrink: 0;}  /* 12 + 5 */
+    .slid-row input[type="range"] {flex: 1;min-width: 0;cursor: pointer;}
+    .slid-row span{font-size:18px;font-weight:500;min-width:80px;color:#e0e0e0;text-align: right;flex-shrink: 0} /* 13 + 5 */
 
     .roi-box{
         background:#252525;
@@ -117,18 +118,18 @@
 <div style="padding:1rem 10px" class="wrap">
 
 <div class="sec">
-  <div class="sl">Indicadores objetivos do PCA — o que o fit test entrega para o gestor</div>
+  <div class="sl">O que o fit test entrega para o gestor — Indicadores objetivos</div>
   <div class="krow">
     <div class="kpi"><div class="kl">% colaboradores protegidos (geral)</div><div class="kv amb">68,4%</div><div class="ks">sem fit test, esse dado não existe</div></div>
-    <div class="kpi"><div class="kl">NAP médio real (colocação correta)</div><div class="kv">16,64 dB</div><div class="ks">vs NRRsf médio de 20,1 dB</div></div>
-    <div class="kpi"><div class="kl">Melhora de 2024 → 2025</div><div class="kv grn">+0,7 dB NAP</div><div class="ks">evidência de eficácia do PCA</div></div>
+    <div class="kpi"><div class="kl">NAP médio real (colocação correta)</div><div class="kv grn">16,64 dB</div><div class="ks">vs NRRsf médio de 20,1 dB</div></div>
+    <div class="kpi"><div class="kl">Evolução 24 meses</div><div class="kv grn">+0,7 dB NAP</div><div class="ks">evidência de eficácia do PCA com Fit test</div></div>
     <div class="kpi"><div class="kl">Taxa de colocação inadequada</div><div class="kv red">19,4%</div><div class="ks">só identificável pelo fit test</div></div>
     <div class="kpi"><div class="kl">Sessões de treinamento documentadas</div><div class="kv bl">5.056</div><div class="ks">rastreabilidade NR-01</div></div>
   </div>
 </div>
 
 <div class="sec">
-  <div class="sl">Evolução trimestral da proteção — indicador central do PCA</div>
+  <div class="sl">Evolução trimestral da proteção — indicador central</div>
   <div class="card">
     <div class="frow">
       <label>Empresa:</label>
@@ -215,7 +216,7 @@
 </div>
 
 <div class="sec">
-  <div class="sl">ROI para o prestador de serviço — calculadora de receita</div>
+  <div class="sl">ROI para a prestação de serviço — calculadora de receita</div>
   <div class="card">
     <div class="slid-row">
       <label>Colaboradores/mês:</label>
