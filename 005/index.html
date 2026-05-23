@@ -197,6 +197,13 @@ input[type=range]:focus{
     font-size:17px;
     color:#b0b0b0;
     min-width:180px;
+    flex-shrink: 0;
+}
+
+.slid-row input[type="range"] {
+    flex: 1;
+    min-width: 0;
+    cursor: pointer;
 }
 
 .slid-row span{
@@ -204,6 +211,8 @@ input[type=range]:focus{
     font-weight:500;
     min-width:80px;
     color:#ffffff;
+    text-align: right;
+    flex-shrink: 0;
 }
 
 /* =========================
@@ -262,6 +271,7 @@ input[type=range]:focus{
 
     .slid-row{
         flex-direction:row;
+        width: 900px;
         align-items:flex-start;
     }
 
