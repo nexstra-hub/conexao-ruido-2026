@@ -1,377 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2. O Verdadeiro Custo do Risco</title>
+</head>
+<body>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-body{
-  font-family:system-ui, -apple-system, sans-serif;
-  font-size:19px;
-  color:#F5F7FA;
-  background:transparent;
-  padding:0 10px;
+body,
+.wrap{
+    background:transparent;
+    color:#e0e0e0;
+    font-family:system-ui,-apple-system,sans-serif;
+    font-size:21px;
 }
 
 .sr-only{
-  position:absolute;
-  width:1px;
-  height:1px;
-  overflow:hidden;
-  clip:rect(0,0,0,0)
+    position:absolute;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
 }
 
-.sec{margin-bottom:2rem}
+.sec{
+    margin-bottom:2rem;
+}
 
 .sl{
-  font-size:16px;
-  font-weight:600;
-  color:#B8C2CC;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  padding-bottom:8px;
-  border-bottom:.5px solid rgba(255,255,255,.12);
-  margin-bottom:14px
+    font-size:16px;
+    font-weight:500;
+    color:#a0a0a0;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding-bottom:8px;
+    border-bottom:.5px solid #333;
+    margin-bottom:14px;
+    margin-top:1.5rem;
 }
 
-.card{
-  background:#11161D;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:18px;
-  padding:16px;
-  margin-bottom:16px;
-  box-shadow:0 2px 12px rgba(0,0,0,.28)
-}
+/* =========================
+   KPI
+========================= */
 
-.cw{
-  position:relative;
-  width:100%
-}
-
-.leg{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-bottom:10px;
-  font-size:16px;
-  color:#B8C2CC
-}
-
-.ld{
-  width:10px;
-  height:10px;
-  border-radius:2px;
-  display:inline-block;
-  margin-right:4px;
-  vertical-align:middle
-}
-
-.ins{
-  border-left:3px solid #3B82F6;
-  border-radius:0 12px 12px 0;
-  background:#18202A;
-  padding:12px 15px;
-  font-size:17px;
-  color:#C7D0DA;
-  margin-top:10px
-}
-
-.ins b{
-  color:#FFFFFF;
-  font-weight:600
-}
-
-.frow{
-  display:flex;
-  gap:8px;
-  margin-bottom:12px;
-  align-items:center;
-  flex-wrap:wrap
-}
-
-.frow label{
-  font-size:17px;
-  color:#C7D0DA
-}
-
-.frow select{
-  font-size:17px;
-  padding:6px 10px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:10px;
-  background:#161B22;
-  color:#FFFFFF
-}
-
-.r2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px
-}
-
-.kpi-row{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-  gap:10px;
-  margin-bottom:1.5rem
+.krow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+    gap:10px;
+    margin-bottom:1.5rem;
 }
 
 .kpi{
-  background:#161B22;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:14px;
-  padding:16px;
-  box-shadow:0 2px 10px rgba(0,0,0,.25)
+    background:#252525;
+    border:.5px solid #333;
+    border-radius:8px;
+    padding:12px 14px;
+    text-align:center;
 }
 
-.kpi-l{
-  font-size:16px;
-  color:#9DA7B3;
-  margin-bottom:5px
+.kl{
+    font-size:16px;
+    color:#e0e0e0;
+    margin-bottom:5px;
 }
 
-.kpi-v{
-  font-size:24px;
-  font-weight:600;
-  color:#FFFFFF
+.kv{
+    font-size:26px;
+    font-weight:500;
+    color:#ffffff;
 }
 
-.kpi-s{
-  font-size:16px;
-  color:#7E8A97;
-  margin-top:3px
+.ks{
+    font-size:16px;
+    color:#e0e0e0;
+    margin-top:3px;
 }
 
-.red{color:#FF6B6B}
-.amber{color:#FFBE55}
-.green{color:#39D98A}
+.r{color:#f87171}
+.a{color:#facc15}
+.g{color:#4ade80}
+.b{color:#60a5fa}
 
-.badge{
-  display:inline-block;
-  font-size:15px;
-  padding:4px 10px;
-  border-radius:999px;
-  font-weight:600
+/* =========================
+   CARDS
+========================= */
+
+.card{
+    background:#1a1a1a;
+    border:.5px solid #333;
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:14px;
 }
 
-.b-deg{
-  background:rgba(255,107,107,.15);
-  color:#FF8E8E
+/* =========================
+   CONTAINERS
+========================= */
+
+.cw{
+    position:relative;
+    width:100%;
 }
 
-.b-ok{
-  background:rgba(57,217,138,.12);
-  color:#67F0A8
+.r2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
 }
 
-.b-n{
-  background:rgba(255,255,255,.08);
-  color:#D0D7DE
+/* =========================
+   LEGENDAS
+========================= */
+
+.leg{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:10px;
+    font-size:16px;
+    color:#a0a0a0;
 }
 
-table{
-  color:#F5F7FA
+.ld{
+    width:10px;
+    height:10px;
+    border-radius:2px;
+    display:inline-block;
+    margin-right:4px;
+    vertical-align:middle;
 }
 
-th{
-  color:#AEB8C2 !important
+/* =========================
+   INSIGHTS
+========================= */
+
+.ins{
+    border-left:3px solid #3b82f6;
+    border-radius:0 8px 8px 0;
+    background:#1f2937;
+    padding:10px 14px;
+    font-size:17px;
+    color:#d0d0d0;
+    margin-top:12px;
+    line-height:1.45;
 }
 
-td{
-  color:#E6EDF3
+.ins b{
+    color:#ffffff;
+    font-weight:500;
 }
 
-canvas{
-  background:transparent
+/* =========================
+   ALERTAS
+========================= */
+
+.alert{
+    background:#3a1f1f;
+    border:.5px solid #f87171;
+    border-radius:8px;
+    padding:12px 14px;
+    margin-bottom:14px;
+}
+
+.alert p{
+    font-size:17px;
+    color:#fda4a4;
+    margin:0;
+    line-height:1.45;
+}
+
+.alert b{
+    font-weight:500;
+    color:#ffffff;
+}
+
+/* =========================
+   SLIDERS
+========================= */
+
+.slid-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.slid-row label{
+    font-size:17px;
+    color:#b0b0b0;
+    min-width:180px;
+    flex-shrink: 0;
+}
+
+.slid-row input[type="range"] {
+    flex: 1;
+    min-width: 0;
+    cursor: pointer;
+}
+
+.slid-row span{
+    font-size:18px;
+    font-weight:500;
+    min-width:80px;
+    color:#ffffff;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+/* =========================
+   RISK / BIG NUMBERS
+========================= */
+
+.big-num{
+    font-size:33px;
+    font-weight:500;
+    color:#f87171;
+}
+
+.big-lbl{
+    font-size:17px;
+    color:#e0e0e0;
+    margin-top:4px;
+}
+
+.risk-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:10px;
+    margin-top:10px;
+}
+
+.risk-box{
+    background:#252525;
+    border:.5px solid #333;
+    border-radius:8px;
+    padding:16px;
+    text-align:center;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:900px){
+    .r2{
+        grid-template-columns:1fr;
+    }
+    .krow{
+        grid-template-columns:1fr 1fr;
+    }
+    .slid-row{
+        flex-direction:row;
+        width: 900px;
+        align-items:flex-start;
+    }
+    .slid-row label{
+        min-width:auto;
+    }
+}
+
+@media(max-width:640px){
+    .krow{
+        grid-template-columns:1fr;
+    }
+    .card{
+        padding:14px;
+    }
+    .kv{
+        font-size:22px;
+    }
+    .big-num{
+        font-size:28px;
+    }
 }
 </style>
 
-<h2 class="sr-only">Dashboard — Tema 2: Seleção e adequação de protetores auditivos. Análise de degradação, eficiência real, matching com GHE e impacto de EPIs conjugados.</h2>
+<h2 class="sr-only">Dashboard jurídico para indústrias: classificação de risco legal por nível de exposição protegida, colaboradores sem nenhum teste adequado, meses de exposição não comprovada e simulador de passivo por PAIR.</h2>
 
 <div style="padding:1rem 10px">
 
-<div class="sec">
-  <div class="sl">Ranking de eficiência real — NAP médio vs NRRsf por modelo</div>
-  <div class="frow">
-    <label>Tipo:</label>
-    <select id="selTipo" onchange="updateRanking()">
-      <option value="all">Todos</option>
-      <option value="Plugue">Plugues</option>
-      <option value="Concha">Conchas</option>
-      <option value="Cap">Cap + Concha</option>
-      <option value="Dupla">Dupla proteção</option>
-    </select>
+<div class="alert">
+    <p><b>Argumento jurídico:</b> Uma única ação trabalhista por PAIR pode custar entre R$ 50.000 e R$ 150.000. A empresa pode ser responsabilizada, mesmo tendo fornecido EPI certificado, se não comprovar que ele funcionou individualmente para cada trabalhador. <b>Sem o laudo do fit test, não há evidência técnica de proteção efetiva.</b></p>
+</div>
+
+<div class="sl">Classificação de risco jurídico — por faixa de NEP médio do colaborador</div>
+<div class="krow">
+  <div class="kpi"><div class="kl">Risco baixo (NEP &lt;75 dB)</div><div class="kv g">1.754</div><div class="ks">colaboradores</div></div>
+  <div class="kpi"><div class="kl">Risco baixo (75–80 dB)</div><div class="kv a">594</div><div class="ks">monitorar</div></div>
+  <div class="kpi"><div class="kl">Risco alto (80–85 dB)</div><div class="kv r">447</div><div class="ks">acima do nível de ação</div></div>
+  <div class="kpi"><div class="kl">Risco crítico (85–90 dB)</div><div class="kv r">226</div><div class="ks">acima do limite</div></div>
+  <div class="kpi"><div class="kl">Risco grave (&gt;90 dB)</div><div class="kv r" style="font-size:22px">61</div><div class="ks">exposição grave</div></div>
+</div>
+
+<div class="card">
+  <div class="leg">
+    <span><span class="ld" style="background:#1D9E75"></span>Baixo (&lt;75 dB)</span>
+    <span><span class="ld" style="background:#EF9F27"></span>Monitorar (75–80)</span>
+    <span><span class="ld" style="background:#E24B4A"></span>Alto (80–85)</span>
+    <span><span class="ld" style="background:#A32D2D"></span>Crítico/Grave (&gt;85)</span>
   </div>
+  <div class="cw" style="height:200px">
+    <canvas id="cRL" role="img" aria-label="Distribuição dos 3077 colaboradores por faixa de risco jurídico em cada empresa. Empresa B tem maior proporção de risco crítico e grave.">Empresa B tem maior proporção relativa de colaboradores em risco crítico e grave, reflexo dos GHEs com NEN acima de 100 dB.</canvas>
+  </div>
+  <div class="ins"><b>Empresa B</b> tem a maior proporção relativa de colaboradores em risco crítico/grave (15,1% vs 12,3% na A e 11,14% na C) — reflexo dos GHEs com NEN acima de 100 dB(A).</div>
+</div>
+
+<div class="sl">Colaboradores sem testes periódicos adequados — risco jurídico</div>
+<div class="r2">
+  <div class="card">
+    <div style="text-align:center;padding:8px 0">
+      <div class="big-num">472</div>
+      <div class="big-lbl">colaboradores sem testes dentro do limite (NEP ≤ 80 dB)</div>
+      <div style="margin-top:16px;font-size:17px;color:#e0e0e0">Empresa A: <b style="color:#f87171">138</b> &nbsp;|&nbsp; Empresa B: <b style="color:#f87171">153</b> &nbsp;|&nbsp; Empresa C: <b style="color:#f87171">181</b></div>
+    </div>
+    <div class="ins">Esses 472 colaboradores não apresentaram registros de NEP adequado em seus testes — nestes casos, <b>não existe evidência de comprovação de proteção efetiva</b> no período analisado.</div>
+  </div>
+  
+  <!-- Card substituído -->
   <div class="card">
     <div class="leg">
-      <span><span class="ld" style="background:#1D9E75"></span>NAP obtido</span>
-      <span><span class="ld" style="background:#B4B2A9"></span>NRRsf (referência)</span>
-      <span><span class="ld" style="background:#E24B4A"></span>Gap negativo (NAP &lt; NRRsf−4)</span>
+      <span><span class="ld" style="background:#E24B4A"></span>Empresa A (138)</span>
+      <span><span class="ld" style="background:#EF9F27"></span>Empresa B (153)</span>
+      <span><span class="ld" style="background:#7F77DD"></span>Empresa C (181)</span>
     </div>
-    <div class="cw" id="rankWrap" style="height:300px">
-      <canvas id="cRank" role="img" aria-label="Gráfico de barras comparando NAP obtido e NRRsf para cada modelo de protetor">Plugue B1 tem maior gap negativo; dupla proteção supera NRRsf</canvas>
+    <div class="cw" style="height:220px">
+      <canvas id="cEmpRisco" role="img" aria-label="Comparação entre colaboradores em risco alto por empresa versus total de colaboradores testados">Empresa C tem proporcionalmente mais colaboradores em risco em relação ao total</canvas>
     </div>
-    <div class="ins"><b>Insight chave:</b> nenhum modelo entrega o NRRsf declarado em uso real — Tipo concha apresenta gap médio de <b>−5,1 dB</b>. Plugues têm gap menor (−3,5 dB).</div>
+    <div class="ins" style="font-size:15px">Empresa C concentra <b>38,3%</b> dos casos de riscos jurídicos por falta de comprovação periódica.</div>
   </div>
 </div>
 
-<div class="sec">
-  <div class="sl">Degradação do NAP ao longo do tempo de uso — modelos com anomalia</div>
-  <div class="frow">
-    <label>Modelo:</label>
-    <select id="selMod" onchange="updateDeg()">
-      <option value="Plugue B1">Plugue B1 — degrada rápido</option>
-      <option value="Concha C2">Concha C2 — degrada rápido</option>
-      <option value="CapConcha E1">CapConcha E1 — degrada rápido</option>
-      <option value="Plugue A2">Plugue A2 — dura bem</option>
-      <option value="Concha D1">Concha D1 — dura bem</option>
-      <option value="CapConcha E2">CapConcha E2 — dura bem</option>
-    </select>
+<div class="sl">Tempo estimado de exposição sem proteção comprovada por trabalhador</div>
+<div class="card">
+  <div class="risk-grid">
+    <div class="risk-box">
+      <div class="big-lbl">Empresa A</div>
+      <div class="big-num" style="font-size:28px">2,8 meses</div>
+      <div class="big-lbl" style="margin-top:3px">média por colaborador</div>
+    </div>
+    <div class="risk-box">
+      <div class="big-lbl">Empresa B</div>
+      <div class="big-num" style="font-size:28px">3,4 meses</div>
+      <div class="big-lbl" style="margin-top:3px">média por colaborador</div>
+    </div>
+    <div class="risk-box">
+      <div class="big-lbl">Empresa C</div>
+      <div class="big-num" style="font-size:28px">3,7 meses</div>
+      <div class="big-lbl" style="margin-top:3px">média por colaborador</div>
+    </div>
   </div>
-  <div class="card">
-    <div class="cw" style="height:210px"><canvas id="cDeg" role="img" aria-label="Evolução do offset NAP menos NRRsf ao longo de faixas de tempo de uso em dias">Modelos com degradação rápida perdem mais de 2dB adicionais após 90 dias</canvas></div>
-    <div class="ins" id="degIns">Selecione o modelo para ver a curva de degradação e diagnóstico de prazo de troca.</div>
+  <div class="ins"><b>Cada ciclo sem proteção comprovada é potencial evidência de negligência.</b> Sem o laudo periódico do fit test, pode-se ficar descoberto juridicamente — mesmo que a empresa tenha fornecido o EPI e o trabalhador o utilize.</div>
+</div>
+
+<!-- Novo Gráfico: GHEs geradores de passivo -->
+<div class="sl">GHEs geradores de risco de passivo — % exposição por ambiente de trabalho</div>
+<div class="card">
+  <div class="cw" style="height:240px">
+    <canvas id="cGheRisco" role="img" aria-label="Percentual de colaboradores expostos (NEP acima de 80dB) por GHE, mostrando os três GHEs críticos acima de 100dB com taxas entre 72% e 86%">GHE-B04, GHE-C03 e GHE-A05 são os ambientes geradores de maior risco de passivo</canvas>
+  </div>
+  <div class="ins"><b>GHE-B04 (102,5 dB) e GHE-C03 (103,0 dB)</b> têm respectivamente 85,9% e 84,4% dos colaboradores expostos acima do limite. Sem o fit test, a empresa não tem como provar individualmente que cada trabalhador estava protegido — <b>todos se tornam passivo potencial</b>.</div>
+</div>
+
+<div class="sl">Simulador de risco financeiro por passivo na empresa</div>
+<div class="card">
+  <div class="slid-row">
+    <label>Colaboradores em risco alto/crítico/grave:</label>
+    <input type="range" min="10" max="1000" value="160" step="5" id="sCol" oninput="calcP()">
+    <span id="oCol">160</span>
+  </div>
+  <div class="slid-row">
+    <label>Prob. de ação trabalhista por colaborador (%):</label>
+    <input type="range" min="5" max="25" value="15" step="1" id="sProb" oninput="calcP()">
+    <span id="oProb">15%</span>
+  </div>
+  <div class="slid-row">
+    <label>Custo médio estimado por ação (R$ mil):</label>
+    <input type="range" min="50" max="300" value="120" step="10" id="sCusto" oninput="calcP()">
+    <span id="oCusto">R$ 120k</span>
+  </div>
+  <div class="risk-grid" style="margin-top:10px">
+    <div class="risk-box"><div class="big-lbl">Ações esperadas</div><div class="big-num" id="pAcoes">16</div></div>
+    <div class="risk-box"><div class="big-lbl">Passivo estimado</div><div class="big-num" id="pTotal" style="font-size:28px">R$ 1,9M</div></div>
+    <div class="risk-box"><div class="big-lbl">Custo de fit test R$150/col.</div><div class="big-num" id="pFit" style="font-size:28px;color:#4ade80">R$ 24k</div></div>
   </div>
 </div>
 
-<div class="sec">
-  <div class="sl">Impacto dos EPIs conjugados no NAP das conchas</div>
-  <div>
-    <div class="card">
-      <div class="leg"><span><span class="ld" style="background:#1D9E75"></span>Concha</span><span><span class="ld" style="background:#85B7EB"></span>Concha Acoplado ao Capacete</span></div>
-      <div class="cw" style="height:220px"><canvas id="cEpi" role="img" aria-label="NAP médio com cada tipo de EPI conjugado comparado com sem EPI em conchas e cap+concha">Todos os EPIs reduzem o NAP em cerca de 6 dB nas conchas</canvas></div>
-      <div class="ins" style="font-size:14px"><b>−6 dB</b> de perda média com qualquer EPI conjugado. Balaclava e óculos são os mais impactantes em cap+concha.</div>
-    </div>
-  </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-const modelos=[
-  {m:"Plugue B1",      t:"Plugue",nrrsf:14,nap:11.56,off:-2.44,tipo:"degrada_rapido"},
-  {m:"Plugue A1",      t:"Plugue",nrrsf:15,nap:13.35,off:-1.65,tipo:"normal"},
-  {m:"Concha D2",      t:"Concha",nrrsf:16,nap:11.38,off:-4.62,tipo:"degrada_rapido"},
-  {m:"Concha C2",      t:"Concha",nrrsf:17,nap:12.19,off:-4.81,tipo:"degrada_rapido"},
-  {m:"Plugue C1(Sonda)",t:"Plugue",nrrsf:14,nap:11.13,off:-2.87,tipo:"normal"},
-  {m:"CapConcha C1",   t:"Cap",   nrrsf:19,nap:13.90,off:-5.10,tipo:"normal"},
-  {m:"CapConcha E1",   t:"Cap",   nrrsf:18,nap:12.89,off:-5.11,tipo:"degrada_rapido"},
-  {m:"Concha C1",      t:"Concha",nrrsf:20,nap:14.86,off:-5.14,tipo:"normal"},
-  {m:"Plugue B2",      t:"Plugue",nrrsf:20,nap:16.32,off:-3.68,tipo:"normal"},
-  {m:"Plugue C2(Sonda)",t:"Plugue",nrrsf:18,nap:15.62,off:-2.38,tipo:"dura_bem"},
-  {m:"Concha A1",      t:"Concha",nrrsf:21,nap:15.84,off:-5.16,tipo:"normal"},
-  {m:"Plugue C3(Sonda)",t:"Plugue",nrrsf:21,nap:15.54,off:-5.46,tipo:"degrada_rapido"},
-  {m:"CapConcha D1",   t:"Cap",   nrrsf:22,nap:16.95,off:-5.05,tipo:"normal"},
-  {m:"CapConcha C2",   t:"Cap",   nrrsf:22,nap:16.38,off:-5.62,tipo:"dura_bem"},
-  {m:"Concha D1",      t:"Concha",nrrsf:23,nap:17.80,off:-5.20,tipo:"dura_bem"},
-  {m:"Plugue A2",      t:"Plugue",nrrsf:19,nap:16.70,off:-2.30,tipo:"dura_bem"},
-  {m:"CapConcha E2",   t:"Cap",   nrrsf:25,nap:19.73,off:-5.27,tipo:"dura_bem"},
-  {m:"Dupla C1(Sonda)",t:"Dupla", nrrsf:25,nap:25.84,off:0.84, tipo:"normal"},
-];
-const tCor={Plugue:"#EF9F27",Concha:"#1D9E75",Cap:"#378ADD",Dupla:"#7F77DD"};
-let rankChart=null;
-function updateRanking(){
-  const f=document.getElementById('selTipo').value;
-  let data=f==='all'?modelos:modelos.filter(d=>d.t===f);
-  data=[...data].sort((a,b)=>a.nap-b.nap);
-  const wrap=document.getElementById('rankWrap');
-  wrap.style.height='300px';
-  if(rankChart) rankChart.destroy();
-  rankChart=new Chart(document.getElementById('cRank'),{
-    type:'bar',indexAxis:'y',
-    data:{
-      labels:data.map(d=>d.m),
-      datasets:[
-        {label:'NRRsf',data:data.map(d=>d.nrrsf),backgroundColor:'rgba(136,135,128,.25)',borderRadius:3,borderSkipped:false},
-        {label:'NAP obtido',data:data.map(d=>d.nap),backgroundColor:data.map(d=>d.off<-4?"#E24B4A":tCor[d.t]),borderRadius:3,borderSkipped:false}
-      ]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>{
-        const d=data[v.dataIndex];
-        return v.datasetIndex===0?'NRRsf: '+v.raw+' dB':'NAP: '+v.raw.toFixed(2)+' dB (gap: '+d.off.toFixed(2)+' dB)';
-      }}}},
-      scales:{x:{min:0,max:30,grid:{color:'rgba(128,128,128,.07)'}},y:{grid:{display:false},ticks:{font:{size:12}}}}
-    }
-  });
-}
-updateRanking();
-
-const degDB={
-  "Plugue B1":      {d:[-2.57,-2.81,-4.39,-5.46,-6.84],tipo:"degrada_rapido",note:"Perda acelerada após 60 dias — reduzir prazo de troca para 45 dias."},
-  "Plugue C3 (Sonda)":{d:[-3.57,-3.51,-5.32,-6.05,-6.89],tipo:"degrada_rapido",note:"Degradação crítica após 90 dias de uso. Prazo de 90 dias deve ser reduzido para 60 dias."},
-  "Concha C2":      {d:[-4.77,-4.43,-5.40,-4.22,-5.63],tipo:"degrada_rapido",note:"Piora progressiva — prazo de 200 dias excessivo. Reduzir para 120 dias."},
-  "CapConcha E1":   {d:[-4.88,-4.74,-4.95,-5.64,-5.96],tipo:"degrada_rapido",note:"Degradação visível após 90 dias. Avaliar redução do prazo de 200 para 150 dias."},
-  "Plugue A2":      {d:[-2.62,-1.64,-1.69,-2.54,-2.83],tipo:"dura_bem",note:"Performance estável. Prazo atual de 150 dias é conservador — pode estender para 170 dias."},
-  "Plugue C2 (Sonda)":{d:[-2.84,-1.67,-1.87,-2.25,-0.25],tipo:"dura_bem",note:"Excelente durabilidade — único modelo com melhora de desempenho ao final do ciclo."},
-  "Concha D1":      {d:[-5.45,-4.81,-4.74,-5.32,-4.93],tipo:"dura_bem",note:"Concha com melhor estabilidade. Prazo de 365 dias confirmado pelos dados."},
-  "CapConcha E2":   {d:[-5.17,-4.38,-3.95,-3.97,-5.08],tipo:"dura_bem",note:"Desempenho estável com leve melhora no meio do ciclo. Prazo de 365 dias adequado."},
-};
-const degLabels=["0–30 dias","30–60 dias","60–90 dias","90–120 dias","120+ dias"];
-let degChart=null;
-function updateDeg(){
-  const mod=document.getElementById('selMod').value;
-  const d=degDB[mod];
-  if(!d){return;}
-  document.getElementById('degIns').innerHTML='<b>'+mod+':</b> '+d.note;
-  if(degChart) degChart.destroy();
-  const c=d.tipo==="degrada_rapido"?"#E24B4A":"#1D9E75";
-  degChart=new Chart(document.getElementById('cDeg'),{
-    type:'line',
-    data:{labels:degLabels,datasets:[{
-      label:'Offset NAP−NRRsf',data:d.d,
-      borderColor:c,backgroundColor:c+'18',fill:true,tension:.35,pointRadius:5,pointBackgroundColor:c
-    }]},
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>'Offset: '+v.raw.toFixed(2)+' dB'}}},
-      scales:{
-        y:{min:-8,max:1,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v.toFixed(1)+' dB'},
-          plugins:{annotation:{annotations:{zero:{type:'line',yMin:0,yMax:0,borderColor:'#888',borderDash:[4,3]}}}}},
-        x:{grid:{display:false}}
-      }
-    }
-  });
-}
-updateDeg();
-
-const matchData=[
-  {m:"Concha C1",          nrrsf:20,b04:0.0, a05:null,c03:null},
-  {m:"CapConcha C1",       nrrsf:19,b04:0.0, a05:null,c03:null},
-  {m:"CapConcha C2",       nrrsf:22,b04:1.7, a05:null,c03:null},
-  {m:"Concha A1",          nrrsf:21,b04:null,a05:3.8, c03:0.4},
-  {m:"CapConcha D1",       nrrsf:22,b04:null,a05:12.5,c03:1.8},
-  {m:"Concha D1",          nrrsf:23,b04:null,a05:31.8,c03:10.7},
-  {m:"CapConcha E2",       nrrsf:25,b04:null,a05:53.5,c03:38.0},
-  {m:"Dupla C1 (Sonda)",   nrrsf:25,b04:68.2,a05:null,c03:null},
-  {m:"Dupla E1",           nrrsf:24,b04:null,a05:64.5,c03:48.5},
-];
-new Chart(document.getElementById('cMatch'),{
-  type:'bar',indexAxis:'y',
-  data:{
-    labels:matchData.map(d=>d.m+' ('+d.nrrsf+' dB)'),
-    datasets:[
-      {label:'GHE-B04 (102,5 dB)',data:matchData.map(d=>d.b04),backgroundColor:'#E24B4A',borderRadius:3},
-      {label:'GHE-A05 (101,5 dB)',data:matchData.map(d=>d.a05),backgroundColor:'#EF9F27',borderRadius:3},
-      {label:'GHE-C03 (103,0 dB)',data:matchData.map(d=>d.c03),backgroundColor:'#7F77DD',borderRadius:3},
-    ]
-  },
-  options:{
-    responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+(v.raw==null?'n/a':v.raw.toFixed(1)+'%')}}},
-    scales:{x:{min:0,max:80,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+'%'}},y:{grid:{display:false},ticks:{font:{size:12}}}}
-  }
-});
-
-new Chart(document.getElementById('cEpi'),{
+new Chart(document.getElementById('cRL'),{
   type:'bar',
   data:{
-    labels:['Sem EPI','Óculos seg.','Balaclava','Máscara','Boné','Óculos grau'],
+    labels:['Empresa A','Empresa B','Empresa C'],
     datasets:[
-      {label:'Concha',data:[19.21,17.24,16.55,17.78,17.10,17.65],backgroundColor:'#1D9E75',borderRadius:3},
-      {label:'Cap+Concha',data:[18.72,16.97,16.01,18.70,16.13,16.51],backgroundColor:'#85B7EB',borderRadius:3},
+      {label:'Baixo',data:[675,592,473],backgroundColor:'#1D9E75',borderRadius:2,stack:'s'},
+      {label:'Monitorar',data:[194,186,214],backgroundColor:'#EF9F27',borderRadius:0,stack:'s'},
+      {label:'Alto',data:[161,119,167],backgroundColor:'#E24B4A',borderRadius:0,stack:'s'},
+      {label:'Crítico/Grave',data:[61+9,74+29,100+23],backgroundColor:'#A32D2D',borderRadius:2,stack:'s'}
     ]
   },
   options:{
     responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw.toFixed(2)+' dB'}}},
-    scales:{y:{min:10,max:22,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},x:{grid:{display:false},ticks:{font:{size:12}}}}
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw+' colaboradores'}}},
+    scales:{
+      y:{stacked:true,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v}},
+      x:{stacked:true,grid:{display:false}}
+    }
   }
 });
+
+// Gráfico Empresa Risco (substituído)
+new Chart(document.getElementById('cEmpRisco'),{
+  type:'bar',
+  data:{
+    labels:['Empresa A','Empresa B','Empresa C'],
+    datasets:[
+      {label:'Em risco',data:[138,153,181],backgroundColor:['#E24B4A','#EF9F27','#7F77DD'],borderRadius:3},
+      {label:'Demais colaboradores',data:[1100-138,1000-153,977-181],backgroundColor:['rgba(228,75,74,.2)','rgba(239,159,39,.2)','rgba(127,119,221,.2)'],borderRadius:3}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw}}},
+    scales:{y:{stacked:true,grid:{color:'rgba(128,128,128,.07)'}},x:{stacked:true,grid:{display:false}}}
+  }
+});
+
+// Gráfico GHEs Geradores de Passivo
+const gheAll=[
+  {g:"GHE-B04",pct:85.9,nen:102.5},{g:"GHE-C03",pct:84.4,nen:103.0},
+  {g:"GHE-A05",pct:72.4,nen:101.5},{g:"GHE-B01",pct:46.4,nen:93.0},
+  {g:"GHE-C02",pct:32.6,nen:90.5},{g:"GHE-A03",pct:31.8,nen:91.0},
+  {g:"GHE-B06",pct:24.0,nen:89.0},{g:"GHE-A02",pct:20.8,nen:88.0},
+  {g:"GHE-B02",pct:18.3,nen:87.5},{g:"GHE-C01",pct:13.8,nen:86.0},
+  {g:"GHE-B03",pct:6.6,nen:84.0},{g:"GHE-C04",pct:6.0,nen:83.0},
+  {g:"GHE-A01",pct:4.6,nen:82.5},
+];
+
+new Chart(document.getElementById('cGheRisco'),{
+  type:'bar',indexAxis:'y',
+  data:{
+    labels:gheAll.map(d=>d.g+' ('+d.nen+' dB)'),
+    datasets:[{
+      label:'% colaboradores expostos',
+      data:gheAll.map(d=>d.pct),
+      backgroundColor:gheAll.map(d=>d.nen>=100?'#A32D2D':d.nen>=90?'#E24B4A':d.pct>10?'#EF9F27':'#1D9E75'),
+      borderRadius:3
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>gheAll[v.dataIndex].pct.toFixed(1)+'% expostos — NEN: '+gheAll[v.dataIndex].nen+' dB(A)'}}},
+    scales:{
+      x:{min:0,max:100,grid:{color:'rgba(128,128,128,.07)'}},
+      y:{grid:{display:false},ticks:{font:{size:10}}}
+    }
+  }
+});
+
+function calcP(){
+  const col=parseInt(document.getElementById('sCol').value);
+  const prob=parseInt(document.getElementById('sProb').value)/100;
+  const custo=parseInt(document.getElementById('sCusto').value)*1000;
+  document.getElementById('oCol').textContent=col;
+  document.getElementById('oProb').textContent=(prob*100).toFixed(0)+'%';
+  document.getElementById('oCusto').textContent='R$ '+(custo/1000).toFixed(0)+'k';
+  const acoes=Math.round(col*prob);
+  const total=acoes*custo;
+  const fit=col*150;
+  document.getElementById('pAcoes').textContent=acoes;
+  document.getElementById('pTotal').textContent='R$ '+(total/1e6).toFixed(1)+'M';
+  document.getElementById('pFit').textContent='R$ '+(fit/1000).toFixed(0)+'k';
+}
 </script>
+</body>
+</html>
