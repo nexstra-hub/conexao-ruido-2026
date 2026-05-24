@@ -304,7 +304,7 @@ body,
   <div class="cw" style="height:200px">
     <canvas id="cRL" role="img" aria-label="Distribuição dos 3077 colaboradores por faixa de risco jurídico em cada empresa. Empresa B tem maior proporção de risco crítico e grave.">Empresa B tem maior proporção relativa de colaboradores em risco crítico e grave, reflexo dos GHEs com NEN acima de 100 dB.</canvas>
   </div>
-  <div class="ins"><b>Empresa B</b> tem a maior proporção relativa de colaboradores em risco crítico/grave (15,1% vs 12,3% na A e 11,14% na C) — reflexo dos GHEs com NEN acima de 100 dB(A).</div>
+  <div class="ins"><b>Empresa B</b> tem a maior proporção relativa de colaboradores em risco crítico/grave (14,1% vs 12,3% na A e 10,8% na C) — reflexo dos GHEs com NEN acima de 100 dB(A).</div>
 </div>
 
 <div class="sl">Colaboradores sem testes periódicos adequados — risco jurídico</div>
@@ -360,25 +360,25 @@ body,
   <div class="cw" style="height:240px">
     <canvas id="cGheRisco" role="img" aria-label="Percentual de colaboradores expostos (NEP acima de 80dB) por GHE, mostrando os três GHEs críticos acima de 100dB com taxas entre 72% e 86%">GHE-B04, GHE-C03 e GHE-A05 são os ambientes geradores de maior risco de passivo</canvas>
   </div>
-  <div class="ins"><b>GHE-B04 (102,5 dB) e GHE-C03 (103,0 dB)</b> têm respectivamente 85,9% e 84,4% dos colaboradores expostos acima do limite. Sem o fit test, a empresa não tem como provar individualmente que cada trabalhador estava protegido — <b>todos se tornam passivo potencial</b>.</div>
+  <div class="ins"><b>GHE-B04 (102,5 dB) e GHE-C03 (103,0 dB)</b> têm respectivamente 85,9% e 84,4% dos testes acima do limite. Sem o fit test não é possível verificar individualmente a exposição de cada trabalhador</b>.</div>
 </div>
 
 <div class="sl">Simulador de risco financeiro por passivo na empresa</div>
 <div class="card">
   <div class="slid-row">
     <label>Colaboradores em risco alto/crítico/grave:</label>
-    <input type="range" min="10" max="1000" value="160" step="5" id="sCol" oninput="calcP()">
-    <span id="oCol">160</span>
+    <input type="range" min="10" max="1000" value="287" step="5" id="sCol" oninput="calcP()">
+    <span id="oCol">287</span>
   </div>
   <div class="slid-row">
     <label>Prob. de ação trabalhista por colaborador (%):</label>
-    <input type="range" min="5" max="25" value="15" step="1" id="sProb" oninput="calcP()">
-    <span id="oProb">15%</span>
+    <input type="range" min="5" max="25" value="12" step="1" id="sProb" oninput="calcP()">
+    <span id="oProb">12%</span>
   </div>
   <div class="slid-row">
     <label>Custo médio estimado por ação (R$ mil):</label>
-    <input type="range" min="50" max="300" value="120" step="10" id="sCusto" oninput="calcP()">
-    <span id="oCusto">R$ 120k</span>
+    <input type="range" min="50" max="300" value="60" step="10" id="sCusto" oninput="calcP()">
+    <span id="oCusto">R$ 60k</span>
   </div>
   <div class="risk-grid" style="margin-top:10px">
     <div class="risk-box"><div class="big-lbl">Ações esperadas</div><div class="big-num" id="pAcoes">16</div></div>
@@ -393,6 +393,7 @@ body,
 
 </div>
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
 new Chart(document.getElementById('cRL'),{
@@ -400,10 +401,10 @@ new Chart(document.getElementById('cRL'),{
   data:{
     labels:['Empresa A','Empresa B','Empresa C'],
     datasets:[
-      {label:'Baixo',data:[675,592,473],backgroundColor:'#1D9E75',borderRadius:2,stack:'s'},
+      {label:'Baixo',data:[675,592,482],backgroundColor:'#1D9E75',borderRadius:2,stack:'s'},
       {label:'Monitorar',data:[194,186,214],backgroundColor:'#EF9F27',borderRadius:0,stack:'s'},
       {label:'Alto',data:[161,119,167],backgroundColor:'#E24B4A',borderRadius:0,stack:'s'},
-      {label:'Crítico/Grave',data:[61+9,74+29,100+23],backgroundColor:'#A32D2D',borderRadius:2,stack:'s'}
+      {label:'Crítico/Grave',data:[61+9,74+29,91+23],backgroundColor:'#A32D2D',borderRadius:2,stack:'s'}
     ]
   },
   options:{
