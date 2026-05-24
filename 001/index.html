@@ -423,7 +423,7 @@ const riskPill=d=>{
   return '<span class="risk-pill rp-ok">Controlado</span>';
 };
 const acao=d=>{
-  if(d.nen>=100&&d.pct_exp>70) return '<span class="risk-pill rp-crit">Upgrade de NRRsf urgente</span>';
+  if(d.nen>=100&&d.pct_exp>70) return '<span class="risk-pill rp-crit">Controles Admin./Eng.</span>';
   if(d.nen>=100) return '<span class="risk-pill rp-alto">Revisar modelo + reforçar treinamento</span>';
   if(d.nen>=90&&d.pct_exp>30) return '<span class="risk-pill rp-med">Avaliar upgrade de NRRsf</span>';
   if(d.pct_exp>10) return '<span class="risk-pill rp-med">Monitorar — intensificar periódicos</span>';
