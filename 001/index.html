@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1. O Big Picture</title>
+</head>
+<body>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
@@ -54,7 +62,7 @@ body{
 .kpi-v{
   font-size:26px;
   font-weight:600;
-  color:#FFFFFF
+  color:#ffffff
 }
 
 .kpi-s{
@@ -66,6 +74,50 @@ body{
 .red{color:#FF6B6B}
 .amber{color:#FFBE55}
 .green{color:#39D98A}
+
+/* ==================== ESTILOS DO 007 ==================== */
+.sl{
+    font-size:16px;
+    font-weight:500;
+    color:#B8C2CC;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding-bottom:8px;
+    border-bottom:.5px solid rgba(255,255,255,.12);
+    margin-bottom:14px
+}
+
+.krow{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+    gap:10px;
+    margin-bottom:1.5rem
+}
+
+.kpi-007{
+    background:#161B22;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:12px;
+    padding:12px 14px;
+}
+
+.kl{
+    font-size:16px; 
+    color:#9DA7B3;
+    margin-bottom:5px
+}
+
+.kv{
+    font-size:26px;
+    font-weight:500;
+    color:#ffffff
+}
+
+.ks{
+    font-size:16px;
+    color:#7E8A97;
+    margin-top:3px
+}
 
 .card{
   background:#11161D;
@@ -133,9 +185,15 @@ body{
   color:#FFFFFF
 }
 
+.red-007{color:#f87171}
+.amb{color:#fbbf24}
+.grn{color:#4ade80}
+.bl{color:#60a5fa}
+/* ==================================================== */
+
 .risk-pill{
   display:inline-block;
-  font-size:15px;
+  font-size:12px;
   padding:4px 10px;
   border-radius:999px;
   font-weight:600
@@ -164,7 +222,7 @@ table{
 }
 
 th{
-  color:#AEB8C2 !important
+  color:#3599fd !important
 }
 
 td{
@@ -179,18 +237,19 @@ canvas{
 <div style="padding:1rem 10px">
 
 <div class="sec">
-  <div class="sec-label">Visão geral — Base de Dados</div>
+  <div class="sec-label">Visão geral</div>
   <div class="kpi-row">
-    <div class="kpi"><div class="kpi-l">Total de testes</div><div class="kpi-v">26.059</div><div class="kpi-s">3.077 colaboradores</div></div>
-    <div class="kpi"><div class="kpi-l">% protegidos (NEP ≤ 80)</div><div class="kpi-v red">68,4%</div><div class="kpi-s">31,6% ainda expostos</div></div>
-    <div class="kpi"><div class="kpi-l">NEP médio geral</div><div class="kpi-v amber">75,5 dB(A)</div><div class="kpi-s">Limiar: 80 dB(A)</div></div>
+    <div class="kpi"><div class="kpi-l">Total de testes</div><div class="kv bl">26.059</div><div class="kpi-s">3.077 colaboradores</div></div>
+    <div class="kpi"><div class="kpi-l">% protegidos (NEP ≤ 80)</div><div class="kpi-v amber">68,4%</div><div class="kpi-s">31,6% ainda expostos</div></div>
+    <div class="kpi"><div class="kpi-l">NEP médio geral</div><div class="kpi-v green">75,5 dB(A)</div><div class="kpi-s">Limiar: 80 dB(A)</div></div>
     <div class="kpi"><div class="kpi-l">GHEs em nível crítico</div><div class="kpi-v red">3 / 15</div><div class="kpi-s">≥ 100 dB(A)</div></div>
-    <div class="kpi"><div class="kpi-l">Colaboradores jornada &gt;8h</div><div class="kpi-v amber">19,8%</div><div class="kpi-s">+3 dB(A) no NEP efetivo</div></div>
+    <div class="kpi"><div class="kpi-l">Colaboradores jornada &gt;8h</div><div class="kpi-v amber">19,8%</div><div class="kpi-s">~3+ dB(A) no NEP efetivo</div></div>
   </div>
 </div>
 
+
 <div class="sec">
-  <div class="sec-label">Matriz de risco — % expostos por GHE vs NEN</div>
+  <div class="sec-label">Matriz de risco — % Expostos por GHE vs NEN</div>
   <div class="card">
     <div class="leg">
       <span><span class="ld" style="background:#E24B4A"></span>GHE crítico ≥100 dB</span>
@@ -199,14 +258,14 @@ canvas{
       <span style="color:var(--color-text-tertiary);font-size:10px;margin-left:4px">● tamanho = nº de testes</span>
     </div>
     <div class="cw" style="height:300px"><canvas id="cScatter" role="img" aria-label="Dispersão: eixo X=NEN do GHE, eixo Y=percentual de colaboradores expostos. Correlação positiva clara entre NEN e exposição">GHE-B04 (102.5 dB, 85.9% expostos) e GHE-C03 (103 dB, 84.4% expostos) são os mais críticos</canvas></div>
-    <div class="ins"><b>Correlação direta:</b> cada +1 dB(A) no NEN eleva o % de expostos em ~4 pp. GHE-B04 (Empresa B, 102,5 dB) tem <b>85,9% dos colaboradores expostos</b> — o pior de toda a base.</div>
+    <div class="ins"><b>Correlação direta:</b> cada +1 dB(A) no NEN eleva o % de expostos em ~4 pp.</div>
   </div>
 </div>
 
 <div class="sec">
-  <div class="sec-label">Tabela de risco consolidada — todos os GHEs</div>
+  <div class="sec-label">Tabela de risco consolidada - GHEs</div>
   <div class="card" style="padding:12px">
-    <table style="width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed">
+    <table style="width:100%;border-collapse:collapse;font-size:15px;table-layout:fixed">
       <thead>
         <tr style="border-bottom:.5px solid var(--color-border-tertiary)">
           <th style="text-align:left;padding:6px 8px;font-weight:500;color:var(--color-text-secondary);width:15%">GHE</th>
@@ -223,34 +282,94 @@ canvas{
   </div>
 </div>
 
+<!-- ==================== WIDGETS INSERIDOS DO 007 ==================== -->
+
 <div class="sec">
-  <div class="sec-label">Impacto da jornada &gt;8h — NEP em GHEs ≥ 88 dB(A)</div>
-  <div class="frow">
-    <label>GHE:</label>
-    <select id="selGhe" onchange="updateJornada()">
-      <option value="all">Todos (≥88 dB)</option>
-      <option value="GHE-C03">GHE-C03 — 103,0 dB</option>
-      <option value="GHE-B04">GHE-B04 — 102,5 dB</option>
-      <option value="GHE-A05">GHE-A05 — 101,5 dB</option>
-      <option value="GHE-B01">GHE-B01 — 93,0 dB</option>
-      <option value="GHE-C02">GHE-C02 — 90,5 dB</option>
-      <option value="GHE-A03">GHE-A03 — 91,0 dB</option>
-    </select>
-  </div>
-  <div class="card">
-    <div class="leg">
-      <span><span class="ld" style="background:#85B7EB"></span>Jornada padrão (8h)</span>
-      <span><span class="ld" style="background:#E24B4A"></span>Jornada estendida (&gt;8h)</span>
-    </div>
-    <div class="cw" style="height:220px"><canvas id="cJorn" role="img" aria-label="NEP médio e percentual de expostos comparando jornada padrão vs estendida por GHE">Jornada extendida aumenta sistematicamente o NEP e o percentual de expostos</canvas></div>
-    <div class="ins" id="jornIns"><b>Jornada &gt;8h:</b> nos GHEs críticos (≥100 dB), trabalhadores com jornada estendida atingem NEP médio de <b>88,1 dB(A)</b> vs 85,2 dB(A) para jornada padrão — <b>+2,9 dB(A)</b> que pode ser determinante para a classificação legal de risco grave.</div>
+  <div class="sl">Evolução geral — Indicadores objetivos</div>
+  <div class="krow">
+    <div class="kpi-007"><div class="kl">Sessões de treinamento documentadas</div><div class="kv bl">5.056</div><div class="ks">rastreabilidade NR-01</div></div>
+    <div class="kpi-007"><div class="kl">% colaboradores expostos</div><div class="kv red-007">31,6%</div><div class="ks">sem fit test, esse dado não existe</div></div>
+    <div class="kpi-007"><div class="kl">NAP médio real (colocação correta)</div><div class="kv grn">16,64 dB</div><div class="ks">vs NRRsf médio de 20,1 dB</div></div>
+    <div class="kpi-007"><div class="kl">Evolução 24 meses</div><div class="kv grn">+0,7 dB NAP</div><div class="ks">evidência de eficácia do PCA com Fit test</div></div>
+    <div class="kpi-007"><div class="kl">Taxa de colocação inadequada</div><div class="kv red-007">19,4%</div><div class="ks">só identificável pelo fit test</div></div>
   </div>
 </div>
 
+<div class="sec">
+  <div class="sl">Evolução trimestral da proteção — % Protegidos & NAP Médio</div>
+  <div class="card">
+    <div class="frow">
+      <label>Empresa:</label>
+      <select id="selEmpPCA" onchange="updatePCA()">
+        <option value="all">Todas (comparativo)</option>
+        <option value="A">Empresa A</option>
+        <option value="B">Empresa B</option>
+        <option value="C">Empresa C</option>
+      </select>
+      <label style="margin-left:8px">Métrica:</label>
+      <select id="selMetrica" onchange="updatePCA()">
+        <option value="pct">% protegidos</option>
+        <option value="nap">NAP médio (dB)</option>
+      </select>
+    </div>
+    <div class="leg">
+      <span><span class="ld" style="background:#1D9E75"></span>Empresa A</span>
+      <span><span class="ld" style="background:#378ADD"></span>Empresa B</span>
+      <span><span class="ld" style="background:#EF9F27"></span>Empresa C</span>
+    </div>
+    <div class="cw" style="height:250px">
+      <canvas id="cPCA" role="img" aria-label="Evolução trimestral do percentual de colaboradores protegidos"></canvas>
+    </div>
+    <div class="ins"><b>Indicador objetivo e rastreável para o PCA:</b> a evolução trimestral demonstra que o programa de fit test gera melhora mensurável ao longo do tempo — exatamente o tipo de evidência exigido pela NR-01 e pelo Guia do PCA da FUNDACENTRO.</div>
+  </div>
 </div>
+
+<!-- ================================================================ -->
+
+</div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
+// ==================== DADOS E FUNÇÕES DO PCA (do 007) ====================
+const pcaData={
+  pct:{ A:[84.1,81.1,82.0,81.4,84.7,84.4,82.0,83.0], B:[78.0,81.4,74.8,83.3,79.2,83.7,80.1,82.0], C:[75.8,74.5,73.7,74.0,76.1,75.7,77.9,78.8] },
+  nap:{ A:[16.50,16.06,16.09,16.47,16.93,16.99,16.86,17.06], B:[15.51,16.84,15.34,16.41,16.02,17.16,16.27,17.32], C:[16.26,16.24,16.67,16.34,16.86,17.32,17.38,16.92] }
+};
+const trim8=['Q1','Q2','Q3','Q4','Q1','Q2','Q3','Q4'];
+let pcaChart=null;
+
+function updatePCA(){
+  const emp=document.getElementById('selEmpPCA').value;
+  const met=document.getElementById('selMetrica').value;
+  const yLabel=met==='pct'?'% protegidos':'NAP médio (dB)';
+  const yMin=met==='pct'?70:14;
+  const yMax=met==='pct'?92:19;
+  const cb=met==='pct'?v=>v.toFixed(1)+'%':v=>v.toFixed(2)+' dB';
+  if(pcaChart) pcaChart.destroy();
+  let datasets;
+  const cols={A:'#1D9E75',B:'#378ADD',C:'#EF9F27'};
+  const dashes={A:[],B:[4,3],C:[2,2]};
+  if(emp==='all'){
+    datasets=['A','B','C'].map(k=>({
+      label:'Empresa '+k,data:pcaData[met][k],
+      borderColor:cols[k],backgroundColor:cols[k]+'12',fill:true,tension:.4,pointRadius:4,borderDash:dashes[k]
+    }));
+  } else {
+    datasets=[{label:'Empresa '+emp,data:pcaData[met][emp],borderColor:cols[emp],backgroundColor:cols[emp]+'12',fill:true,tension:.4,pointRadius:5}];
+  }
+  pcaChart=new Chart(document.getElementById('cPCA'),{
+    type:'line',
+    data:{labels:trim8,datasets},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+cb(v.raw)}}},
+      scales:{y:{min:yMin,max:yMax,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:cb}},x:{grid:{display:false}}}
+    }
+  });
+}
+// =====================================================================
+
 const ghe = [
   {g:"GHE-B04",e:"Empresa B",nen:102.5,pct_exp:85.9,nap:15.79,nep:87.21,n:1048},
   {g:"GHE-C03",e:"Empresa C",nen:103.0,pct_exp:84.4,nap:17.46,nep:86.10,n:2559},
@@ -304,11 +423,11 @@ const riskPill=d=>{
   return '<span class="risk-pill rp-ok">Controlado</span>';
 };
 const acao=d=>{
-  if(d.nen>=100&&d.pct_exp>70) return 'Migrar para dupla proteção urgente';
-  if(d.nen>=100) return 'Revisar modelo + reforçar treinamento';
-  if(d.nen>=90&&d.pct_exp>30) return 'Avaliar upgrade de NRRsf';
-  if(d.pct_exp>10) return 'Monitorar — intensificar periódicos';
-  return '—';
+  if(d.nen>=100&&d.pct_exp>70) return '<span class="risk-pill rp-crit">Upgrade de NRRsf urgente</span>';
+  if(d.nen>=100) return '<span class="risk-pill rp-alto">Revisar modelo + reforçar treinamento</span>';
+  if(d.nen>=90&&d.pct_exp>30) return '<span class="risk-pill rp-med">Avaliar upgrade de NRRsf</span>';
+  if(d.pct_exp>10) return '<span class="risk-pill rp-med">Monitorar — intensificar periódicos</span>';
+  return '<span class="risk-pill rp-ok">—</span>';
 };
 [...ghe].sort((a,b)=>b.pct_exp-a.pct_exp).forEach(d=>{
   const pct=d.pct_exp;
@@ -317,51 +436,16 @@ const acao=d=>{
     <td style="padding:7px 8px;font-weight:500">${d.g}</td>
     <td style="padding:7px 8px;color:var(--color-text-secondary)">${d.e}</td>
     <td style="padding:7px 8px;text-align:right">${d.nen}</td>
-    <td style="padding:7px 8px"><div style="font-size:12px;font-weight:500;color:${bc}">${pct.toFixed(1)}%</div>
-      <div class="mini-bar-bg"><div class="mini-bar" style="width:${Math.min(100,pct)}%;background:${bc}"></div></div></td>
+    <td style="padding:7px 8px"><div style="font-size:14px;font-weight:500;color:${bc}">${pct.toFixed(1)}%</div>
+    <div class="mini-bar-bg"><div class="mini-bar" style="width:${Math.min(100,pct)}%;background:${bc}"></div></div></td>
     <td style="padding:7px 8px;text-align:right;color:var(--color-text-secondary)">${d.nep.toFixed(1)}</td>
     <td style="padding:7px 8px">${riskPill(d)}</td>
     <td style="padding:7px 8px;font-size:11px;color:var(--color-text-secondary)">${acao(d)}</td>
   </tr>`;
 });
 
-const jornData = {
-  all:{labels:["GHE-C03","GHE-B04","GHE-A05","GHE-B01","GHE-C02","GHE-A03","GHE-B06","GHE-A02"],
-    pad:[85.62,86.81,84.07,78.92,76.03,76.52,74.39,73.59],
-    ext:[88.21,89.21,86.96,82.41,79.97,79.14,77.63,76.93],
-    padPct:[82.1,84.4,68.8,41.3,28.5,29.8,20.2,17.7],
-    extPct:[94.3,93.1,88.7,66.8,50.1,41.6,35.5,36.0]},
-  "GHE-C03":{labels:["NEP médio","% expostos"],pad:[85.62,82.1],ext:[88.21,94.3]},
-  "GHE-B04":{labels:["NEP médio","% expostos"],pad:[86.81,84.4],ext:[89.21,93.1]},
-  "GHE-A05":{labels:["NEP médio","% expostos"],pad:[84.07,68.8],ext:[86.96,88.7]},
-  "GHE-B01":{labels:["NEP médio","% expostos"],pad:[78.92,41.3],ext:[82.41,66.8]},
-  "GHE-C02":{labels:["NEP médio","% expostos"],pad:[76.03,28.5],ext:[79.97,50.1]},
-  "GHE-A03":{labels:["NEP médio","% expostos"],pad:[76.52,29.8],ext:[79.14,41.6]},
-};
-let jChart=null;
-function updateJornada(){
-  const sel=document.getElementById('selGhe').value;
-  if(jChart) jChart.destroy();
-  const d=jornData[sel]||jornData.all;
-  const isAll=sel==='all';
-  jChart=new Chart(document.getElementById('cJorn'),{
-    type:'bar',
-    data:{
-      labels:d.labels,
-      datasets:[
-        {label:'Jornada padrão (8h)',data:d.pad,backgroundColor:'#85B7EB',borderRadius:3},
-        {label:'Jornada >8h',data:d.ext,backgroundColor:'#E24B4A',borderRadius:3,borderDash:[]}
-      ]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw.toFixed(1)+(isAll?' dB(A)':'')}}},
-      scales:{
-        y:{min:isAll?65:0,grid:{color:'rgba(128,128,128,.08)'},ticks:{callback:v=>v.toFixed(0)+(isAll?' dB':'')}},
-        x:{grid:{display:false},ticks:{font:{size:10},maxRotation:30}}
-      }
-    }
-  });
-}
-updateJornada();
+// Inicializa o gráfico PCA
+updatePCA();
 </script>
+</body>
+</html>
