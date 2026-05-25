@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1. O Big Picture</title>
+    <title>1. Problema</title>
 </head>
 <body>
 <style>
@@ -273,8 +273,6 @@ canvas{
           <th style="text-align:right;padding:6px 8px;font-weight:500;color:var(--color-text-secondary);width:12%">NEN dB(A)</th>
           <th style="text-align:left;padding:6px 8px;font-weight:500;color:var(--color-text-secondary);width:18%">% expostos</th>
           <th style="text-align:right;padding:6px 8px;font-weight:500;color:var(--color-text-secondary);width:10%">NEP médio</th>
-          <th style="text-align:left;padding:6px 8px;font-weight:500;color:var(--color-text-secondary);width:10%">Risco</th>
-          <th style="text-align:left;padding:6px 8px;font-weight:500;color:var(--color-text-secondary);width:21%">Ação prioritária</th>
         </tr>
       </thead>
       <tbody id="riskTbody"></tbody>
@@ -296,7 +294,7 @@ canvas{
 </div>
 
 <div class="sec">
-  <div class="sl">Evolução trimestral da proteção — % Protegidos & NAP Médio</div>
+  <div class="sl">Evolução da proteção por ciclo — % Protegidos & NAP Médio</div>
   <div class="card">
     <div class="frow">
       <label>Empresa:</label>
@@ -313,14 +311,14 @@ canvas{
       </select>
     </div>
     <div class="leg">
-      <span><span class="ld" style="background:#1D9E75"></span>Empresa A</span>
-      <span><span class="ld" style="background:#378ADD"></span>Empresa B</span>
-      <span><span class="ld" style="background:#EF9F27"></span>Empresa C</span>
+      <span><span class="ld" style="background:#1D9E75"></span>Empresa A (periódico 6 meses)</span>
+      <span><span class="ld" style="background:#378ADD"></span>Empresa B (periódico 12 meses)</span>
+      <span><span class="ld" style="background:#EF9F27"></span>Empresa C (periódico 6 meses)</span>
     </div>
     <div class="cw" style="height:250px">
       <canvas id="cPCA" role="img" aria-label="Evolução trimestral do percentual de colaboradores protegidos"></canvas>
     </div>
-    <div class="ins"><b>Indicador objetivo e rastreável para o PCA:</b> a evolução trimestral demonstra que o programa de fit test gera melhora mensurável ao longo do tempo — exatamente o tipo de evidência exigido pela NR-01 e pelo Guia do PCA da FUNDACENTRO.</div>
+    <div class="ins">Empresa B apresenta maior variabilidade de resultados, tanto em % protegidos quanto NAP médio.</div>
   </div>
 </div>
 
@@ -336,7 +334,7 @@ const pcaData={
   pct:{ A:[84.1,81.1,82.0,81.4,84.7,84.4,82.0,83.0], B:[78.0,81.4,74.8,83.3,79.2,83.7,80.1,82.0], C:[75.8,74.5,73.7,74.0,76.1,75.7,77.9,78.8] },
   nap:{ A:[16.50,16.06,16.09,16.47,16.93,16.99,16.86,17.06], B:[15.51,16.84,15.34,16.41,16.02,17.16,16.27,17.32], C:[16.26,16.24,16.67,16.34,16.86,17.32,17.38,16.92] }
 };
-const trim8=['Q1','Q2','Q3','Q4','Q1','Q2','Q3','Q4'];
+const trim8=['1º','2º','3º','4º','5º','6º','7º','8º'];
 let pcaChart=null;
 
 function updatePCA(){
@@ -364,7 +362,7 @@ function updatePCA(){
     options:{
       responsive:true,maintainAspectRatio:false,
       plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+cb(v.raw)}}},
-      scales:{y:{min:yMin,max:yMax,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:cb}},x:{grid:{display:false}}}
+      scales:{y:{min:yMin,max:yMax,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:cb}},x:{grid:{display:false},title:{display:true,text:'Ciclo de Teste',font:{size:14}}}}
     }
   });
 }
@@ -439,8 +437,6 @@ const acao=d=>{
     <td style="padding:7px 8px"><div style="font-size:14px;font-weight:500;color:${bc}">${pct.toFixed(1)}%</div>
     <div class="mini-bar-bg"><div class="mini-bar" style="width:${Math.min(100,pct)}%;background:${bc}"></div></div></td>
     <td style="padding:7px 8px;text-align:right;color:var(--color-text-secondary)">${d.nep.toFixed(1)}</td>
-    <td style="padding:7px 8px">${riskPill(d)}</td>
-    <td style="padding:7px 8px;font-size:11px;color:var(--color-text-secondary)">${acao(d)}</td>
   </tr>`;
 });
 
