@@ -1,45 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4. Solução</title>
+</head>
+<body>
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
-body,
-.wrap{
-    background:transparent;
-    color:#e0e0e0;
-    font-family:system-ui,-apple-system,sans-serif;
-    font-size:21px; /* +5px base */
+body{
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size:19px;
+  color:#F5F7FA;
+  background:transparent;
+  padding:0 10px;
 }
 
 .sr-only{
-    position:absolute;
-    width:1px;
-    height:1px;
-    overflow:hidden;
-    clip:rect(0,0,0,0);
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0)
 }
 
-.sec{
-    margin-bottom:1.5rem;
-}
+.sec{margin-bottom:2rem}
 
 .sl{
-    font-size:16px;
-    font-weight:500;
-    color:#e0e0e0;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    padding-bottom:6px;
-    border-bottom:.5px solid #333;
-    margin-bottom:12px;
+  font-size:16px;
+  font-weight:600;
+  color:#B8C2CC;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding-bottom:8px;
+  border-bottom:.5px solid rgba(255,255,255,.12);
+  margin-bottom:14px
 }
 
-/* =========================
-   KPI
-========================= */
+.card{
+  background:#11161D;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:16px;
+  box-shadow:0 2px 12px rgba(0,0,0,.28)
+}
 
+.cw{
+  position:relative;
+  width:100%
+}
+
+.leg{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:10px;
+  font-size:16px;
+  color:#B8C2CC
+}
+
+.ld{
+  width:10px;
+  height:10px;
+  border-radius:2px;
+  display:inline-block;
+  margin-right:4px;
+  vertical-align:middle
+}
+
+.ins{
+  border-left:3px solid #3B82F6;
+  border-radius:0 12px 12px 0;
+  background:#18202A;
+  padding:12px 15px;
+  font-size:17px;
+  color:#C7D0DA;
+  margin-top:10px
+}
+
+.ins b{
+  color:#FFFFFF;
+  font-weight:600
+}
+
+.kpi-row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:10px;
+  margin-bottom:1.5rem
+}
+
+.kpi{
+  background:#161B22;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  padding:16px;
+  box-shadow:0 2px 10px rgba(0,0,0,.25)
+}
+
+.kpi-l{
+  font-size:16px;
+  color:#ffffff;
+  margin-bottom:5px
+}
+
+.kpi-v{
+  font-size:26px;
+  font-weight:600;
+  color:#FFFFFF
+}
+
+.kpi-s{
+  font-size:16px;
+  color:#ffffff;
+  margin-top:3px
+}
+
+.green{color:#39D98A}
+.amber{color:#FFBE55}
+.red{color:#FF6B6B}
+.blue{color:#3B82F6}
+
+.r2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px
+}
+
+/* ==================== ESTILOS ADICIONADOS DO 010 ==================== */
 .krow{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
@@ -49,418 +139,320 @@ body,
 
 .kpi{
     background:#252525;
+    border:.5px solid #333;
     border-radius:8px;
     padding:12px 14px;
     text-align:center;
-    border:.5px solid #333;
 }
 
 .kl{
     font-size:16px;
-    color:#888;
-    margin-bottom:4px;
+    color:#e0e0e0;
+    margin-bottom:5px;
 }
 
 .kv{
-    font-size:27px;
+    font-size:24px;
     font-weight:500;
     color:#ffffff;
 }
 
 .ks{
     font-size:16px;
-    color:#888;
-    margin-top:4px;
+    color:#e0e0e0;
+    margin-top:3px;
 }
 
-.red{color:#f87171}
-.amb{color:#facc15}
-.grn{color:#4ade80}
+.r{color:#f87171}
+.a{color:#facc15}
+.g{color:#4ade80}
+.b{color:#60a5fa}
 
-/* =========================
-   CARDS
-========================= */
-
-.card{
-    background:#1a1a1a;
-    border:.5px solid #333;
-    border-radius:12px;
-    padding:16px;
-    margin-bottom:14px;
+.prog-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:12px;
 }
 
-/* =========================
-   FILTROS
-========================= */
+.prog-lbl{
+    font-size:17px;
+    color:#b0b0b0;
+    width:190px;
+    flex-shrink:0;
+}
+
+.prog-bar-bg{
+    flex:1;
+    height:10px;
+    background:#333;
+    border-radius:6px;
+    overflow:hidden;
+}
+
+.prog-bar{
+    height:10px;
+    border-radius:6px;
+}
+
+.prog-val{
+    font-size:18px;
+    font-weight:500;
+    min-width:60px;
+    text-align:right;
+    flex-shrink:0;
+}
+
+.step-flow{
+  display:grid;
+  grid-template-columns:1fr auto 1fr auto 1fr;
+  gap:0;
+  align-items:center;
+  margin:16px 0
+}
+
+.step-box{
+  background:#161B22;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  padding:14px;
+  text-align:center;
+  box-shadow:0 2px 10px rgba(0,0,0,.2)
+}
+
+.step-num{
+  font-size:27px;
+  font-weight:600
+}
+
+.step-lbl{
+  font-size:15px;
+  color:#B8C2CC;
+  margin-top:5px
+}
+
+.step-sub{
+  font-size:16px;
+  color:#8B98A5;
+  margin-top:4px
+}
+
+.step-arr{
+  text-align:center;
+  font-size:24px;
+  color:#B8C2CC;
+  padding:0 8px
+}
+
+.gain-badge{
+  display:inline-block;
+  font-size:15px;
+  font-weight:600;
+  padding:4px 10px;
+  border-radius:999px;
+  background:rgba(57,217,138,.12);
+  color:#67F0A8;
+  margin-top:6px
+}
 
 .frow{
-    display:flex;
-    gap:8px;
-    margin-bottom:12px;
-    align-items:center;
-    flex-wrap:wrap;
+  display:flex;
+  gap:8px;
+  margin-bottom:12px;
+  align-items:center;
+  flex-wrap:wrap
 }
 
 .frow label{
-    font-size:17px;
-    color:#b0b0b0;
+  font-size:17px;
+  color:#C7D0DA
 }
 
-select{
-    background:#252525;
-    color:#e0e0e0;
-    border:1px solid #444;
-    border-radius:6px;
-    padding:8px 10px;
-    font-size:17px;
+.frow select{
+  font-size:17px;
+  padding:6px 10px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;
+  background:#161B22;
+  color:#FFFFFF
 }
 
-select:focus{
-    outline:none;
-    border-color:#3b82f6;
-}
-
-/* =========================
-   LEGENDAS
-========================= */
-
-.leg{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    margin-bottom:12px;
-    font-size:16px;
-    color:#a0a0a0;
-}
-
-.ld{
-    width:10px;
-    height:10px;
-    border-radius:2px;
-    display:inline-block;
-    margin-right:4px;
-    vertical-align:middle;
-}
-
-/* =========================
-   CONTAINERS
-========================= */
-
-.cw{
-    position:relative;
-    width:100%;
-}
-
-.r2{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-}
-
-/* =========================
-   FLOW / PROCESSO
-========================= */
-
-.flow{
-    display:grid;
-    grid-template-columns:1fr 36px 1fr 36px 1fr;
-    align-items:center;
-    margin:16px 0;
-}
-
-.fbox{
-    background:#252525;
-    border:.5px solid #333;
-    border-radius:8px;
-    padding:14px;
-    text-align:center;
-}
-
-.fnum{
-    font-size:27px;
-    font-weight:500;
-    color:#ffffff;
-}
-
-.flbl{
-    font-size:15px;
-    color:#888;
-    margin-top:4px;
-}
-
-.farr{
-    text-align:center;
-    font-size:23px;
-    color:#666;
-}
-
-/* =========================
-   BADGES
-========================= */
-
-.gbadge{
-    display:inline-block;
-    font-size:16px;
-    font-weight:500;
-    padding:2px 8px;
-    border-radius:6px;
-    background:#0a3a2a;
-    color:#4ade80;
-    margin-top:6px;
-    border:.5px solid #4ade80;
-}
-
-.rbadge{
-    display:inline-block;
-    font-size:16px;
-    font-weight:500;
-    padding:2px 8px;
-    border-radius:6px;
-    background:#3a1f1f;
-    color:#f87171;
-    margin-top:6px;
-    border:.5px solid #f87171;
-}
-
-/* =========================
-   INSIGHTS / CALLOUTS
-========================= */
-
-.ins{
-    border-left:3px solid #3b82f6;
-    border-radius:0 8px 8px 0;
-    background:#1f2937;
-    padding:10px 14px;
-    font-size:17px;
-    color:#d0d0d0;
-    margin-top:12px;
-    line-height:1.45;
-}
-
-.ins b{
-    color:#ffffff;
-    font-weight:500;
-}
-
-/* =========================
-   RESPONSIVO
-========================= */
-
-@media(max-width:900px){
-
-    .r2{
-        grid-template-columns:1fr;
-    }
-
-    .flow{
-        grid-template-columns:1fr;
-        gap:10px;
-    }
-
-    .farr{
-        transform:rotate(90deg);
-    }
-
-    .krow{
-        grid-template-columns:1fr 1fr;
-    }
-}
-
-@media(max-width:640px){
-
-    .krow{
-        grid-template-columns:1fr;
-    }
-
-    .card{
-        padding:14px;
-    }
-
-    .kv{
-        font-size:25px;
-    }
-
-    .fnum{
-        font-size:25px;
-    }
+canvas{
+  background:transparent
 }
 </style>
 
-<h2 class="sr-only">Dashboard — Tema 1 safe.EAR: o CA não garante proteção real. Gap entre NRRsf certificado e NAP obtido, e impacto da colocação incorreta do protetor.</h2>
+<h2 class="sr-only">Dashboard — Tema 4: O Fator Humano. Análise do fluxo experimentador, ganhos por empresa, GHE e número de teste.</h2>
 
-<div style="padding:1rem 10px">
+<div style="padding:1rem 0">
 
 <div class="sec">
-  <div class="sl">O CA certifica o produto — não a proteção individual do trabalhador</div>
-  <div class="krow">
-    <div class="kpi"><div class="kl">Gap médio NRRsf → NAP (conchas)</div><div class="kv red">−5,1 dB</div><div class="ks">25% da atenuação perdida</div></div>
-    <div class="kpi"><div class="kl">Gap médio NRRsf → NAP (plugues)</div><div class="kv amb">−3,0 dB</div><div class="ks">17% da atenuação perdida</div></div>
-    <div class="kpi"><div class="kl">Dupla proteção vs NRRsf</div><div class="kv grn">+1,0 dB</div><div class="ks">único tipo que supera o CA</div></div>
-    <div class="kpi"><div class="kl">Pior modelo (Concha C2)</div><div class="kv red">−5,5 dB</div><div class="ks">32,6% do NRRsf perdido</div></div>
-    <div class="kpi"><div class="kl">Melhor plugue convencional</div><div class="kv grn">−2,3 dB</div><div class="ks">Plugue A2 — apenas 12,2% de gap</div></div>
+  <div class="sl">KPIs do programa de treinamento</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-l">Sessões de treinamento</div><div class="kpi-v blue">5.056</div><div class="kpi-s">19,4% dos testes</div></div>
+    <div class="kpi"><div class="kpi-l">Ganho médio — recolocação</div><div class="kpi-v green">+6,9 dB</div><div class="kpi-s">vs colocação ruim</div></div>
+    <div class="kpi"><div class="kpi-l">NAP médio pós-recolocação</div><div class="kpi-v green">17,2 dB</div><div class="kpi-s">83% do NRRsf atingido</div></div>
+    <div class="kpi"><div class="kpi-l">% que atinge ~NRRsf na recolocação</div><div class="kpi-v amber">88,7%</div><div class="kpi-s">11,3% ainda muito abaixo do NRRsf</div></div>
+    <div class="kpi"><div class="kpi-l">GHEs com treinamento obrigatório</div><div class="kpi-v red">13 / 15</div><div class="kpi-s">NEN ≥ 80 dB(A)</div></div>
   </div>
 </div>
 
-<div class="sec">
-  <div class="sl">Proteção real obtida vs NRRsf certificado — todos os modelos</div>
-  <div class="card">
-    <div class="frow">
-      <label>Filtrar por tipo:</label>
-      <select id="selTipo" onchange="updateGap()">
-        <option value="all">Todos</option>
-        <option value="Plugue">Plugues</option>
-        <option value="Concha">Conchas</option>
-        <option value="Cap">Cap + Concha</option>
-        <option value="Dupla">Dupla proteção</option>
-      </select>
-    </div>
-    <div class="leg">
-      <span><span class="ld" style="background:#B4B2A9"></span>NRRsf (certificado — CA)</span>
-      <span><span class="ld" style="background:#1D9E75"></span>NAP real obtido</span>
-      <span><span class="ld" style="background:#E24B4A"></span>Gap crítico (&gt;30% perdido)</span>
-    </div>
-    <div class="cw" id="gapWrap" style="height:460px">
-      <canvas id="cGap" role="img" aria-label="Comparação entre NRRsf certificado e NAP real obtido para cada modelo de protetor. Todos os modelos exceto dupla proteção entregam menos do que o certificado.">Todos os modelos de concha perdem entre 20% e 34% da atenuação certificada. Plugues perdem entre 12% e 30%.</canvas>
-    </div>
-    <div class="ins"><b>O CA do protetor não comprova proteção individual:</b> mesmo com certificado válido, conchas entregam em média apenas <b>75–80% do NRRsf</b> no uso real. Com dupla proteção NAP supera o maior NRRsf certificado em apenas +1 dB em média.</div>
-  </div>
-</div>
 
 <div class="sec">
   <div class="sl">Colocação incorreta — o maior fator de perda de atenuação</div>
   <div class="card">
-    <div class="flow">
-      <div class="fbox">
-        <div class="fnum red">11,2 dB</div>
-        <div class="flbl">NAP com colocação incorreta</div>
-        <div class="rbadge">−10,8 dB vs NRRsf</div>
+    <div class="step-flow">
+      <div class="step-box">
+        <div class="step-num red" id="sNapRuim">10,1 dB</div>
+        <div class="step-lbl">NAP colocação inadequada</div>
+        <div class="step-sub">usuário — resultado ruim</div>
       </div>
-      <div class="farr">→</div>
-      <div class="fbox">
-        <div class="fnum" style="color:#185FA5">18,4 dB</div>
-        <div class="flbl">NAP com experimentador</div>
-        <div class="gbadge">+7,2 dB recuperado</div>
+      <div class="step-arr">→</div>
+      <div class="step-box">
+        <div class="step-num" style="color:#3b82f6" id="sNapExp">18,3 dB</div>
+        <div class="step-lbl">NAP colocação experimentador</div>
+        <div class="step-sub"><span class="gain-badge" id="sGanhoExp">+8,2 dB</span></div>
       </div>
-      <div class="farr">→</div>
-      <div class="fbox">
-        <div class="fnum" style="color:#0F6E56">17,0 dB</div>
-        <div class="flbl">Recolocação pelo usuário</div>
-        <div class="gbadge">+5,8 dB após treinamento</div>
+      <div class="step-arr">→</div>
+      <div class="step-box">
+        <div class="step-num green" id="sNapRec">17,0 dB</div>
+        <div class="step-lbl">NAP recolocação usuário</div>
+        <div class="step-sub"><span class="gain-badge" id="sGanhoRec">+6,9 dB vs inicial</span></div>
       </div>
     </div>
-  </div>
-  <div class="r2">
-    <div class="card">
-      <div class="cw" style="height:220px">
-        <canvas id="cColocacao" role="img" aria-label="Comparação de NAP médio entre colocação incorreta (6.2 dB), pelo experimentador (18.4 dB) e recolocação pelo usuário (17.0 dB) por empresa">Ganho médio de 10.9 dB após sessão de treinamento em todas as empresas</canvas>
-      </div>
-      <div class="ins" style="font-size:15px"><b>5.056 sessões</b> de treinamento registradas. Em média, <b>19,4%</b> das tentativas iniciais resultaram em colocação inadequada — com NAP apenas 66% do que seria atingível.</div>
+    <div class="frow" style="justify-content:center">
+      <label>Empresa:</label>
+      <select id="selEmpFlow" onchange="updateFlow()">
+        <option value="all">Todas</option>
+        <option value="A">Empresa A</option>
+        <option value="B">Empresa B</option>
+        <option value="C">Empresa C</option>
+      </select>
     </div>
-    <div class="card">
-      <div class="cw" style="height:220px">
-        <canvas id="cGapColocacao" role="img" aria-label="Distribuição do NAP em três situações: colocação incorreta concentrada abaixo de 10dB, pelo experimentador em torno de 18-20dB, recolocação usuário em torno de 15-19dB">A colocação incorreta reduz o NAP para menos de 10 dB em 96% dos casos</canvas>
-      </div>
-      <div class="ins" style="font-size:15px">Após recolocação orientada, o usuário recupera <b>82,8% do NRRsf</b> — demonstrando que o treinamento tem impacto mensurável e rastreável com o safe.EAR.</div>
-    </div>
+    <div class="ins">A colocação pelo experimentador alcança um NAP em <b>+8,3 dB</b> em média — demonstrando que o protetor tem capacidade técnica, e que a colocação inadequada impacta fortemente na atenuação. A recolocação pelo usuário, logo após, atinge <b>~6,9 dB</b> de ganho sobre a tentativa ruim — evidenciando aprendizado.</div>
   </div>
 </div>
 
+<div class="sec">
+  <div class="sl">Evolução do NAP por ciclo de teste — efeito cumulativo do treinamento</div>
+  <div class="card">
+    <div class="leg">
+      <span><span class="ld" style="background:#1D9E75"></span>Empresa A (periódico 6 meses)</span>
+      <span><span class="ld" style="background:#378ADD"></span>Empresa B (periódico 12 meses)</span>
+      <span><span class="ld" style="background:#EF9F27"></span>Empresa C (periódico 6 meses)</span>
+    </div>
+    <div class="cw" style="height:220px"><canvas id="cEvol" role="img" aria-label="Evolução do NAP médio do primeiro ao oitavo teste por empresa. Crescimento lento mas consistente ao longo dos testes">NAP cresce de forma modesta mas consistente do primeiro ao oitavo teste em todas as empresas</canvas></div>
+    <div class="ins"><b>Efeito de treinamento cumulativo real:</b> o NAP cresce em média <b>+0,6 a +1,0 dB</b> ao longo de 8 ciclos. Isso indica que o programa de treinamento melhora a conscientização, mas <b>não substitui a avaliação do protetor ou troca de modelo</b> para colaboradores cronicamente muito abaixo do NRRsf.</div>
+  </div>
+</div>
+<div class="sec">
+  <div class="sl">Evidência Treinamentos e - NR-01</div>
+  <div class="krow">
+    <div class="kpi"><div class="kl">Treinamentos documentados (NR-01)</div><div class="kv b">5.056</div><div class="ks">sessões com laudo rastreável</div></div>
+    <div class="kpi"><div class="kl">Colaboradores com ≥2 treinamentos</div><div class="kv a">1.534</div><div class="ks">necessidade de reforço identificada</div></div>
+    <div class="kpi"><div class="kl">Colaboradores com ≥3 treinamentos</div><div class="kv r">742</div><div class="ks">colocação cronicamente inadequada</div></div>
+    <div class="kpi"><div class="kl">Taxa geral de colocação inadequada</div><div class="kv r">19,4%</div><div class="ks">alvo: &lt; 5% após treinamento</div></div>
+    <div class="kpi"><div class="kl">Ganho médio pós-treinamento</div><div class="kv g">+6,9 dB</div><div class="ks">evidência de eficácia NR-01</div></div>
+  </div>
+</div>
+
+<!-- ==================== SEÇÃO ADICIONADA ==================== -->
+
+<div class="sec">
+  <div class="sl">Perfil de recorrência de treinamentos - rastreabilidade</div>
+  <div class="r2">
+    <div class="card">
+      <div style="margin-bottom:12px">
+        <div class="prog-row">
+          <div class="prog-lbl">1 sessão de treinamento</div>
+          <div class="prog-bar-bg"><div class="prog-bar" style="width:32%;background:#4ade80"></div></div>
+          <div class="prog-val" style="color:#4ade80">815</div>
+        </div>
+        <div class="prog-row">
+          <div class="prog-lbl">2 ou mais sessões</div>
+          <div class="prog-bar-bg"><div class="prog-bar" style="width:60%;background:#facc15"></div></div>
+          <div class="prog-val" style="color:#facc15">1.534</div>
+        </div>
+        <div class="prog-row">
+          <div class="prog-lbl">3 ou mais sessões</div>
+          <div class="prog-bar-bg"><div class="prog-bar" style="width:29%;background:#f87171"></div></div>
+          <div class="prog-val" style="color:#f87171">742</div>
+        </div>
+      </div>
+      <div class="ins">Colaboradores com 3+ treinamentos precisam de <b>avaliação individual</b> pode indicar incompatibilidade de protetor ou limitação anatômica, <b>não falta de esforço</b>.</div>
+    </div>
+    <div class="card">
+      <div class="cw" style="height:190px">
+        <canvas id="cGanhoSessao" role="img" aria-label="Ganho médio em dB da recolocação pelo usuário por número de sessão de treinamento, do primeiro ao oitavo teste. O ganho se mantém estável em torno de 5.8 dB independente do número de sessões.">O ganho médio por sessão permanece estável em torno de 5.8 dB independentemente do número de treinamentos anteriores.</canvas>
+      </div>
+      <div class="ins">O ganho do treinamento se mantém <b>estável (~6,9 dB)</b> ao longo das sessões o colaborador — o treinamento tem eficácia consistente, mas a colocação inadequada persiste para alguns perfis.</div>
+    </div>
+  </div>
+</div>
+<!-- ==================== FIM DA SEÇÃO ADICIONADA ==================== -->
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-const modelos=[
-  {m:"Concha C2",    t:"Concha",nrrsf:17,nap:11.46,off:-5.54,gap_pct:32.6},
-  {m:"CapConcha E1", t:"Cap",   nrrsf:18,nap:12.48,off:-5.52,gap_pct:30.7},
-  {m:"CapConcha C2", t:"Cap",   nrrsf:22,nap:16.52,off:-5.48,gap_pct:24.9},
-  {m:"Concha D2",    t:"Concha",nrrsf:16,nap:10.54,off:-5.46,gap_pct:34.1},
-  {m:"Concha C1",    t:"Concha",nrrsf:20,nap:14.78,off:-5.22,gap_pct:26.1},
-  {m:"CapConcha C1", t:"Cap",   nrrsf:19,nap:13.79,off:-5.21,gap_pct:27.4},
-  {m:"CapConcha D1", t:"Cap",   nrrsf:22,nap:16.94,off:-5.06,gap_pct:23.0},
-  {m:"Concha A1",    t:"Concha",nrrsf:21,nap:16.00,off:-5.00,gap_pct:23.8},
-  {m:"Concha D1",    t:"Concha",nrrsf:23,nap:18.03,off:-4.97,gap_pct:21.6},
-  {m:"CapConcha E2", t:"Cap",   nrrsf:25,nap:20.22,off:-4.78,gap_pct:19.1},
-  {m:"Plugue C3(Sonda)",t:"Plugue",nrrsf:21,nap:16.74,off:-4.26,gap_pct:20.3},
-  {m:"Plugue B1",    t:"Plugue",nrrsf:14,nap:9.85, off:-4.15,gap_pct:29.6},
-  {m:"Plugue B2",    t:"Plugue",nrrsf:20,nap:16.59,off:-3.41,gap_pct:17.0},
-  {m:"Plugue A1",    t:"Plugue",nrrsf:15,nap:11.96,off:-3.04,gap_pct:20.3},
-  {m:"Plugue C1(Sonda)",t:"Plugue",nrrsf:14,nap:11.02,off:-2.98,gap_pct:21.3},
-  {m:"Plugue C2(Sonda)",t:"Plugue",nrrsf:18,nap:15.68,off:-2.32,gap_pct:12.9},
-  {m:"Plugue A2",    t:"Plugue",nrrsf:19,nap:16.69,off:-2.31,gap_pct:12.2},
-  {m:"Dupla C1(Sonda)",t:"Dupla",nrrsf:25,nap:26.07,off:1.07,gap_pct:-4.3},
-];
-const tColors={Plugue:"#EF9F27",Concha:"#1D9E75",Cap:"#378ADD",Dupla:"#7F77DD"};
-let gapChart=null;
-
-function updateGap(){
-  const f=document.getElementById('selTipo').value;
-  const data=f==='all'?modelos:modelos.filter(d=>{
-    if(f==="Plugue") return d.t==="Plugue";
-    if(f==="Concha") return d.t==="Concha";
-    if(f==="Cap")    return d.t==="Cap";
-    if(f==="Dupla")  return d.t==="Dupla";
-    return true;
-  });
-  const h=Math.max(260,data.length*4+6);
-  document.getElementById('gapWrap').style.height=h+'px';
-  if(gapChart) gapChart.destroy();
-  gapChart=new Chart(document.getElementById('cGap'),{
-    type:'bar', indexAxis:'y',
-    data:{
-      labels:data.map(d=>d.m),
-      datasets:[
-        {label:'NRRsf (CA)',data:data.map(d=>d.nrrsf),backgroundColor:'rgba(136,135,128,.22)',borderRadius:3,order:2},
-        {label:'NAP real',data:data.map(d=>d.nap),backgroundColor:data.map(d=>d.gap_pct>28?'#E24B4A':tColors[d.t]),borderRadius:3,order:1}
-      ]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{
-        label:v=>{const d=data[v.dataIndex];
-          return v.datasetIndex===0?'NRRsf (CA): '+v.raw+' dB':'NAP real: '+v.raw.toFixed(2)+' dB | gap: '+d.off.toFixed(2)+' dB ('+d.gap_pct+'% perdido)';
-        }
-      }}},
-      scales:{
-        x:{min:0,max:30,grid:{color:'rgba(128,128,128,.07)'}},
-        y:{grid:{display:false},ticks:{font:{size:10}}}
-      }
-    }
-  });
+// Script original do final.html
+const flowData={
+  all:{ruim:10.1,exp:18.3,rec:17.0,gexp:8.2,grec:6.9},
+  A:  {ruim:10.37,exp:18.69,rec:17.23,gexp:8.33,grec:6.83},
+  B:  {ruim:10.03,exp:18.10,rec:16.67,gexp:8.07,grec:6.7},
+  C:  {ruim:10.10,exp:18.51,rec:17.07,gexp:8.41,grec:6.97},
+};
+function updateFlow(){
+  const emp=document.getElementById('selEmpFlow').value;
+  const d=flowData[emp]||flowData.all;
+  document.getElementById('sNapRuim').textContent=d.ruim.toFixed(1)+' dB';
+  document.getElementById('sNapExp').textContent=d.exp.toFixed(1)+' dB';
+  document.getElementById('sNapRec').textContent=d.rec.toFixed(1)+' dB';
+  document.getElementById('sGanhoExp').textContent='+'+d.gexp.toFixed(1)+' dB';
+  document.getElementById('sGanhoRec').textContent='+'+d.grec.toFixed(1)+' dB vs inicial';
 }
-updateGap();
 
-new Chart(document.getElementById('cColocacao'),{
-  type:'bar',
+// Script do gráfico adicionado do 010.html
+new Chart(document.getElementById('cGanhoSessao'),{
+  type:'line',
   data:{
-    labels:['Empresa A','Empresa B','Empresa C'],
-    datasets:[
-      {label:'Colocação incorreta',data:[12.37,12.03,12.10],backgroundColor:'#F09595',borderRadius:3},
-      {label:'Pelo experimentador',data:[18.69,18.10,18.51],backgroundColor:'#85B7EB',borderRadius:3,borderDash:[4,3]},
-      {label:'Recolocação usuário',data:[17.23,16.67,17.07],backgroundColor:'#1D9E75',borderRadius:3}
-    ]
-  },
-  options:{
-    responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw.toFixed(2)+' dB NAP'}}},
-    scales:{y:{min:0,max:22,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},x:{grid:{display:false}}}
-  }
-});
-
-new Chart(document.getElementById('cGapColocacao'),{
-  type:'bar',
-  data:{
-    labels:['Incorreta','Experimentador','Recolocação','Colocação ok'],
+    labels:['1ª','2ª','3ª','4ª','5ª','6ª','7ª','8ª'],
     datasets:[{
-      label:'NAP médio (dB)',
-      data:[12.18,18.43,17.05,16.64],
-      backgroundColor:['#E24B4A','#185FA5','#EF9F27','#1D9E75'],
-      borderRadius:4
+      label:'Ganho médio (dB)',
+      data:[5.97,5.68,5.65,5.93,5.78,5.47,6.16,5.80],
+      borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.08)',fill:true,
+      tension:.4,pointRadius:5,borderDash:[]
     }]
   },
   options:{
     responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.raw.toFixed(2)+' dB NAP médio'}}},
-    scales:{y:{min:0,max:22,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},x:{grid:{display:false}}}
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>'+'+v.raw.toFixed(2)+' dB ganho médio'}}},
+    scales:{
+      y:{min:3.5,max:8,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>'+'+v.toFixed(1)+' dB'}},
+      x:{grid:{display:false},title:{display:true,text:'Sessão de treinamento',font:{size:14}}}
+    }
+  }
+});
+
+// Gráfico original do final.html
+new Chart(document.getElementById('cEvol'),{
+  type:'line',
+  data:{
+    labels:['1º','2º','3º','4º','5º','6º','7º','8º'],
+    datasets:[
+      {label:'Empresa A',data:[16.31,16.04,16.51,16.58,16.65,16.83,16.94,17.31],borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,.07)',fill:true,tension:.4,pointRadius:4,borderDash:[]},
+      {label:'Empresa B',data:[16.14,15.94,16.55,16.31,16.64,16.98,16.48,16.54],borderColor:'#378ADD',backgroundColor:'rgba(55,138,221,.07)',fill:true,tension:.4,pointRadius:4,borderDash:[4,3]},
+      {label:'Empresa C',data:[16.46,16.31,16.71,16.70,16.92,17.02,16.76,17.01],borderColor:'#EF9F27',backgroundColor:'rgba(239,159,39,.07)',fill:true,tension:.4,pointRadius:4,borderDash:[2,2]},
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+v.raw.toFixed(2)+' dB NAP médio'}}},
+    scales:{
+      y:{min:15,max:18.5,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+' dB'}},
+      x:{grid:{display:false},title:{display:true,text:'Ciclo de Teste',font:{size:14}}}
+    }
   }
 });
 </script>
+</body>
+</html>
