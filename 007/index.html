@@ -1,247 +1,321 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Dashboard — Tema 4 safe.EAR: PCA e ROI</title>
-<style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-
-    body, .wrap {
-        background: transparent;
-        color: #e0e0e0;
-        font-family: system-ui, -apple-system, sans-serif;
-    }
-
-    .sec{margin-bottom:2rem}
-    .sl{
-        font-size:16px;        /* 11 + 5 */
-        font-weight:500;
-        color:#e0e0e0;
-        letter-spacing:.06em;
-        text-transform:uppercase;
-        padding-bottom:8px;
-        border-bottom:.5px solid #333;
-        margin-bottom:14px
-    }
-
-    .krow{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.5rem}
-    .kpi{
-        background:#252525;
-        border:.5px solid #333;
-        border-radius:12px;
-        padding:12px 14px;
-    }
-    .kl{font-size:16px; color:#e0e0e0;margin-bottom:5px}     /* 11 + 5 */
-    .kv{font-size:24px;font-weight:500;color:#ffffff}     /* 19 + 5 */
-    .ks{font-size:16px;color:#e0e0e0;margin-top:3px}         /* 11 + 5 */
-
-    .card{
-        background:#1a1a1a;
-        border:.5px solid #333;
-        border-radius:12px;
-        padding:16px;
-        margin-bottom:14px;
-    }
-
-    .cw{position:relative;width:100%}
-    .leg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;font-size:16px;color:#e0e0e0} /* 11 + 5 */
-    .ld{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle}
-
-    .ins{
-        border-left:3px solid #3b82f6;
-        border-radius:0 8px 8px 0;
-        background:#1f2937;
-        padding:9px 13px;
-        font-size:17px;        /* 12 + 5 */
-        color:#ccc;
-        margin-top:10px
-    }
-    .ins b{color:#ffffff;font-weight:500}
-
-    .frow{display:flex;gap:8px;margin-bottom:12px;align-items:center;flex-wrap:wrap}
-    .frow label{font-size:17px;color:#b0b0b0}              /* 12 + 5 */
-
-    select, input[type=range]{
-        background:#252525;
-        color:#e0e0e0;
-        border:1px solid #444;
-        border-radius:6px;
-        padding:6px 10px;
-        font-size:16px;
-    }
-
-    .slid-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-    .slid-row label{font-size:17px;color:#b0b0b0;min-width:175px;flex-shrink: 0;}  /* 12 + 5 */
-    .slid-row input[type="range"] {flex: 1;min-width: 0;cursor: pointer;}
-    .slid-row span{font-size:18px;font-weight:500;min-width:80px;color:#e0e0e0;text-align: right;flex-shrink: 0} /* 13 + 5 */
-
-    .roi-box{
-        background:#252525;
-        border:.5px solid #333;
-        border-radius:12px;
-        padding:14px;
-        text-align:center;
-    }
-    .roi-v{font-size:31px;font-weight:500;color:#4ade80}   /* 26 + 5 */
-    .roi-l{font-size:16px;color:#e0e0e0;margin-top:3px}       /* 11 + 5 */
-
-    .roi-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px}
-
-    .ind-table{
-        width:100%;
-        border-collapse:collapse;
-        font-size:17px;        /* 12 + 5 */
-    }
-    .ind-table th{
-        text-align:left;
-        font-weight:500;
-        font-size:16px;        /* 11 + 5 */
-        color:#e0e0e0;
-        padding:8px 10px;
-        border-bottom:.5px solid #333;
-    }
-    .ind-table td{
-        padding:9px 10px;
-        border-bottom:.5px solid #333;
-        color:#e0e0e0;
-    }
-
-    .red{color:#f87171}
-    .amb{color:#fbbf24}
-    .grn{color:#4ade80}
-    .bl{color:#60a5fa}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bônus 2 - Planejador de Campanha</title>
 </head>
 <body>
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-<div style="padding:1rem 10px" class="wrap">
+body,
+.wrap{
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0, 0, 0, 0.9)),url('https://nexstra-hub.github.io/conexao-ruido-2026/background/Presentation-2.png') no-repeat center center fixed;
+    background-size: cover;
+    color:#e0e0e0;
+    font-family:system-ui,-apple-system,sans-serif;
+    font-size:21px;
+    line-height:1.4;
+}
+
+.sr-only{
+    position:absolute;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+}
+
+.sec{
+    margin-bottom:2rem;
+}
+
+.sl{
+    font-size:21px;
+    font-weight:500;
+    color:#a0a0a0;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding-bottom:4px;
+    margin-bottom:1px;
+    margin-top:1.5rem;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 1200px) {
+    body { font-size: 19px; }
+}
+
+@media (max-width: 900px) {
+    body { font-size: 17px; }
+    .sl { font-size: 15px; }
+    .card { padding: 14px; }
+    .kv { font-size: 22px; }
+}
+
+@media (max-width: 640px) {
+    body { font-size: 16px; }
+    .sl { font-size: 14px; }
+    .card { padding: 12px; }
+    .frow { 
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: 6px; 
+    }
+    .frow label { 
+        min-width: auto; 
+        font-size: 15px; 
+    }
+    .grid3 { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .gantt th, .gantt td { font-size: 13px; padding: 6px 6px; }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 15px; }
+    .grid3 { grid-template-columns: 1fr; }
+    .kv { font-size: 20px; }
+}
+
+/* =========================
+   KPI
+========================= */
+
+.grid3{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+    gap:10px;
+    margin-bottom:1.5rem;
+}
+
+.kpi{
+    background:#252525;
+    border:.5px solid #333;
+    border-radius:8px;
+    padding:12px 14px;
+    text-align:center;
+}
+
+.kl{
+    font-size:16px;
+    color:#e0e0e0;
+    margin-top:5px;
+}
+
+.kv{
+    font-size:26px;
+    font-weight:500;
+    color:#ffffff;
+}
+
+.r{color:#f87171}
+.a{color:#facc15}
+.g{color:#4ade80}
+.b{color:#60a5fa}
+
+/* =========================
+   CARDS e FORM
+========================= */
+
+.card{
+    background:#1a1a1a;
+    border:.5px solid #333;
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:14px;
+}
+
+.frow{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.frow label{
+    font-size:17px;
+    color:#b0b0b0;
+    min-width:200px;
+    flex-shrink:0;
+}
+
+.frow input,
+.frow select,
+.frow button{
+    flex:1;
+    background:#252525;
+    color:#e0e0e0;
+    border:1px solid #444;
+    padding:8px 12px;
+    border-radius:6px;
+    font-size:17px;
+}
+
+.frow input:focus,
+.frow select:focus{
+    outline:none;
+    border-color:#3b82f6;
+}
+
+/* =========================
+   GANTT TABLE
+========================= */
+
+.gantt-wrap{
+    overflow-x:auto;
+    margin-top:8px;
+    border-radius:8px;
+    background:#1a1a1a;
+    padding:4px;
+}
+
+.gantt{
+    width:100%;
+    border-collapse:collapse;
+    font-size:15px;
+    color:#e0e0e0;
+}
+
+.gantt th{
+    text-align:left;
+    font-weight:500;
+    color:#a0a0a0;
+    padding:10px 8px;
+    border-bottom:1px solid #333;
+    white-space:nowrap;
+    background:#252525;
+}
+
+.gantt td{
+    padding:10px 8px;
+    border-bottom:1px solid #333;
+    vertical-align:middle;
+}
+
+.gbar-wrap{
+    height:18px;
+    border-radius:4px;
+    background:#333;
+    position:relative;
+    min-width:160px;
+}
+
+.gbar{
+    height:18px;
+    border-radius:4px;
+    position:absolute;
+    top:0;
+}
+
+/* =========================
+   INSIGHTS E ALERTAS
+========================= */
+
+.ins{
+    border-left:3px solid #3b82f6;
+    border-radius:0 8px 8px 0;
+    background:#1f2937;
+    padding:12px 16px;
+    font-size:17px;
+    color:#d0d0d0;
+    margin-top:12px;
+    line-height:1.45;
+}
+
+.alert{
+    background:#3a1f1f;
+    border:.5px solid #f87171;
+    border-radius:8px;
+    padding:12px 16px;
+    color:#fda4a4;
+    margin-top:10px;
+}
+
+.alert b{
+    color:#ffffff;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+</style>
+
+<h2 class="sr-only">Ferramenta 7: planejador operacional de campanha de fit test. Calcula dias necessários por GHE, cronograma de campo por turno, alertas de gargalo operacional e necessidade de técnicos por volume.</h2>
+
+<div class="wrap" style="padding:1rem 10px">
 
 <div class="sec">
-  <div class="sl">O que o fit test entrega para o gestor — Indicadores objetivos</div>
-  <div class="krow">
-    <div class="kpi"><div class="kl">% colaboradores protegidos (geral)</div><div class="kv amb">68,4%</div><div class="ks">sem fit test, esse dado não existe</div></div>
-    <div class="kpi"><div class="kl">NAP médio real (colocação correta)</div><div class="kv grn">16,64 dB</div><div class="ks">vs NRRsf médio de 20,1 dB</div></div>
-    <div class="kpi"><div class="kl">Evolução 24 meses</div><div class="kv grn">+0,7 dB NAP</div><div class="ks">evidência de eficácia do PCA com Fit test</div></div>
-    <div class="kpi"><div class="kl">Taxa de colocação inadequada</div><div class="kv red">19,4%</div><div class="ks">só identificável pelo fit test</div></div>
-    <div class="kpi"><div class="kl">Sessões de treinamento documentadas</div><div class="kv bl">5.056</div><div class="ks">rastreabilidade NR-01</div></div>
-  </div>
-</div>
-
-<div class="sec">
-  <div class="sl">Evolução trimestral da proteção — indicador central</div>
+  <div class="sl">Configuração da campanha</div>
   <div class="card">
-    <div class="frow">
-      <label>Empresa:</label>
-      <select id="selEmpPCA" onchange="updatePCA()">
-        <option value="all">Todas (comparativo)</option>
-        <option value="A">Empresa A</option>
-        <option value="B">Empresa B</option>
-        <option value="C">Empresa C</option>
-      </select>
-      <label style="margin-left:8px">Métrica:</label>
-      <select id="selMetrica" onchange="updatePCA()">
-        <option value="pct">% protegidos</option>
-        <option value="nap">NAP médio (dB)</option>
-      </select>
+    <div class="grid2">
+      <div>
+        <div class="frow"><label>Data de início da campanha</label><input type="date" id="cData" value="2025-03-10" oninput="calcCamp()"></div>
+        <div class="frow"><label>Horas disponíveis por dia</label><input type="number" id="cHoras" value="8" min="4" max="12" step="0.5" oninput="calcCamp()"></div>
+        <div class="frow"><label>Número de técnicos em campo</label><input type="number" id="cTecnicos" value="1" min="1" max="5" step="1" oninput="calcCamp()"></div>
+        <div class="frow"><label>% esperada de trios de treinamento</label><input type="number" id="cTrio" value="20" min="1" max="60" step="5" oninput="calcCamp()"></div>
+        <div class="frow"><label>Buffer logístico por dia (%)</label><input type="number" id="cBuffer" value="15" min="1" max="40" step="5" oninput="calcCamp()"></div>
+      </div>
+      <div>
+        <div style="font-size:17px;font-weight:500;color:#e0e0e0;margin-bottom:12px">GHEs da campanha</div>
+        <div id="gheRows"></div>
+        <button onclick="addGhe()" style="margin-top:8px;padding:10px 16px;background:#252525;border:1px solid #444;color:#e0e0e0;border-radius:8px;cursor:pointer">+ Adicionar GHE</button>
+      </div>
     </div>
-    <div class="leg">
-      <span><span class="ld" style="background:#1D9E75"></span>Empresa A</span>
-      <span><span class="ld" style="background:#378ADD"></span>Empresa B</span>
-      <span><span class="ld" style="background:#EF9F27"></span>Empresa C</span>
-    </div>
-    <div class="cw" style="height:250px">
-      <canvas id="cPCA" role="img" aria-label="Evolução trimestral do percentual de colaboradores protegidos"></canvas>
-    </div>
-    <div class="ins"><b>Indicador objetivo e rastreável para o PCA:</b> a evolução trimestral demonstra que o programa de fit test gera melhora mensurável ao longo do tempo — exatamente o tipo de evidência exigido pela NR-01 e pelo Guia do PCA da FUNDACENTRO.</div>
   </div>
 </div>
 
 <div class="sec">
-  <div class="sl">Painel de indicadores objetivos — o que o relatório safe.EAR entrega</div>
-  <div class="card" style="padding:12px">
-    <table class="ind-table">
-      <thead><tr>
-        <th style="width:22%">Indicador para o PCA</th>
-        <th style="width:13%">Empresa A</th>
-        <th style="width:13%">Empresa B</th>
-        <th style="width:13%">Empresa C</th>
-        <th style="width:15%">Referência</th>
-        <th style="width:24%">Ação recomendada</th>
-      </tr></thead>
-      <tbody>
-        <tr>
-          <td>% protegidos (NEP ≤ 80 dB)</td>
-          <td><span style="color:#BA7517;font-weight:500">82,9%</span></td>
-          <td><span style="color:#BA7517;font-weight:500">80,6%</span></td>
-          <td><span style="color:#f87171;font-weight:500">75,5%</span></td>
-          <td style="color:#4ade80">Meta: ≥ 90%</td>
-          <td style="font-size:16px;color:#f87171">Revisar modelos nos GHEs críticos</td>
-        </tr>
-        <tr>
-          <td>NAP médio real</td>
-          <td>16,5 dB</td>
-          <td>16,1 dB</td>
-          <td>16,8 dB</td>
-          <td style="color:#4ade80">NRRsf médio: ~20 dB</td>
-          <td style="font-size:16px;color:#f87171">Gap de 3–5 dB a investigar</td>
-        </tr>
-        <tr>
-          <td>Taxa colocação inadequada</td>
-          <td><span style="color:#f87171;font-weight:500">19,2%</span></td>
-          <td><span style="color:#f87171;font-weight:500">19,5%</span></td>
-          <td><span style="color:#f87171;font-weight:500">19,3%</span></td>
-          <td style="color:#4ade80">Meta: &lt; 5%</td>
-          <td style="font-size:16px;color:#f87171">Intensificar treinamento — NR-01</td>
-        </tr>
-        <tr>
-          <td>Sessões treinamento registradas</td>
-          <td>1.812</td>
-          <td>1.120</td>
-          <td>2.124</td>
-          <td style="color:#4ade80">Rastreabilidade NR-01</td>
-          <td style="font-size:16px;color:#4ade80">Relatório individual gerado ✓</td>
-        </tr>
-        <tr>
-          <td>Modelos subdimensionados nos GHEs</td>
-          <td><span style="color:#BA7517;font-weight:500">1 GHE</span></td>
-          <td><span style="color:#f87171;font-weight:500">2 GHEs</span></td>
-          <td><span style="color:#f87171;font-weight:500">1 GHE</span></td>
-          <td style="color:#4ade80">Meta: 0 GHEs</td>
-          <td style="font-size:16px;color:#f87171">Avaliar troca de protetores — NR-06</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="sl">Capacidade e resumo</div>
+  <div class="grid3" style="margin-bottom:14px">
+    <div class="kpi"><div class="kv b" id="rTotCol">—</div><div class="kl">total de colaboradores</div></div>
+    <div class="kpi"><div class="kv" id="rCapDia">—</div><div class="kl">capacidade efetiva/dia</div></div>
+    <div class="kpi"><div class="kv" id="rDiasTot">—</div><div class="kl">dias necessários totais</div></div>
+    <div class="kpi"><div class="kv" id="rFim">—</div><div class="kl">previsão de conclusão</div></div>
+    <div class="kpi"><div class="kv" id="rTestesTot">—</div><div class="kl">testes totais (c/ trios)</div></div>
+    <div class="kpi"><div class="kv g" id="rEfic">—</div><div class="kl">ocupação estimada</div></div>
   </div>
+  <div id="alertBox"></div>
 </div>
 
 <div class="sec">
-  <div class="sl">ROI para a prestação de serviço — calculadora de receita</div>
+  <div class="sl">Cronograma por GHE — distribuição de campo</div>
   <div class="card">
-    <div class="slid-row">
-      <label>Colaboradores/mês:</label>
-      <input type="range" min="20" max="1000" value="300" step="10" id="slNCol" oninput="calcROI()">
-      <span id="outNCol">100</span>
+    <div class="gantt-wrap">
+      <table class="gantt">
+        <thead><tr>
+          <th style="width:140px">GHE</th>
+          <th style="width:70px">Colabs.</th>
+          <th style="width:90px">Tipo</th>
+          <th style="width:60px">Dias</th>
+          <th>Alocação</th>
+          <th style="width:110px">Período</th>
+        </tr></thead>
+        <tbody id="ganttBody"></tbody>
+      </table>
     </div>
-    <div class="slid-row">
-      <label>Preço por teste (R$):</label>
-      <input type="range" min="80" max="200" value="100" step="10" id="slPreco" oninput="calcROI()">
-      <span id="outPreco">R$ 100</span>
+    <div class="ins" id="campIns" style="margin-top:12px"></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sl">Distribuição de tempo por método</div>
+  <div class="card">
+    <div style="position:relative;width:100%;height:260px">
+      <canvas id="cCamp" role="img" aria-label="Gráfico de barras mostrando tempo alocado por GHE dividido entre método objetivo e subjetivo, com trios de treinamento destacados.">Tempo de campo distribuído por GHE, método e trios de treinamento.</canvas>
     </div>
-    <div class="slid-row">
-      <label>Periodicidade (meses entre testes):</label>
-      <input type="range" min="1" max="12" value="6" step="1" id="slPer" oninput="calcROI()">
-      <span id="outPer">6 meses</span>
-    </div>
-    <div class="roi-grid">
-      <div class="roi-box"><div class="roi-l">Receita por ciclo</div><div class="roi-v" id="roiCiclo">R$ 10.000</div></div>
-      <div class="roi-box"><div class="roi-l">Receita anual</div><div class="roi-v" id="roiAnual">R$ 20.000</div></div>
-      <div class="roi-box"><div class="roi-l">Payback estimado</div><div class="roi-v" id="roiPayback">&lt; 6 meses</div><div class="roi-l" style="margin-top:2px;font-size:15px">equipamento ~R$60k (referência)</div></div>
-    </div>
-    <div class="cw" style="height:250px;margin-top:14px">
-      <canvas id="cROI" role="img" aria-label="Projeção de receita acumulada"></canvas>
-    </div>
-    <div class="ins"><b>3 empresas</b> com <b>100 colaboradores</b> e periodicidade média de <b>6 meses</b>, a <b>R$ 100/teste</b>. A receita estimada alcança o <b>payback do equipamento</b> para o prestador de serviço.</div>
   </div>
 </div>
 
@@ -249,90 +323,127 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-const pcaData={
-  pct:{ A:[84.1,81.1,82.0,81.4,84.7,84.4,82.0,83.0], B:[78.0,81.4,74.8,83.3,79.2,83.7,80.1,82.0], C:[75.8,74.5,73.7,74.0,76.1,75.7,77.9,78.8] },
-  nap:{ A:[16.50,16.06,16.09,16.47,16.93,16.99,16.86,17.06], B:[15.51,16.84,15.34,16.41,16.02,17.16,16.27,17.32], C:[16.26,16.24,16.67,16.34,16.86,17.32,17.38,16.92] }
-};
-const trim8=['Q1','Q2','Q3','Q4','Q1','Q2','Q3','Q4'];
-let pcaChart=null;
+let gheCount=0, campChart=null;
 
-function updatePCA(){
-  const emp=document.getElementById('selEmpPCA').value;
-  const met=document.getElementById('selMetrica').value;
-  const yLabel=met==='pct'?'% protegidos':'NAP médio (dB)';
-  const yMin=met==='pct'?70:14;
-  const yMax=met==='pct'?92:19;
-  const cb=met==='pct'?v=>v.toFixed(1)+'%':v=>v.toFixed(2)+' dB';
-  if(pcaChart) pcaChart.destroy();
-  let datasets;
-  const cols={A:'#1D9E75',B:'#378ADD',C:'#EF9F27'};
-  const dashes={A:[],B:[4,3],C:[2,2]};
-  if(emp==='all'){
-    datasets=['A','B','C'].map(k=>({
-      label:'Empresa '+k,data:pcaData[met][k],
-      borderColor:cols[k],backgroundColor:cols[k]+'12',fill:true,tension:.4,pointRadius:4,borderDash:dashes[k]
-    }));
-  } else {
-    datasets=[{label:'Empresa '+emp,data:pcaData[met][emp],borderColor:cols[emp],backgroundColor:cols[emp]+'12',fill:true,tension:.4,pointRadius:5}];
-  }
-  pcaChart=new Chart(document.getElementById('cPCA'),{
-    type:'line',
-    data:{labels:trim8,datasets},
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label+': '+cb(v.raw)}}},
-      scales:{y:{min:yMin,max:yMax,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:cb}},x:{grid:{display:false}}}
-    }
-  });
+function addGhe(nome='',cols=100,pctSub=20){
+  const id='g'+gheCount++;
+  const div=document.createElement('div');
+  div.id=id;
+  div.style.cssText='display:grid;grid-template-columns:1fr 70px 70px 32px;gap:8px;align-items:center;margin-bottom:8px';
+  div.innerHTML=`
+    <input type="text" value="${nome||'GHE-'+(gheCount)}" oninput="calcCamp()">
+    <input type="number" value="${cols}" min="5" max="2000" step="5" placeholder="n° col." oninput="calcCamp()">
+    <input type="number" value="${pctSub}" min="0" max="100" step="5" placeholder="% subj." oninput="calcCamp()">
+    <button onclick="document.getElementById('${id}').remove();calcCamp()" style="padding:6px;background:#252525;border:1px solid #444;color:#f87171;border-radius:6px;cursor:pointer">×</button>
+  `;
+  document.getElementById('gheRows').appendChild(div);
+  calcCamp();
 }
-updatePCA();
 
-let roiChart=null;
-function calcROI(){
-  const nc=parseInt(document.getElementById('slNCol').value);
-  const pr=parseInt(document.getElementById('slPreco').value);
-  const per=parseInt(document.getElementById('slPer').value);
-  document.getElementById('outNCol').textContent=nc;
-  document.getElementById('outPreco').textContent='R$ '+pr;
-  document.getElementById('outPer').textContent=per+' meses';
-  const ciclo=nc*pr;
-  const anual=ciclo*(12/per);
-  document.getElementById('roiCiclo').textContent='R$ '+ciclo.toLocaleString('pt-BR');
-  document.getElementById('roiAnual').textContent='R$ '+Math.round(anual).toLocaleString('pt-BR');
-  
-  // Payback ajustado (primeiro ciclo no mês 0)
-  const ciclos_necessarios = Math.ceil(60000 / ciclo);
-  const payback_meses = (ciclos_necessarios - 1) * per;
-  
-  document.getElementById('roiPayback').textContent=payback_meses<=6?'< 6 meses':payback_meses+' meses';
-  
-  const meses=Array.from({length:25},(_,i)=>i);
-  const acum=[];let s=0;
-  
-  // Receita entra no INÍCIO do ciclo
-  for(let i=0;i<25;i++){
-    if(i % per === 0) s += ciclo;
-    acum.push(s);
-  }
-  
-  if(roiChart) roiChart.destroy();
-  roiChart=new Chart(document.getElementById('cROI'),{
-    type:'line',
-    data:{labels:meses.map(m=>m+'m'),datasets:[
-      {label:'Receita acumulada',data:acum,borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,.08)',fill:true,tension:.3,pointRadius:0},
-      {label:'Custo equipamento',data:meses.map(()=>60000),borderColor:'#E24B4A',borderDash:[4,3],pointRadius:0,fill:false}
+addGhe('GHE-A01',220,0);
+addGhe('GHE-A02',180,30);
+addGhe('GHE-A03',140,45);
+addGhe('GHE-B04',90,0);
+
+function addWorkdays(startDate,days){
+  let d=new Date(startDate);let added=0;
+  while(added<days){d.setDate(d.getDate()+1);if(d.getDay()!==0&&d.getDay()!==6)added++;}
+  return d;
+}
+
+function calcCamp(){
+  // ... (o script original permanece inalterado)
+  const horas=parseFloat(document.getElementById('cHoras').value)||8;
+  const tecn=parseInt(document.getElementById('cTecnicos').value)||1;
+  const pTrio=parseInt(document.getElementById('cTrio').value)/100||0.2;
+  const buf=1+(parseInt(document.getElementById('cBuffer').value)||15)/100;
+  const dataStr=document.getElementById('cData').value;
+  const dataInicio=dataStr?new Date(dataStr):new Date();
+
+  const rows=[...document.getElementById('gheRows').children];
+  const ghes=rows.map(r=>{
+    const ins=r.querySelectorAll('input');
+    return{nome:ins[0].value,cols:parseInt(ins[1].value)||0,pctSub:parseInt(ins[2].value)/100||0};
+  }).filter(g=>g.cols>0);
+
+  if(!ghes.length) return;
+
+  const capObjH=3600/420;
+  const capSubH=3600/1620;
+  const capObjDia=Math.floor(capObjH*horas*tecn);
+  const capSubDia=Math.floor(capSubH*horas*tecn);
+
+  let totalCol=0,totalTestes=0,totalDias=0;
+  const gGantt=[];
+  let curDate=new Date(dataInicio);
+
+  ghes.forEach(g=>{
+    const nObj=Math.round(g.cols*(1-g.pctSub));
+    const nSub=Math.round(g.cols*g.pctSub);
+    const nTrio=Math.round(g.cols*pTrio);
+    const testesExtra=nTrio*2;
+    const diasObj=nObj>0?Math.ceil(nObj/capObjDia*buf):0;
+    const diasSub=nSub>0?Math.ceil(nSub/capSubDia*buf):0;
+    const diasExtra=Math.ceil(nTrio*3/capObjDia*buf);
+    const diasTotal=Math.max(1,diasObj+diasSub+diasExtra);
+    const fimDate=addWorkdays(curDate,diasTotal);
+    const testesFim=g.cols+testesExtra;
+    gGantt.push({...g,nObj,nSub,nTrio,diasObj,diasSub,diasExtra,diasTotal,inicio:new Date(curDate),fim:fimDate,testes:testesFim});
+    totalCol+=g.cols;totalTestes+=testesFim;totalDias+=diasTotal;
+    curDate=new Date(fimDate);
+  });
+
+  const fmtDate=d=>d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'});
+  const capEfetivaDia=Math.floor(capObjDia*(1-pTrio)+capSubDia*0.1);
+  const ocup=Math.min(100,Math.round(totalTestes/(totalDias*(capObjDia*tecn))*100));
+
+  document.getElementById('rTotCol').textContent=totalCol.toLocaleString('pt-BR');
+  document.getElementById('rCapDia').textContent=capEfetivaDia;
+  document.getElementById('rDiasTot').textContent=totalDias;
+  document.getElementById('rDiasTot').className='kv '+(totalDias<=5?'g':totalDias<=10?'a':'r');
+  document.getElementById('rFim').textContent=fmtDate(curDate);
+  document.getElementById('rTestesTot').textContent=totalTestes.toLocaleString('pt-BR');
+  document.getElementById('rEfic').textContent=ocup+'%';
+
+  const alertBox=document.getElementById('alertBox');
+  alertBox.innerHTML='';
+  if(totalDias>15) alertBox.innerHTML=`<div class="alert"><b>Atenção:</b> campanha com ${totalDias} dias de campo. Considere aumentar o número de técnicos ou dividir em sub-campanhas por GHE.</div>`;
+  if(ghes.some(g=>g.pctSub>50)) alertBox.innerHTML+=`<div class="alert" style="margin-top:8px"><b>Gargalo subjetivo:</b> GHE(s) com mais de 50% de plugues convencionais — o método subjetivo é o limitante principal da capacidade. Avalie substituição por plugues com sonda.</div>`;
+
+  const ganttBody=document.getElementById('ganttBody');
+  ganttBody.innerHTML='';
+  const totalRange=(curDate-dataInicio)||1;
+  gGantt.forEach((g,i)=>{
+    const off=Math.round((g.inicio-dataInicio)/totalRange*100);
+    const wid=Math.round((g.fim-g.inicio)/totalRange*100);
+    const barColor=i%2===0?'#60a5fa':'#3b82f6';
+    ganttBody.innerHTML+=`<tr>
+      <td style="font-weight:500">${g.nome}</td>
+      <td>${g.cols}</td>
+      <td><span style="background:#1e40af;color:white;padding:2px 6px;border-radius:4px;font-size:13px">obj</span> <span style="background:#b45309;color:white;padding:2px 6px;border-radius:4px;font-size:13px">subj</span></td>
+      <td>${g.diasTotal}</td>
+      <td><div class="gbar-wrap"><div class="gbar" style="left:${off}%;width:${Math.max(3,wid)}%;background:${barColor}"></div></div></td>
+      <td style="font-size:15px;color:#a0a0a0">${fmtDate(g.inicio)} → ${fmtDate(g.fim)}</td>
+    </tr>`;
+  });
+
+  document.getElementById('campIns').innerHTML=`Campanha de <b>${totalDias} dias úteis</b> com ${tecn} técnico${tecn>1?'s':''} — ${totalTestes.toLocaleString('pt-BR')} testes totais incluindo ${gGantt.reduce((s,g)=>s+g.nTrio,0)} trios de treinamento esperados.`;
+
+  if(campChart) campChart.destroy();
+  campChart=new Chart(document.getElementById('cCamp'),{
+    type:'bar',
+    data:{labels:gGantt.map(g=>g.nome),datasets:[
+      {label:'Obj. (h)',data:gGantt.map(g=>parseFloat((g.nObj/capObjH).toFixed(1))),backgroundColor:'#60a5fa',borderRadius:3,stack:'s'},
+      {label:'Subj. (h)',data:gGantt.map(g=>parseFloat((g.nSub/capSubH).toFixed(1))),backgroundColor:'#facc15',borderRadius:0,stack:'s'},
+      {label:'Trios (h)',data:gGantt.map(g=>parseFloat((g.nTrio*3/capObjH).toFixed(1))),backgroundColor:'#f87171',borderRadius:0,stack:'s'}
     ]},
     options:{
       responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>'R$ '+Math.round(v.raw).toLocaleString('pt-BR')}}},
-      scales:{
-        y:{grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>'R$ '+(v/1000).toFixed(0)+'k'}},
-        x:{grid:{display:false},ticks:{font:{size:13},maxTicksLimit:13}}
-      }
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>v.dataset.label.split('(')[0]+': '+v.raw.toFixed(1)+'h'}}},
+      scales:{y:{stacked:true,grid:{color:'rgba(128,128,128,.07)'},ticks:{callback:v=>v+'h'}},x:{stacked:true,grid:{display:false},ticks:{font:{size:11}}}}
     }
   });
 }
-calcROI();
 </script>
 </body>
 </html>
